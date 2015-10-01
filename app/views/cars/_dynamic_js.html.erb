@@ -1,0 +1,32 @@
+<script type='text/javascript'>
+
+function replaceOptions($select, data) {
+  $.each(data, function(index, option) {
+    $select.append(
+      $("<option></option>")
+        .attr('value', option)
+        .text(option));
+  });
+}
+
+function makeSelected() {
+  var make = $('#search_car_model\\.make').val();
+  $.get("/cars/models?make=" + make, function(data) {
+    $('#search_car_model\\.model option:gt(0)').remove();
+    replaceOptions($("#search_car_model\\.model"), data);
+    $('#search_car_model\\.body option:gt(0)').remove();
+  })
+}
+
+makeSelected();
+$('#search_car_model\\.make').bind("change",makeSelected);
+
+$('#search_car_model\\.model').bind("change",function () {
+  var make = $('#search_car_model\\.make').val();
+  var model = $('#search_car_model\\.model').val();
+  $.get("/cars/bodystyles?make=" + make + "&model=" + model, function(data) {
+    $('#search_car_model\\.body option:gt(0)').remove();
+    replaceOptions($("#search_car_model\\.body"), data);
+  })
+});
+</script>

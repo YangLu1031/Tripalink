@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <hr class="tall">
+    </div>
+
+
+    <div class="col-md-12"> <h4>My Profile</h4> </div>
+    <table class="table">
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Profile & Appointments</th>
+      </tr>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.name %></td>
+          <td><%= user.email %></td>
+          <td><%= user.phone %></td>
+          <td><%= link_to "#{user.appointments.count} #{"Appointment".pluralize(user.appointments.count)}", user  %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

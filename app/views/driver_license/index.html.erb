@@ -1,0 +1,206 @@
+
+<style>
+    header{
+        background-color: rgb(74,144,226);
+    }
+    .buy_car_container{
+        height:auto;
+
+    }
+    .signUpBtn > span > a{
+        color:rgb(74,144,226);
+    }
+    .nav_title, .nav_item > a > div{
+        color:white;
+    }
+    .signInBtn{
+        color:white;
+    }
+    .signUpBtn{
+        color:rgb(74,144,226);
+        background-color:white;
+    }
+    .driver_licence_container{
+        width:100%;
+        box-shadow: 0px 2px 4px 0px #A0A8BD;
+        height:1050px;
+    }
+    .driver_licence_nav{
+        height:70px;
+        padding:0;
+        line-height:70px;
+        vertical-align:middle;
+        font-size:18px;
+        color:#4A4A4A;
+        font-weight:500;
+        margin-top:50px;
+        padding-left:5%;
+        padding-right:5%;
+    }
+    .driver_licence_nav_content{
+        text-align:left;
+        width:100%;
+        border-bottom:3px solid #E6E7EB;
+    }
+    .main_container{
+        width:100%;
+        max-width:840px;
+    }
+    .test_title{
+        text-align:center;
+        font-size:24px;
+        color:#4A4A4A;
+        font-weight:500;
+        margin-top:37px;
+        margin-bottom:43px;
+    }
+    .select_item_box_0{
+/*        max-width:400px;*/
+        height:300px;
+        border:2px solid #4A90E2;
+        border-radius:3px;
+        float:left;
+        padding-top:90px;
+        margin-bottom:10px;
+    }
+    .select_item_box_1{
+
+        height:300px;
+        border:2px solid #4A90E2;
+        border-radius:3px;
+        float:right;
+        padding-top:90px;
+        margin-bottom:10px;
+    }
+    @media (min-width: 992px){
+        .select_item_box{
+            max-width:400px !important;
+        }
+    }
+    .select_title{
+        height:50px;
+        line-height:50px;
+        vertical-align:top;
+        color:#4A90E2;
+        font-size:30px;
+        margin-bottom:7px;
+        float:left
+    }
+    .select_box_content{
+        padding-left:10px;
+        height:44px;
+        font-size:14px;
+        color:#333333;
+        text-align:left;
+        float:left;
+    }
+    .main_container_footer{
+        font-size:14px;
+        color:#333333;
+        text-align:center;
+        margin-top:48px;
+    }
+    .select_item_box:hover{
+        box-shadow: 0px 2px 4px 0px #A0A8BD;
+        cursor:pointer;
+    }
+
+    .zopim{
+        display:none;
+    }
+</style>
+
+<!--random list-->
+<div class="col-xs-12" align='center' style="padding-left:5%; padding-right:5%; padding-bottom:5%;">
+    <div class="driver_licence_container">
+        <div class="col-xs-12 driver_licence_nav" align="center">
+            <div class="driver_licence_nav_content">
+                <a href="/">
+                    <span>
+                        Home >
+                    </span>
+                </a>
+                <a href="/faq">
+                    <span>
+                        Help Center
+                    </span>
+                </a>
+            </div>
+        </div>
+        <div class="col-xs-12 all-to-none" align="center">
+            <div class="main_container" align="center">
+                <div class="test_title">
+                    California Driver License Permit Practice Test<br>
+                </div>
+                <a href="/driver_license/test">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 select_item_box_0 select_item_box" align="center">
+                        <div class="select_title col-xs-12">
+                            在线测试(48题)
+                        </div>
+                        <div class='select_box_content col-xs-12'>
+                            48道随机题目，包括36道文字选择题和12道路标识别题<br>
+                            没有时间限制<br>
+                            答完全部题目，即可查看答案及分数<br>
+                            
+                        </div>
+                    </div>
+                </a>
+                <a href="/driver_license/practice">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 select_item_box_1 select_item_box" align="center">
+                        <div class="select_title col-xs-12">
+                            在线练习(170题)
+                        </div>
+                        <div class='select_box_content col-xs-12'>
+                            包含170道题目，包括所有文字选择题和道路标识题<br>
+                            没有时间限制<br>
+                            可以立即查看答案<br>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-xs-12 all-to-none main_container_footer">
+                Please note: This is not a official dmv driver license permit writing exam, and the test scores and levels are very approximate.<br> 
+                Your score on this test cannot be used as proof of a formal driver license qualification
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function(){
+      $(window).scroll(function(){
+          var scrollTop = $(window).scrollTop();
+          if(scrollTop != 0) {
+            $('header').css('background','rgba(74,144,226,0.8)');
+            $('.nav_title, .nav_item > a > div, .signInBtn').css('color','white');  
+            $('.signUpBtn').css('background-color','white');
+            $('.signUpBtn, .signout a').css('color','rgba(74,144,226,1)');
+          }
+          else {
+            $('header').css('background','rgba(74,144,226,0.8)');
+            $('.nav_title, .nav_item > a > div, .signInBtn').css('color','white');  
+            $('.signUpBtn').css('background-color','white');
+            $('.signUpBtn, .signout a').css('color','rgba(74,144,226,1)');
+          }
+      });
+    
+    })
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

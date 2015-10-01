@@ -1,0 +1,57 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <hr class="tall">
+    </div>
+
+    <div class="row checkbox-container">
+      <span class="button-checkbox">
+        <button id="test-drive" type="button" class="btn" data-color="primary">Test Drive</button>
+          <input type="checkbox" class="hidden" />
+      </span>
+      <span class="button-checkbox">
+        <button id="sell" type="button" class="btn" data-color="primary">Sell</button>
+          <input type="checkbox" class="hidden" />
+      </span>
+    </div>
+
+    <% unless @appointments.empty? %>
+      <div class="col-md-12">
+        <h4>Appointments</h4>
+      </div>
+      <table class="table">
+        <tr>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Appointment Type</th>
+          <th>Address</th>
+          <th>User</th>
+          <th>Car</th>
+          <th>Change/Cancel</th>
+        </tr>
+        <% @appointments.each do |apt| %>
+          <%= content_tag "tr",
+                          class: "checkbox-content",
+                          data: {status: appointment_type_str(apt)} do %>
+                <% datetime_str = apt.time_window ? "#{apt.time_window.date}, #{apt.time_window.date.strftime("%A")}" : "Undetermined" %>
+                <% time_str = apt.time_window ? "#{apt.time_window.hour}:00".to_time.strftime("%l %P") : "Undetermined" %>
+                   <td><%= "#{datetime_str}" %></td>
+            <% if apt.appointment_type == 0 %>
+              <td><a href="<%= sell_request_path(apt.sell_request) %>"><%= time_str %></a></td>
+            <% else %>
+              <td><a href="<%= appointment_path(apt) %>"><%= time_str %></a></td>
+            <% end %>
+            <td><%= apt.apt_type %></td>
+            <td><%= "#{apt.address}, #{apt.city}, #{apt.state}, #{apt.zipcode}" %></td>
+            <td><%= link_to apt.user.name, apt.user %></td>
+            <td><%= link_to "Car detail", car_path(apt.car) if apt.car %></td>
+            <td>
+              <%= link_to "Change", edit_appointment_path(apt) %> /
+              <%= link_to "Cancel", appointment_path(apt), method: :delete %>
+            </td>
+          <% end %>
+        <% end %>
+      </table>
+    <% end %>
+  </div>
+</div>

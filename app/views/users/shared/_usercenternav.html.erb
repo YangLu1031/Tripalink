@@ -1,0 +1,63 @@
+        <div class="user_center_left_container">
+            <div class='user_center_nav'>
+                <a href="/">
+                    <span>Home</span>
+                </a>
+                &nbsp;>&nbsp;
+                <span>
+                    User Center
+                </span>
+            </div>
+            <div class="user_center_left_bar">
+                <div class="user_center_left_bar_title">
+                    User Center
+                </div>
+                <div class="divider-line" style="margin-left:-20px;">
+                </div>
+                <ul class="user_center_left_bar_list">
+                    <li class="nav_purchasing">
+                        <a href="<%= buy_transactions_user_path current_user %>">
+                            <div class="list_square">
+                            </div>
+                            <span>
+                                My Purchasing
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav_selling">
+                        <a href="<%= sell_transactions_user_path current_user %>">
+                            <div class="list_square">
+                            </div>
+                            <span>
+                                My Selling
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav_appointment user_center_active">
+                        <a href="<%= appointments_user_path current_user %>">
+                            <div class="list_square">
+                            </div>
+                            <span>
+                                My Appointment
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav_profile">
+                        <a href="<%= user_path current_user %>">
+                            <div class="list_square">
+                            </div>
+                            <span>
+                                My Profile
+                            </span>
+                        </a>
+                    </li>
+                    <li style="cursor:not-allowed">
+                        <div class="list_square">
+                        </div>
+                        <span>
+                            My Wish List (Future)
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </div>

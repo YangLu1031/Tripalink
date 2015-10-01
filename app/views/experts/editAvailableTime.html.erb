@@ -1,0 +1,53 @@
+<%= provide(:title, 'Edit Your Available Times') %>
+
+<div class="container">
+  <hr class="tall">
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="mb-none"><strong>Edit Your Available Times</strong></h2>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+
+      <%= form_tag('updateAvailableTime', method: :post) do |f|%>
+
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            Available Time Windows:
+          </h4>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <div class="col-md-12">
+              <%= render 'shared/time_window' %>
+            </div>
+          </div>
+        </div>
+
+        <div id="time_window_ids">
+          <% time_windows = TimeWindow.where(expert_id: @expert.id).where.not(status:0).where(date: Date.today..(Date.today+1.week)) %>
+          <% if time_windows.size != 0 %>
+              <% time_windows.each do |tw| %>
+                  <%= hidden_field_tag "time_window_ids[]", tw.id %>
+              <% end %>
+          <% else %>
+              <%= hidden_field_tag "time_window_ids[]", :multiple => true %>
+          <% end %>
+        </div>
+
+        <div class="row">
+          <div class="form-group">
+            <div class="col-md-12">
+              <%= submit_tag "Submit", class: "btn btn-primary pull-right mb-xl" %>
+            <% end %>
+            </div>
+          </div>
+        </div>
+
+    </div>
+  </div>
+</div>
+
+<%= render 'shared/time_window_script_expert' %>

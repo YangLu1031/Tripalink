@@ -1,0 +1,295 @@
+<style>
+    body{
+        background-color:#F9F9FB;
+    }
+    .driver_license_question_container{
+        background-color:white;
+    }
+    .signout a{
+        color:rgb(74,144,226);
+    }
+    .signUpBtn > span > a{
+        color:rgb(74,144,226);
+    }
+    header{
+        background-color: rgb(74,144,226);
+    }
+    ul{
+        list-style-type: none;
+    }
+    .nav_title, .nav_item > a > div{
+        color:white;
+    }
+    .signInBtn{
+        color:white;
+    }
+    .signUpBtn{
+        color:rgb(74,144,226);
+        background-color:white;
+    }
+    .driver_license_navbar{
+        height:70px;
+        margin-top:50px;
+        width:100%;
+        padding-top:20px;
+        border-bottom:2px solid #E6E7EB;
+        font-size:14px;
+        color:#4A4A4A;
+        text-align:left;
+        padding-left:15px;
+    }
+    .question_container{
+        height:auto;
+        width:100%;
+        text-align:left;
+        padding-left:5%;
+        padding-right:5%;
+        float:left;
+        margin-bottom:10px;
+/*        background-color:red;*/
+        
+    }
+    .driver_license_navbar span:hover{
+        color:rgb(74, 144, 226);
+    }
+    .driver_license_question_container{
+        box-shadow:0px 2px 4px 0px #A0A8BD;
+    }
+    .test_title_container{
+        width:100%;
+        min-height:148px;
+        height:auto;
+        padding-left:5%;
+        padding-right:5%;
+        float:left;
+    }
+    .test_title_container_content_main_title{
+        font-size:24px;
+        color:#3A3D42;
+        min-height:87px;
+        height:auto;
+        padding-top:25px;
+        line-height:30px;
+        vertical-align:middle;
+        
+    }
+    .test_title_container_content_sub_title{
+        min-height:20px;
+        vertical-align:middle;
+        text-align:center;
+        
+    }
+    .question_content{
+        font-size:18px;
+        color:#3A3D42;
+        font-weight:500;
+    }
+    .question_list_item{
+        margin-bottom:10px;
+        padding-left:5px;
+    }
+    .question_container_footer{
+        margin-bottom:40px;
+        text-align:left;
+        color:#FF0000;
+        padding-left:5%;
+        font-size:16px;
+    }
+    .question_container_footer_button{
+        width:335px;
+        height:40px;
+        margin-top:20px;
+    }
+    .question_container_footer_button_0{
+        width:160px;
+        height:40px;
+        background-color:rgb(74,144,226);
+        border-radius:3px;
+        color:white;
+        margin-right:10px;
+        text-align:center;
+        vertical-align:middle;
+        line-height:40px;
+        float:left;
+        cursor:pointer;
+    }
+    .question_container_footer_button_1{
+        width:160px;
+        height:40px;
+        background-color:#E6E7EB;
+        border-radius:3px;
+        color:black;
+        text-align:center;
+        line-height:40px;
+        vertical-align:middle;
+        float:left;
+        cursor:pointer;
+    }
+    .corrent_icon{
+        color:#5FC782;
+        font-size:16px;
+        margin-left:5px;
+        display:none;
+    }
+    .wrong_icon{
+        color:#F55949;
+        font-size:16px;
+        margin-left:5px;
+        display:none;
+    }
+    .question_list_container{
+        margin-bottom:25px;
+    }
+    .see_all_answer{
+        position:relative;
+        left:50%;
+        margin-left:-80px;
+        margin-top:10px;
+    }
+    .test_title_subtitle{
+        font-size:13px;
+        line-height:15px;
+        color:#4A90E2;
+    }
+</style>
+
+<div class="col-xs-12" align="center" style="padding-left:5%; padding-right:5%;padding-bottom:15px;">
+    <div class="col-xs-12 all-to-none driver_license_question_container">
+        <div class="driver_license_navbar">
+    <!--        Help Center > For Buyer > California Driver License Permit Practice Test-->
+            <a href="/">
+                <span>
+                    Home  
+                </span>
+                >
+            </a>
+            <a href="/faq/">
+                <span>
+                    Help Center 
+                </span>
+                >
+            </a>
+            <a href="/driver_license/">
+                <span>
+                    License
+                </span>
+                >
+            </a>
+            <a href="/driver_license/practice">
+                <span>
+                    Practice
+                </span>
+            </a>
+        </div>
+        <div class="test_title_container">
+            <div class="test_title_container_content" align="center">
+                <div class="test_title_container_content_main_title">
+                    加州DMV汽车驾照笔试－在线练习
+                </div>
+                <span class="col-xs-12 test_title_subtitle">
+                    由于DMV实际考试中文考卷为繁体，为还原最真实的考试情景，本测试也采用了繁体字题目来模拟测试
+                </span>
+                <div class="col-xs-12 test_title_container_content_sub_title">
+                    考试一共有170道题目，每道题目仅有一个正确答案。本模拟测试不限时间，测试完成后即可查看答案。
+                </div>
+                <div class="col-xs-12 test_title_container_content_sub_title" style="color:#4A90E2; border-bottom:1px solid #4A90E2;line-height:30px;">
+                    答完每道题目后即可查看答案
+                </div>
+
+                <div class="see_all_answer question_container_footer_button_0" id="see_all_answer_button">
+                    显示全部答案
+                </div>
+                
+            </div>
+        </div>
+        <div class="question_container">
+            
+            <% @questions.each_with_index do |question, index| %>
+                <div class="question_list">
+                        <div class="question_content">
+                            <%= (index + 1).to_s + '. ' +question["question"] %><br>
+                        </div>
+                       <div class="question_list_container col-xs-12 all-to-none">
+                           <div class="col-md-1 col-xs-3" style="padding-top:5px;">
+                               <% if question["image"] %>
+                                   <img src="<%= question['image'] %>"><br>
+                               <% end %>
+                           </div>
+                           <div class="col-md-11 col-xs-9" style="padding-right:0;">
+                               <% question["choices"].each do |choice| %>
+                                    <div class="question_list_item question_list_item_<%= index%>" value="<%= choice['value'] %>">
+                                       <input class="score_<%= index %> question_option" type="radio" value="<%= choice['value'] %>" name="'q<%= index %>'" style="margin-right:5px;" />
+                                        <span>
+                                            <%= choice["text"].html_safe %>
+                                        </span>
+                                    </div>
+                                <% end %>
+                           </div>
+                        </div>
+                </div>
+            <% end %>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    var total_question_number;
+    var total_score = 0;
+    var html_correct = '<span class="corrent_icon judge_icon"><i class="fa fa-check"></i></span>';
+    var html_incorrect = '<span class="wrong_icon judge_icon"><i class="fa fa-times"></i></span>';
+    var item_array = [];
+    var incorrent_array = [];
+
+    $(function(){
+          total_question_number = $('.question_container .question_list').length;
+          console.log(total_question_number);
+          $(window).scroll(function(){
+              var scrollTop = $(window).scrollTop();
+              if(scrollTop != 0) {
+                $('header').css('background','rgba(74,144,226,0.8)');
+                $('.nav_title, .nav_item > a > div, .signInBtn').css('color','white');  
+                $('.signUpBtn').css('background-color','white');
+                $('.signUpBtn, .signout a').css('color','rgba(74,144,226,1)');
+              }
+              else {
+                $('header').css('background','rgba(74,144,226,0.8)');
+                $('.nav_title, .nav_item > a > div, .signInBtn').css('color','white');  
+                $('.signUpBtn').css('background-color','white');
+                $('.signUpBtn, .signout a').css('color','rgba(74,144,226,1)');
+              }
+          });  
+          $('.question_list_item[value="1"]').append(html_correct);
+          $('.question_list_item[value="0"]').append(html_incorrect);
+    })
+    
+    $('.question_option').click(function(){
+        $(this).parent().parent().find('.wrong_icon').css('display','none');
+        $(this).parent().parent().find('.corrent_icon').css('display','none');
+        if($(this).attr('value') == '0'){
+            $(this).parent().find('.wrong_icon').css('display','inline'); 
+        }else if($(this).attr('value') == '1'){
+            $(this).parent().find('.corrent_icon').css('display','inline');
+        }
+    })
+    $('#see_all_answer_button').click(function(){
+        $('.corrent_icon').css('display','inline');
+        $('.question_list_item[value="1"]').css('background-color','rgba(95,199,130,0.2)');
+    })
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

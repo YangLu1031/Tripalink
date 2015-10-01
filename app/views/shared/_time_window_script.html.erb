@@ -1,0 +1,41 @@
+<script>
+$(document).ready(function() {
+  $('.time-window-btn').click(function (evt) {
+    var vals = [];
+    var twid = $(evt.target).attr('twid');
+    var hash = {};
+    hash[twid] = true;
+    $('#time_window_ids input').each(function(index,element){
+      if ($(element).val() != "" && !hash.hasOwnProperty($(element).val()))
+        vals = vals.concat($(element).val());
+        hash[$(element).val()] = true;
+    });
+    console.log(vals);
+    if (!$(evt.target).hasClass('btn-success')) {
+      vals = vals.concat($(evt.target).attr('twid'));
+    }
+    console.log(vals);
+    $(evt.target).toggleClass('btn-primary').toggleClass('btn-success');
+    var i = 0;
+    while (vals.length - i > 3) {
+      $('.time-window-btn[twid="' + vals[i++] + '"]').toggleClass('btn-primary').toggleClass('btn-success');
+    }
+    $('#time_window_ids input').each(function(index,element){
+      if (i < vals.length) {
+        $(element).val(vals[i++]);
+      } else {
+        $(element).val("");
+      }
+    });
+  });
+
+  //Set selected time windows in table with data from hidden inputs
+  $('#time_window_ids input').each(function(index,element){
+    var twid = $(element).val();
+    if (twid != "") {
+      //$('.time-window-btn[twid="' + twid + '"]').toggleClass('btn-primary').toggleClass('btn-success');
+    }
+  });
+
+});
+</script>

@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="row">
+    <ul class="thumbnails">
+      <div class="col-md-4">
+        <div class="thumbnail">
+          <img class="car-picture" src="http://placehold.it/320x200"
+               alt="ALT NAME" class="img-responsive" width="320" height="200" />
+
+          <%= s3_uploader_form callback_url: car_car_pictures_url(@car),
+                               id: "car-picture-#{@car_picture.id}",
+                               class: "car-picture-uploader",
+                               callback_param: "car_picture[picture]",
+                               expiration: 24.hours.from_now.utc.iso8601,
+                               max_file_size: 100.megabytes,
+                               key: "car_pictures/{timestamp}-{unique_id}-#{SecureRandom.hex}-${filename}",
+                               key_starts_with: "car_pictures" do %>
+            <%= hidden_field_tag  "Content-Type", "" %>
+            <%= file_field_tag :file, multiple: true %>
+          <% end %>
+
+          <div class="caption">
+            <%= form_for @car_picture, url: car_car_pictures_path(@car), html: {method: :POST},
+                         class: "car-picture-upload-form" do |f| %>
+              <p>Picture type</p>
+              <%= f.hidden_field :picture, class: "car-picture-path" %>
+              <%= f.select :picture_type,
+                           options_for_select(@car_picture_types), class: "selectpicker", data: { size: 5 } %>
+              <p>Description</p>
+              <%= f.text_area :description, class: "form-control", rows: 3 %>
+              <!--<textarea class="form-control" rows="3"></textarea>-->
+              </p>
+              <%= f.submit "Upload", class: "btn btn-primary btn-block" %>
+            <% end %>
+          </div>
+          <div class="caption">
+            <p align="center"><a href="http://bootsnipp.com/" class="btn btn-success btn-block">Add</a></p>
+            <p align="center"><a href="http://bootsnipp.com/" class="btn btn-danger btn-block">Delete</a></p>
+          </div>
+        </div>
+      </div>
+    </ul>
+  </div>
+</div>
+
+<script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.5.4/bootstrap-select.js" />
+

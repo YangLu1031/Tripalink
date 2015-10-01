@@ -1,0 +1,88 @@
+<%= provide(:title, 'Appointment') %>
+
+<div class="container">
+  <hr class="tall">
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="mb-none"><strong>Reschedule Appointment</strong></h2>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+
+      <%= form_for(@apt) do |f|%>
+
+        <div class="row">
+          <div class="form-group">
+            <div class="col-md-4">
+              <%= f.text_field :name, placeholder: 'Name', class: 'form-control', disabled: true %>
+            </div>
+            <div class="col-md-4">
+              <%= f.text_field :email, placeholder: 'Email', class: 'form-control', disabled: true %>
+            </div>
+            <div class="col-md-4">
+              <%= f.text_field :phone, placeholder: 'phone', class: 'form-control' %>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group">
+            <div class="col-md-8">
+              <%= f.text_field :address, placeholder: 'Address', class: 'form-control' %>
+            </div>
+            <div class="col-md-4" style="padding-left: 0; padding-right: 0;">
+              <div class="col-md-5">
+                <%= f.text_field :city, placeholder: 'City', class: 'form-control' %>
+              </div>
+              <div class="col-md-3">
+                <%= f.text_field :state, placeholder: 'State', class: 'form-control' %>
+              </div>
+              <div class="col-md-4">
+                <%= f.text_field :zipcode, placeholder: 'State', class: 'form-control' %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="divider divider-primary">
+          <i class="fa fa-chevron-down"></i>
+        </div>
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            Available Time Windows:
+          </h4>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <div class="col-md-12">
+              <%= render 'shared/time_window' %>
+            </div>
+          </div>
+        </div>
+
+        <div id="time_window_ids">
+          <% (0...3).each do |i| %>
+            <% if i < @apt.time_window_ids.size %>
+              <%= f.hidden_field :time_window_ids, :multiple => true, :value => @apt.time_window_ids[i] %>
+            <% else %>
+              <%= f.hidden_field :time_window_ids, :multiple => true, :value => "" %>
+            <% end %>
+          <% end %>
+        </div>
+
+        <div class="row">
+          <div class="form-group">
+            <div class="col-md-12">
+              <%= f.submit "Submit", class: "btn btn-primary pull-right mb-xl" %>
+            <% end %>
+            </div>
+          </div>
+        </div>
+
+    </div>
+  </div>
+</div>
+
+<%= render 'shared/time_window_script' %>

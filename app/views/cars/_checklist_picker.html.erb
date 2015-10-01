@@ -1,0 +1,25 @@
+<div class="tab-pane <%= section_id == 0 ? "active" : "" %>" id=<%= "tabs-#{section_id + 1}" %>>
+  <div class="panel-body">
+    <% section["values"].each_with_index do |item, idx| %>
+      <div class="col-md-6">
+        <div class="well well-sm">
+          <div class="checkbox">
+            <%= fields_for :checklist do |checklist_form| %>
+              <label>
+                <% item_name = item["name"] %>
+                <% item_val = @car.checklist[@check_item_index[item_name]] %>
+                <% if item["type"] == "boolean" %>
+                  <%= checklist_form.check_box item_name, checked: item_val == "1"%>
+                  <%= item_name %>
+                <% else %>
+                  <p><%= item_name %></p>
+                  <%= checklist_form.text_field item_name, value: item_val, class: "form-control" %>
+                <% end %>
+              </label>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

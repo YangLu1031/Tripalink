@@ -1,0 +1,64 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <hr class="tall">
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6 col-sm-offset-3">
+        <div class="featured-box featured-box-primary align-left mt-xlg">
+          <div class="box-content">
+
+            <div class="row">
+              <div class="col-md-6">
+                <h4 class="heading-primary text-uppercase mb-md">Log In</h4>
+              </div>
+              <% if resource_name == :user %>
+                <div class="col-md-6 align-right">
+                  or <%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %>
+                </div>
+              <% end %>
+            </div>
+
+            <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+              <div class="row">
+                <div class="form-group">
+                  <div class="col-md-12">
+                    <%= f.label :email %><br />
+                    <%= f.email_field :email, autofocus: true, class: "form-control input-lg" %>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="form-group">
+                  <div class="col-md-12">
+                    <%= f.label :password %>
+                    <%= link_to "Forget Password?", new_password_path(resource_name), class: "pull-right" %>
+                    <br>
+                    <%= f.password_field :password, autocomplete: "off", class: "form-control input-lg" %>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <% if devise_mapping.rememberable? -%>
+                  <div class="col-md-6">
+                    <%= f.check_box :remember_me %>
+                    <%= f.label :remember_me %>
+                  </div>
+                <% end -%>
+
+                <div class="col-md-6 pull-right">
+                  <%= f.submit "Log in", class: "btn btn-primary pull-right mb-xl" %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%#= render "users/shared/links" %>

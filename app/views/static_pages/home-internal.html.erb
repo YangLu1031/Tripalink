@@ -1,0 +1,201 @@
+<div role="main" class="main" id="home">
+
+  <div class="slider-container slider-container-fullscreen">
+    <div class="slider" id="revolutionSliderFullScreen" data-plugin-revolution-slider data-plugin-options='{"fullScreen": "on"}'>
+      <ul>
+        <li data-transition="fade" data-slotamount="10" data-masterspeed="300">
+          <%= image_tag "img/slides/slide-bg-full.jpg", data: {fullwidthcentering:"on"} , alt:"" %>
+
+          <div class="tp-caption sft stb visible-lg"
+               data-x="417"
+               data-y="100"
+               data-speed="300"
+               data-start="1000"
+               data-easing="easeOutExpo"><%= image_tag "img/slides/slide-title-border.png", alt:"" %></div>
+
+          <div class="tp-caption top-label lfl stl"
+               data-x="center" data-hoffset="0"
+               data-y="100"
+               data-speed="300"
+               data-start="500"
+               data-easing="easeOutExpo">DO YOU NEED A NEW</div>
+
+          <div class="tp-caption sft stb visible-lg"
+               data-x="717"
+               data-y="100"
+               data-speed="300"
+               data-start="1000"
+               data-easing="easeOutExpo"><%= image_tag "img/slides/slide-title-border.png", alt:"" %></div>
+
+          <div class="tp-caption main-label sft stb"
+               data-x="center" data-hoffset="0"
+               data-y="130"
+               data-speed="300"
+               data-start="1500"
+               data-easing="easeOutExpo">WEB DESIGN?</div>
+
+          <div class="tp-caption bottom-label sft stb"
+               data-x="center" data-hoffset="0"
+               data-y="200"
+               data-speed="500"
+               data-start="2000"
+               data-easing="easeOutExpo">Check out our options and features.</div>
+
+          <a class="tp-caption customin btn btn-lg btn-primary main-button" data-hash href="#projects"
+             data-x="center" data-hoffset="0"
+             data-y="250"
+             data-customin="x:0;y:0;z:0;rotationX:90;rotationY:0;rotationZ:0;scaleX:1;scaleY:1;skewX:0;skewY:0;opacity:0;transformPerspective:200;transformOrigin:50% 0%;"
+             data-speed="800"
+             data-start="1700"
+             data-easing="Back.easeInOut"
+             data-endspeed="300">
+            Get Started Now!
+          </a>
+
+        </li>
+        <li data-transition="fade" data-slotamount="10" data-masterspeed="300">
+          <%= image_tag "img/slides/dark-cover.jpg", data: { bgposition:"center center", bgfit:"cover", bgrepeat:"no-repeat" }, alt:"" %>
+
+          <div class="tp-caption tp-fade fadeout fullscreenvideo"
+               data-x="0"
+               data-y="0"
+               data-speed="1000"
+               data-start="100"
+               data-easing="Power4.easeOut"
+               data-elementdelay="0.01"
+               data-endelementdelay="0.1"
+               data-endspeed="1500"
+               data-endeasing="Power4.easeIn"
+               data-autoplay="true"
+               data-autoplayonlyfirsttime="false"
+               data-nextslideatend="true"
+               data-volume="mute"
+               data-forceCover="1"
+               data-aspectratio="16:9"
+               data-forcerewind="on">
+
+            <video preload="none" width="100%" height="100%" poster="img/slides/dark-cover.jpg">
+              <source src="video/dark.mp4" type="video/mp4" />
+              <source src="video/dark.ogv" type="video/ogg">
+            </video>
+
+          </div>
+
+          <div class="tp-caption top-label lfl stl"
+               data-x="140"
+               data-y="180"
+               data-speed="300"
+               data-start="500"
+               data-easing="easeOutExpo">You just found the</div>
+
+          <div class="tp-caption main-label sft stb"
+               data-x="135"
+               data-y="210"
+               data-speed="300"
+               data-start="1500"
+               data-easing="easeOutExpo">BEST SOLUTION</div>
+
+          <div class="tp-caption bottom-label sft stb"
+               data-x="150"
+               data-y="280"
+               data-speed="500"
+               data-start="2000"
+               data-easing="easeOutExpo">The #1 Selling HTML Site Template on ThemeForest</div>
+
+          <a class="tp-caption customin btn btn-lg btn-primary main-button" data-hash href="#home-intro"
+             data-x="260"
+             data-y="335"
+             data-customin="x:0;y:0;z:0;rotationX:90;rotationY:0;rotationZ:0;scaleX:1;scaleY:1;skewX:0;skewY:0;opacity:0;transformPerspective:200;transformOrigin:50% 0%;"
+             data-speed="800"
+             data-start="2500"
+             data-easing="Back.easeInOut"
+             data-endspeed="300">
+            Get Started Now!
+          </a>
+
+          <div class="tp-caption main-label sft stb visible-lg"
+               data-x="345"
+               data-y="415"
+               data-speed="500"
+               data-start="2700"
+               data-easing="easeOutExpo"><a data-hash href="#home-intro"><i class="fa fa-arrow-circle-o-down"></i></a></div>
+
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <section class="parallax section section-parallax section-center mb-none" data-stellar-background-ratio="0.5" style="background-image: url(img/parallax-transparent.jpg);">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <i class="icon-featured fa fa-envelope" data-appear-animation="bounceIn"></i>
+          <h2 class="mb-none"><strong>Get in Touch With Us</strong></h2>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Google Maps -->
+  <div id="googlemaps" class="google-map mt-none mb-sm"></div>
+
+  <section id="contact">
+    <div class="container">
+      <div class="row mt-xlg">
+        <div class="col-md-6">
+
+          <div class="alert alert-success hidden" id="contactSuccess">
+            <strong>Success!</strong> Your message has been sent to us.
+          </div>
+
+          <div class="alert alert-danger hidden" id="contactError">
+            <strong>Error!</strong> There was an error sending your message.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer class="short" id="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <h4 class="heading-primary">About Porto</h4>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu pulvinar magna. Phasellus semper scelerisque purus, et semper nisl lacinia sit amet. Praesent venenatis turpis vitae purus semper, eget sagittis velit venenatis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos... <a href="#" class="btn-flat btn-xs">View More <i class="fa fa-arrow-right"></i></a></p>
+        <hr class="light">
+      </div>
+      <div class="col-md-3 col-md-offset-1">
+        <h5 class="mb-sm">Contact Us</h5>
+        <span class="phone">(800) 123-4567</span>
+        <p class="mb-none">International: (333) 456-6670</p>
+        <p class="mb-none">Fax: (222) 531-8999</p>
+        <ul class="list list-icons list-icons-sm">
+          <li><i class="fa fa-envelope"></i> <a href="mailto:okler@okler.net">okler@okler.net</a></li>
+        </ul>
+        <div class="social-icons">
+          <ul class="social-icons">
+            <li class="facebook"><a href="http://www.facebook.com/" target="_blank" data-placement="bottom" data-tooltip title="Facebook">Facebook</a></li>
+            <li class="twitter"><a href="http://www.twitter.com/" target="_blank" data-placement="bottom" data-tooltip title="Twitter">Twitter</a></li>
+            <li class="linkedin"><a href="http://www.linkedin.com/" target="_blank" data-placement="bottom" data-tooltip title="Linkedin">Linkedin</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-copyright">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-1">
+          <a href="index.html" class="logo">
+            <img alt="Porto Website Template" class="img-responsive" src="img/logo-footer.png">
+          </a>
+        </div>
+        <div class="col-md-11">
+          <p>© Copyright 2015. All Rights Reserved.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,11 @@
+<li class="col-md-6 clearfix">
+  <div class="thumbnail clearfix">
+    <h4><%= picture_type %></h4>
+    <img src="http://placehold.it/320x200" alt="ALT NAME" class="pull-left clearfix" style='margin-right:10px'>
+    <span>
+    <%= fields_for(:car_picture, html: { multipart: true }) do |upload_form|  %>
+      <%= upload_form.file_field picture_type %>
+    <% end %>
+      </span>
+  </div>
+</li>

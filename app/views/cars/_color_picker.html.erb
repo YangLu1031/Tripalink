@@ -1,0 +1,17 @@
+<div class="tab-pane <%= color_type == "interior_color" ? "active" : "" %>" id=<%= color_type %>>
+  <div class="panel-body">
+    <% CarColor.all.each do |color| %>
+      <div class="col-md-4">
+        <%= content_tag :div, class: "well well-sm color-picker-chip", style: "border-right-color: #{color.value}" do %>
+          <div class="radio">
+            <label>
+              <%= form.radio_button color_type.to_sym,
+                                    color.name, checked: ((not car_color.nil?) and car_color.name == color.name) %>
+              <%= color.name %>
+            </label>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

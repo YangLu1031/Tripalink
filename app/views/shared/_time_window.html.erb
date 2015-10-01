@@ -1,0 +1,57 @@
+
+
+<% today = Date.today %>
+<% time_range = today...(today+1.week) %>
+<% time_windows = @time_windows %>
+<% twids = @apt && @apt.time_window_ids ? @apt.time_window_ids : [] %>
+<table>
+  <tr>
+    <% time_range.each do |date| %>
+      <th class="col-xs-1"><%= date.strftime("%a %m/%d") %></th>
+    <% end %>
+  </tr>
+  <% tw_idx = 0 %>
+  <% (9..19).step(2) do |hour| %>
+    <tr>
+      <% time_range.each do |date| %>
+        <td class='col-xs-1'>
+          <% tw = time_windows[tw_idx]; tw_idx += 1 %>
+          <% if tw.date != date || tw.hour != hour %>
+            <div class="col-xs-12 btn time-window-btn btn-default" twid="<%= tw.id %>" disabled="disabled">error</div>
+            <% next %>
+          <% end %>
+          <% if action_name == "scheduleAppointments" %>
+              <% apt_list = @appointment_ids.has_key?(tw.id) ? @appointment_ids[tw.id].join(' ') : nil %>
+              <% apt_attrs = apt_list ? "#{ apt_list }" : "" %>
+              <% if tw.reserved? %>
+                  <div class="col-xs-12 btn time-window-btn btn-success" twid="<%= tw.id %>" apt_ids="<%= apt_attrs %>" disabled="disabled">
+              <% elsif tw.notavailable? %>
+                  <div class="col-xs-12 btn time-window-btn btn-default" twid="<%= tw.id %>" disabled="disabled">
+              <% else # if tw.available? == true %>
+                  <div class="col-xs-12 btn time-window-btn btn-primary" twid="<%= tw.id %>" apt_ids="<%= apt_attrs %>">
+              <% end %>
+          <% elsif action_name == "editAvailableTime" %>
+              <% if tw.notavailable? %>
+                  <div class="col-xs-12 btn time-window-btn btn-primary" twid="<%= tw.id %>">
+              <% elsif tw.reserved? %>
+                  <div class="col-xs-12 btn time-window-btn btn-danger" twid="<%= tw.id %>" disabled="disabled">
+              <% else %>
+                  <div class="col-xs-12 btn time-window-btn btn-success" twid="<%= tw.id %>">
+              <% end %>
+          <% else %>
+              <% if twids.include?(tw.id)  #appointed by current user %>
+                  <div class="col-xs-12 btn time-window-btn btn-success" twid="<%= tw.id %>">
+              <% elsif tw.available? %>
+                  <div class="col-xs-12 btn time-window-btn btn-primary" twid="<%= tw.id %>">
+              <% else %>
+                  <div class="col-xs-12 btn time-window-btn btn-default" twid="<%= tw.id %>" disabled="disabled">
+              <% end %>
+
+          <% end %>
+          <%= "#{hour}:00".to_time.strftime("%l %P") %>
+            </div>
+        </td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>

@@ -1,0 +1,338 @@
+
+<!-- Vendor -->
+<!--[if lt IE 9]>
+  <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+  <![endif]-->
+  <!--[if gte IE 9]><!-->
+    
+    <!--<![endif]-->
+
+
+    <%= javascript_include_tag "vendor/jquery.appear/jquery.appear.js" %>
+    <%= javascript_include_tag "vendor/jquery.easing/jquery.easing.js" %>
+    <%= javascript_include_tag "vendor/jquery-cookie/jquery-cookie.js" %>
+    <%= javascript_include_tag "vendor/bootstrap/bootstrap.js" %>
+    <%= javascript_include_tag "vendor/common/common.js" %>
+    <%= javascript_include_tag "vendor/jquery.validation/jquery.validation.js" %>
+    <%= javascript_include_tag "vendor/jquery.stellar/jquery.stellar.js" %>
+    <%= javascript_include_tag "vendor/jquery.easy-pie-chart/jquery.easy-pie-chart.js" %>
+    <%= javascript_include_tag "vendor/jquery.gmap/jquery.gmap.js" %>
+    <%= javascript_include_tag "vendor/isotope/jquery.isotope.js" %>
+    <%= javascript_include_tag "vendor/owlcarousel/owl.carousel.js" %>
+    <%= javascript_include_tag "vendor/jflickrfeed/jflickrfeed.js" %>
+    <%= javascript_include_tag "vendor/magnific-popup/jquery.magnific-popup.js" %>
+    <%= javascript_include_tag "vendor/vide/vide.js" %>
+
+    <script defer src="https://s3.amazonaws.com/lxnjstatic/assets/javascripts/jquery.flexslider.js"></script>
+
+    <!-- Theme Base, Components and Settings -->
+    <%= javascript_include_tag "js/theme.js" %>
+
+    <!-- Specific Page Vendor and Views -->
+    <%= javascript_include_tag "vendor/rs-plugin/js/jquery.themepunch.tools.min.js" %>
+    <%= javascript_include_tag "vendor/rs-plugin/js/jquery.themepunch.revolution.min.js" %>
+    <%= javascript_include_tag "vendor/circle-flip-slideshow/js/jquery.flipshow.js" %>
+    <%= javascript_include_tag "js/views/view.home.js" %>
+    <%= javascript_include_tag "js/views/view.contact.js" %>
+
+    <!-- Theme Custom -->
+    <%= javascript_include_tag "js/custom.js" %>
+
+    <!-- Theme Initialization Files -->
+    <%= javascript_include_tag "js/theme.init.js" %>
+
+    <!-- Google Analytics: Change UA-XXXXX-X to be your site's ID. Go to http://www.google.com/analytics/ for more information.
+      <script type="text/javascript">
+
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-12345678-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
+      </script>
+      -->
+
+      <script>
+
+/*
+Map Settings
+
+Find the Latitude and Longitude of your address:
+- http://universimmedia.pagesperso-orange.fr/geo/loc.htm
+- http://www.findlatitudeandlongitude.com/find-address-from-latitude-and-longitude/
+
+ */
+
+      // Map Markers
+      var mapMarkers = [{
+        address: "217 Summit Boulevard, Birmingham, AL 35243",
+        html: "<strong>Alabama Office</strong><br>217 Summit Boulevard, Birmingham, AL 35243<br><br><a href='#' onclick='mapCenterAt({latitude: 33.44792, longitude: -86.72963, zoom: 16}, event)'>[+] zoom here</a>",
+        icon: {
+          image: "img/pin.png",
+          iconsize: [26, 46],
+          iconanchor: [12, 46]
+        }
+      },{
+        address: "645 E. Shaw Avenue, Fresno, CA 93710",
+        html: "<strong>California Office</strong><br>645 E. Shaw Avenue, Fresno, CA 93710<br><br><a href='#' onclick='mapCenterAt({latitude: 36.80948, longitude: -119.77598, zoom: 16}, event)'>[+] zoom here</a>",
+        icon: {
+          image: "img/pin.png",
+          iconsize: [26, 46],
+          iconanchor: [12, 46]
+        }
+      },{
+        address: "New York, NY 10017",
+        html: "<strong>New York Office</strong><br>New York, NY 10017<br><br><a href='#' onclick='mapCenterAt({latitude: 40.75198, longitude: -73.96978, zoom: 16}, event)'>[+] zoom here</a>",
+        icon: {
+          image: "img/pin.png",
+          iconsize: [26, 46],
+          iconanchor: [12, 46]
+        }
+      }];
+
+// Map Initial Location
+var initLatitude = 37.09024;
+var initLongitude = -95.71289;
+
+// Map Extended Settings
+var mapSettings = {
+  controls: {
+    draggable: (($.browser.mobile) ? false : true),
+    panControl: true,
+    zoomControl: true,
+    mapTypeControl: true,
+    scaleControl: true,
+    streetViewControl: true,
+    overviewMapControl: true
+  },
+  scrollwheel: false,
+  markers: mapMarkers,
+  latitude: initLatitude,
+  longitude: initLongitude,
+  zoom: 5
+};
+
+var map = $("#googlemaps").gMap(mapSettings);
+
+// Map Center At
+var mapCenterAt = function(options, e) {
+  e.preventDefault();
+  $("#googlemaps").gMap("centerAt", options);
+}
+    </script>
+<script>
+    var signin_flag = '';
+    $('#step_3_to_4_need_login').click(function(){
+        signin_flag = 'sell_step_4_page';
+        console.log(signin_flag);
+    })
+    
+    $('#sell_car_step_4_need_login').click(function(){
+        signin_flag = 'sell_step_4_page';
+        console.log(signin_flag);
+    })
+    
+    $('#signInButton').click(function(){
+        signin_flag = 'nav_bar_signin';
+        $('.signInBox').fadeIn();
+    })
+    $('#test_drive_button').click(function(){
+        signin_flag = 'text_drive';
+    })
+    $('#buy_me_btn').click(function(){
+        signin_flag = 'buy_it_page';
+    })
+    $('#submit_signIn').click(function(){
+        var userName = $('#loginEmail').val();
+        var passWord = $('#loginPassword').val();
+        var div = $('#header_id').html();
+        $.ajax({
+            url: '/users/signin',
+            type: 'post',
+            data: 'email=' + encodeURIComponent(userName) + '&password=' + encodeURIComponent(passWord),
+            dataType: 'json',
+            success: function(json){
+//                console.log(json);
+                if(json['message'] != 'Signin failed!'){
+                    $('.signInBox, .modal-backdrop').fadeOut();
+                    $('.signInBtn, .signUpBtn').fadeOut();
+                    if(signin_flag == 'sell_step_4_page'){
+                        ga('send', 'event', 'submit_signIn', 'click', 'step_4_page');
+                        $("#sell_car_container_step1").css("display","none");
+                        $("#sell_car_container_step2").css("display","none");
+                        $("#sell_car_container_step3").css("display","none");
+                        $("#sell_car_container_step4").css("display","block");
+                        $('#sell_car_step_4').removeClass('last_step');
+                        $('#sell_car_step_4').removeClass('next_step');        
+                        $('#sell_car_step_4').addClass('current_step');
+                        $('.sell_step_4_circle > .last_step_circle').css('display','none');
+                        $('.sell_step_4_circle > .next_step_circle').css('display','none');
+                        $('.sell_step_4_circle > .current_step_circle').css('display','block');
+
+                        $('#sell_car_step_2').removeClass('current_step');
+                        $('#sell_car_step_2').addClass('last_step');
+                        $('#sell_car_step_2').removeClass('next_step');
+                        $('.sell_step_2_circle > .last_step_circle').css('display','block');
+                        $('.sell_step_2_circle > .next_step_circle').css('display','none');
+                        $('.sell_step_2_circle > .current_step_circle').css('display','none');
+
+                        $('#sell_car_step_1').removeClass('current_step');
+                        $('#sell_car_step_1').addClass('last_step');
+                        $('#sell_car_step_1').removeClass('next_step');
+                        $('.sell_step_1_circle > .last_step_circle').css('display','block');
+                        $('.sell_step_1_circle > .next_step_circle').css('display','none');
+                        $('.sell_step_1_circle > .current_step_circle').css('display','none');
+
+                        $('#sell_car_step_3').removeClass('current_step');
+                        $('#sell_car_step_3').addClass('last_step');
+                        $('#sell_car_step_3').removeClass('next_step');
+                        $('.sell_step_3_circle > .last_step_circle').css('display','block');
+                        $('.sell_step_3_circle > .next_step_circle').css('display','none');
+                        $('.sell_step_3_circle > .current_step_circle').css('display','none');
+                    }else{
+                        location.reload();
+                    }
+                }else{
+                    alert('Login failed');
+                }
+                    
+            }
+        })
+    })
+    $('#submit_signUp').click(function(){
+        var userName = $('#signupEmail').val();
+        var fullName = $('#signupName').val();
+        var phone = $('#signupPhone').val();
+        var passWord = $('#signupPassword').val();
+        var confirm_passWord = $('#signUpConfirm_Password').val();
+        var div = $('#header_id').html();
+        if(passWord != confirm_passWord){
+            alert('Passwords are not matched!');
+        }else{
+            $.ajax({
+                url: '/users/signup',
+                type: 'post',
+                data: 'user[email]=' + encodeURIComponent(userName) + '&user[name]=' + encodeURIComponent(fullName) +  '&user[password]=' + encodeURIComponent(passWord) + '&user[phone]=' + encodeURIComponent(phone) + '&user[password]=' + encodeURIComponent(passWord) + '&user[password_confirmation]=' + encodeURIComponent(confirm_passWord),
+                dataType: 'json',
+                success: function(json){
+//                    console.log(json);
+                    if(json['message'] != "Signup failed!"){
+                        $('.signInBox, .modal-backdrop').fadeOut();
+                        console.log(div);
+                        $('#header_id').html(div);
+                        if(signin_flag == 'sell_step_4_page'){
+                            ga('send', 'event', 'submit_signUp', 'click', 'step_4_page');
+                            $("#sell_car_container_step1").css("display","none");
+                            $("#sell_car_container_step2").css("display","none");
+                            $("#sell_car_container_step3").css("display","none");
+                            $("#sell_car_container_step4").css("display","block");
+                            $('#sell_car_step_4').removeClass('last_step');
+                            $('#sell_car_step_4').removeClass('next_step');        
+                            $('#sell_car_step_4').addClass('current_step');
+                            $('.sell_step_4_circle > .last_step_circle').css('display','none');
+                            $('.sell_step_4_circle > .next_step_circle').css('display','none');
+                            $('.sell_step_4_circle > .current_step_circle').css('display','block');
+
+                            $('#sell_car_step_2').removeClass('current_step');
+                            $('#sell_car_step_2').addClass('last_step');
+                            $('#sell_car_step_2').removeClass('next_step');
+                            $('.sell_step_2_circle > .last_step_circle').css('display','block');
+                            $('.sell_step_2_circle > .next_step_circle').css('display','none');
+                            $('.sell_step_2_circle > .current_step_circle').css('display','none');
+
+                            $('#sell_car_step_1').removeClass('current_step');
+                            $('#sell_car_step_1').addClass('last_step');
+                            $('#sell_car_step_1').removeClass('next_step');
+                            $('.sell_step_1_circle > .last_step_circle').css('display','block');
+                            $('.sell_step_1_circle > .next_step_circle').css('display','none');
+                            $('.sell_step_1_circle > .current_step_circle').css('display','none');
+
+                            $('#sell_car_step_3').removeClass('current_step');
+                            $('#sell_car_step_3').addClass('last_step');
+                            $('#sell_car_step_3').removeClass('next_step');
+                            $('.sell_step_3_circle > .last_step_circle').css('display','block');
+                            $('.sell_step_3_circle > .next_step_circle').css('display','none');
+                            $('.sell_step_3_circle > .current_step_circle').css('display','none');
+                        }else{
+                            location.reload();
+                        }
+                    }else{
+                        alert('Login failed');
+                    }
+
+                }
+            })
+        }
+    })
+    $('#signIn_up').click(function(){
+        $('#signInBox_up, .modal-backdrop').fadeOut();
+    })
+    $('#signUp_in').click(function(){
+        $('#signInBox_in, .modal-backdrop').fadeOut();
+    })
+
+</script>
+
+
+<!--Google Analytics Code start here-->
+<script>
+  $(document).ready(function(){
+      var current_url = window.location.href;
+      if(current_url.indexOf('localhost') > -1){
+          console.log('Localhost');
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+          
+        //  ga('create', 'UA-67004534-1', 'auto');
+          ga('create', 'UA-67004534-1', 'auto');
+          ga('send', 'pageview');
+      }else{
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+          
+        //  ga('create', 'UA-67004534-1', 'auto');
+          ga('create', 'UA-62214121-3', 'auto');
+          ga('send', 'pageview');
+      }
+  })      
+</script>
+
+
+<!--Start of Facebook API code-->
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1658379551045575',
+      xfbml      : true,
+      version    : 'v2.4'
+    });
+  };
+</script>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4&appId=1658379551045575";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<!--End of Facebook API code-->
+
+<!--Start of Zopim Live Chat Script-->
+<script type="text/javascript">
+window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
+d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
+_.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute("charset","utf-8");
+$.src="//v2.zopim.com/?3J1jCAi69UCRj6y2Q8XYomm5r5UkQEwX";z.t=+new Date;$.
+type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
+</script>
+<!--End of Zopim Live Chat Script-->

@@ -1,0 +1,55 @@
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 toppad" >
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <%= content_tag "h4", @appointment_type_str %>
+    </div>
+    <div class="panel-body">
+      <% unless @appointments.empty? %>
+      <table class="table">
+        <tr>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Appointment Type</th>
+          <th>Address</th>
+          <th>User</th>
+          <th>Car</th>
+          <th>Change/Cancel</th>
+        </tr>
+        <% @appointments.each do |apt| %>
+        <%= content_tag "tr", class: "checkbox-content",
+        data: {status: appointment_type_str(apt)} do %>
+        <td><%= "#{apt.time_window.date}, #{apt.time_window.date.strftime("%A")}" %></td>
+        <% if apt.appointment_type == 0 %>
+        <td><a href="<%= sell_request_path(apt.sell_request) %>"><%= "#{apt.time_window.hour}:00".to_time.strftime("%l %P") %></a></td>
+        <% else %>
+        <td><a href="<%= appointment_path(apt) %>"><%= "#{apt.time_window.hour}:00".to_time.strftime("%l %P") %></a></td>
+        <% end %>
+        <td><%= apt.apt_type %></td>
+        <td><%= "#{apt.address}, #{apt.city}, #{apt.state}, #{apt.zipcode}" %></td>
+        <td><%= link_to apt.user.name, apt.user %></td>
+        <td><%= link_to "Car detail", car_path(apt.car) %></td>
+        <td>
+          <a data-toggle="modal" href="#change-cancel-modal">Change/Cancel</a>
+        </td>
+        <% end %>
+        <% end %>
+      </table>
+      <% end %>
+      <%= will_paginate @appointments %>
+    </div>
+  </div>
+  <div id="change-cancel-modal" class="modal fade in">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <a class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></a>
+          <h4 class="modal-title">Sorry, it is not supported yet</h4>
+        </div>
+        <div class="modal-body">
+          <p>Please contact our administrator at 000-000-000</p>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dalog -->
+  </div><!-- /.modal -->
+</div>
+

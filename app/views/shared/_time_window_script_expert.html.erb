@@ -1,0 +1,30 @@
+<script>
+$(document).ready(function() {
+  $('.time-window-btn').click(function (evt) {
+    var vals = [];
+    var twid = $(evt.target).attr('twid');
+    $('#time_window_ids input').each(function(index,element){
+      if ($(element).val() != "" && $(element).val() != twid)
+        vals = vals.concat($(element).val());
+    });
+    if (!$(evt.target).hasClass('btn-success'))
+      vals = vals.concat($(evt.target).attr('twid'));
+    console.log(vals);
+    $(evt.target).toggleClass('btn-primary').toggleClass('btn-success');
+    var input_html = $('#time_window_ids input')[0];
+    var i = 0;
+    $('#time_window_ids input').each(function(index,element){
+      if (i < vals.length) {
+        $(element).val(vals[i++]);
+      } else {
+        $(element).val("");
+      }
+    });
+    for ( ; i < vals.length; ++i) {
+        $('#time_window_ids').append(
+                $(input_html).clone().val(vals[i])
+        );
+    }
+  });
+});
+</script>

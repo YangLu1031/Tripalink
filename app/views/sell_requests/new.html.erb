@@ -1,0 +1,2975 @@
+<%= provide(:title, 'Sell') %>
+<style>
+    #ui-id-1{
+        position:absolute !important;
+    }
+    #back_button{
+        cursor:pointer;
+        opacity:0.9;
+    }
+    #back_button:hover{
+        opacity:1;
+    }
+    .sell_car_container_list_content{
+        display:inline-block;
+        //min-width:300px;
+    }
+    .signout a{
+        color:rgb(74,144,226);
+    }
+    .signUpBtn > span > a{
+        color:rgb(74,144,226);
+    }
+    .sell_car_container{
+        height:650px;
+        margin-top:30px;
+    }
+    header{
+        background-color: rgb(74,144,226);
+    }
+    ul{
+        list-style-type: none;
+    }
+    .nav_title, .nav_item > a > div{
+        color:white;
+    }
+    .signInBtn{
+        color:white;
+    }
+    .signUpBtn{
+        color:rgb(74,144,226);
+        background-color:white;
+    }
+    .address_input_container{
+        padding-left:0;
+        padding-right:0;
+    }
+    .address_input_title{
+        padding-left:0;
+        padding-right:0;
+        height:40px;
+        line-height:40px;
+        vertical-align:middle;
+        color: rgb(10,10,10);
+        text-align:left;
+    }
+    .address_input{
+        font-size:15px;
+        border:1px solid rgb(200, 200, 200);
+        border-radius: 8px;
+        text-align:left;
+        height:40px;
+        line-height:40px;
+        vertical-align:middle;
+        color:rgb(10, 10, 10);
+        padding-left:15px;
+    }
+    .sell_car_list_title{
+        width:100%;
+        font-size:12px;
+        border:1px solid rgb(74,144,226);
+        border-radius: 8px;
+        text-align:left;
+        height:50px;
+        line-height:50px;
+        vertical-align:middle;
+        color:rgb(74,144,226);
+        padding-left:15px;
+        cursor:pointer;
+    }
+    .sell_car_list_title span:nth-child(1){
+        float:left;
+        height:100%;
+        padding-right:0;
+    }
+    .sell_car_list_title span:nth-child(2){
+        text-align:right;
+        font-size:30px;
+    }
+    .sell_car_list_main{
+        width:100%;
+        display:none;
+        background-color:rgb(237,237,242);
+        height:auto;
+        max-height:300px;
+        overflow-y:auto;
+        border-radius:8px;
+        margin-top:10px;
+        padding-left:15px;
+    }
+    .sell_car_list_ul{
+        height:61px;
+    }
+    .sell_car_list_ul:hover .sell_car_list_title{
+        background-color:rgb(237,237,242);
+    }
+    .sell_car_list_ul:hover .sell_car_list_main{
+        display:block;
+    }
+    .sell_car_list_main > li{
+        height:48px;
+        color:rgb(123,131,147);
+        font-size:12px;
+        line-height:48px;
+        vertical-align:middle;
+    }
+    .sell_car_list_main_li:hover{
+        cursor:pointer;
+        color:rgb(74,144,226);
+        
+    }
+    .sell_car_list_main_li:hover .fa{
+        visibility: visible;
+    }
+    .sell_car_list_main_li .fa{
+        visibility: hidden;
+    }
+    .sell_car_list_main_li span:nth-child(1){
+        text-align:left;
+    }
+    .sell_car_list_main_li span:nth-child(2){
+        text-align:right;
+    }
+    .disabled_ul{
+        pointer-events:none;
+    }
+    .disabled_ul .sell_car_list_title{
+        color: rgba(0,0,0,0.2) !important;
+    }
+    .disabled_ul .sell_car_list_title{
+        border: 1px solid rgba(0,0,0,0.2);
+    }
+    .sell_car_nav_bar{
+        margin-top:50px;
+        height:80px;
+        background-color:rgb(250,250,250);
+    }
+    .sell_car_nav_bar_upper{
+        text-align:center;
+    }
+    .sell_car_nav_bar_upper_content{
+        height:50px;
+        line-height:50px;
+        vertical-align:middle;
+        margin-bottom:5px;
+    }
+    .last_step{
+        color:rgb(143,185,236);
+        font-size:15px;
+        font-weight:300;
+    }
+    .current_step{
+        color:rgb(69,150,226);
+        font-size:15px;
+        font-weight:400;
+    }
+    .next_step{
+        color:rgb(200,200,200);
+        font-size:15px;
+        font-weight:300;
+    }
+    .sell_car_container_upper{
+        height:65px;
+        z-index:99;
+    }
+    .sell_car_container_lower{
+        margin-top:10px;
+        height:65px;
+        z-index:1;
+    }
+    .error {
+        color: #e21c78;
+        text-align: left;
+        margin-bottom: 10px;
+        margin-top: -8px;
+        display: none;
+        border-width: 1px;
+        border-style: solid;
+        padding: 9px 13px;
+        position: relative;
+        background-color: #fff;
+        font-size: 12px;
+        border-radius: 5px;
+        border-color: rgba(0,0,0,.1);
+        background-clip: padding-box;
+    }
+    .error.shown {
+        display: table;
+    }
+    .sell_car_container_title{
+        color:rgb(69,150,226);
+    }
+    .sell_car_container_title div:nth-child(1){
+        height:60px;
+        line-height:60px;
+        vertical-align:middle;
+        text-align:center;
+        font-size:40px;
+        margin-top:40px;
+        
+    }
+    .sell_car_container_title div:nth-child(2){
+        height:30px;
+        line-height:30px;
+        vertical-align:middle;
+        text-align:center;
+        font-size:18px;
+        font-weight:200;
+        margin-bottom:40px;
+    }
+    .sell_car_selector_cotainer{
+        height:140px;
+    }
+    .step_line{
+        height:1px;
+        background-color:rgba(0,0,0,0.2);
+    }
+
+    .step_line_offset{
+        height:30px; 
+        width:12.5%; 
+        float:left;
+    }
+    .last_step_circle{
+        background-color: rgb(250,250,250);
+        width:40px;
+        position:relative;
+        top:-40px;
+        color:rgb(143,185,236);
+    }
+    .current_step_circle{
+        background-color: rgb(250,250,250);
+        width:40px;
+        position:relative;
+        top:-44px;
+        color:rgb(69,150,226);
+    }
+    .next_step_circle{
+        background-color: rgb(250,250,250);
+        width:40px;
+        position:relative;
+        top:-40px;
+        color:rgb(200,200,200);
+    }
+    .current_step_circle_border{
+        width:28px;
+        line-height:26px;
+        height:28px;
+        vertical-align:middle;
+        border-radius:14px;
+        border:1px solid rgb(69,150,226);
+    }
+    .sell_car_nav_bar_upper_btn{
+        opacity:0.8;
+        cursor:pointer;
+    }
+    .sell_car_nav_bar_upper_btn:hover{
+        opacity:1;
+    }
+    .sell_step_1_circle, .sell_step_2_circle, .sell_step_3_circle, .sell_step_4_circle{
+        cursor:pointer;
+    }
+    .step_1_submit_btn_container{
+        margin-bottom:50px;margin-top:30px;height:30px;
+    }
+    .submit_btn {
+        width:200px;
+        text-align:center;
+        height:40px;
+        border-radius:5px;
+        line-height:40px;
+        vertical-align:middle;
+        background-color:rgb(67,146,220);
+        color:rgba(255,255,255,0.95);
+        opacity:0.9;
+        cursor:pointer;
+    }
+    .submit_btn:hover{
+        opacity:1;
+    }
+    .input_letter{
+        float:right;
+        padding-right:11px;
+        position:relative;
+        top:-34px;
+        display:none;
+        color:rgb(87,157,223)
+    }
+    #sell_car_list_current_addressName:focus +.input_letter {
+        display:block;
+    }
+    #sell_car_list_current_addressPhone:focus +.input_letter {
+        display:block;
+    }
+    #sell_car_list_current_addressStreet:focus +.input_letter {
+        display:block;
+    }
+    #sell_car_list_current_mileage:focus +.input_letter {
+        display:block;
+    }
+    #sell_car_list_current_zipcode:focus +.input_letter {
+        display:block;
+    }
+    #sell_car_list_current_vin:focus +.input_letter {
+        display:block;
+    }
+    .error_border{
+        border:1px solid rgb(250,50,50) !important;
+    }
+    .error_text{
+        color: rgb(250,50,50);
+        float:right !important;
+        visibility:hidden;
+    }
+    .car_price_cart_cotainer{
+        height:auto;
+        margin-bottom:10px;
+    }
+    div#sell_car_container_step3 {
+        height: 650px;
+        margin-top: 0px;
+    }
+    #sell_car_canvas{
+/*
+        -ms-transform: rotate(180deg);
+        -webkit-transform: rotate(180deg);
+        transform: rotate(180deg);
+*/
+    }
+    .cannot_find_price div{
+        height:300px;
+        width:400px;
+    }
+    .address_container{
+        width:80%;
+        padding-left:0px;
+        padding-right:0px;
+        height:125px;
+        color:rgb(74,144,226);
+    }
+    .schedule_time_container{
+        width:80%;
+        padding-left:25px;
+        padding-right:25px;
+        border:1px solid rgb(222, 222, 222);
+        border-radius:8px;
+        height: 300px;
+    }
+    .schedule_time_tile{
+        height:50px;
+        line-height:50px;
+        font-size:16px;
+        font-weight:400;
+        border-bottom: 1px solid rgb(222, 222, 222);
+    }
+    .schedule_time_week{
+        padding-left:0;
+        padding-right:0;
+        height:50px;
+        color:rgb(74,144,226);
+    }
+    .col_7{
+        width: 14.2857142857%;
+        float:left;
+        line-height:50px;
+        vertical-align: middle;
+        height:100%;
+    }
+    .schedule_time_number_container{
+        padding-left:0;
+        padding-right:0;       
+    }
+    .schedule_time_hour_item{
+        margin-top:5px;
+        padding-left:5px;
+        padding-right:5px;
+        height:24px;
+        line-height:24px;
+        vertical-align: middle;
+        text-align:center;
+        font-size:15px;
+        cursor:pointer;
+        
+    }
+    .schedule_time_hour_item div:hover{
+        background-color:white;
+        border:1px solid rgb(74, 144, 226);
+        color: rgb(74, 144, 226);
+    }
+    .schedule_time_hour_item div{
+        height:24px;
+        background-color:rgb(250, 250, 250);
+        border-radius:3px;
+        border:1px solid rgb(250, 250, 250);
+    }
+    .schedule_time_hour_item_actived{
+        background-color:rgb(74, 144, 226) !important;
+        border:1px solid rgb(74, 144, 226) !important;
+        color: white !important;
+    }
+    .schedule_time_hour_item_disabled{
+        color: rgb(220, 220, 220);
+        pointer-events:none;
+    }
+    .tradeIn_price_container{
+        padding-right:125px;
+    }
+    .tradeIn_price_container_box{
+        width:100px;
+        text-align:center;
+        color:#7B808C;
+        font-size:16px;
+        line-height:20px;
+        vertical-align:middle;
+        position:relative;
+        top:10px;
+    }
+    .hidden_container{
+        display:none;
+    }
+    .clean_price_container{
+        padding-left:100px;
+    } 
+    .clean_price_container_box{
+        width:200px;
+        text-align:center;
+        color:#4A90E2;
+        font-size:22px;
+        line-height:27px;
+        vertical-align:middle;
+    }
+    .fair_price_container{
+        padding-right:200px;
+    }
+    .fair_price_container_box{
+        width:200px;
+        text-align:center;
+        color:#7B808C;
+        font-size:16px;
+        line-height:20px;
+        vertical-align:middle;
+        position:relative;
+        top:10px;
+    }
+    .outstanding_price_container{
+        padding-left:200px;
+    }
+    .outstanding_price_container_box{
+        width:200px;
+        text-align:center;
+        color:#4A90E2;
+        font-size:22px;
+        line-height:27px;
+        vertical-align:middle;
+    }
+    .inspection_success_title{
+        margin-top:10px;
+        margin-bottom:0px;
+    }
+    .inspection_success_title div:nth-child(1){
+        height:43px;
+        line-height:43px;
+        vertical-align:middle;
+        margin-top:0px;
+    }
+    .inspection_success_title div:nth-child(2){
+        height:24px;
+        line-height:24px;
+        vertical-align:middle;
+    }
+    .confirmation_container_inspection_information span{
+        color: #3A3D42;
+        font-size:14px;
+        line-height:16px;
+        vertical-align:middle;
+        height:16px;
+    }
+</style>
+<div class="col-xs-12 sell_car_nav_bar">
+    <div class="col-xs-12 sell_car_nav_bar_upper">
+        <div class="hidden-xs hidden-sm hidden-md col-lg-1">
+            <img src="<%= asset_path 'buypage/back_btn.png' %>" width='67px' height='25px' style="position:relative; top:27px; display:none;" id="back_button"/>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10 sell_car_nav_bar_upper_content">
+            <div class="col-xs-3 sell_car_nav_bar_upper_btn sell_step_1 current_step" id="sell_car_step_1">
+                Tell us about your car
+            </div>
+            <div class="col-xs-3 sell_car_nav_bar_upper_btn sell_step_2 next_step" id="sell_car_step_2">
+                Tell us more 
+            </div>
+            <div class="col-xs-3 sell_car_nav_bar_upper_btn sell_step_3 next_step" id="sell_car_step_3">
+                See how much you can get
+            </div>
+            <% if not(expert_signed_in? or user_signed_in?) %>
+                <div class="col-xs-3 sell_car_nav_bar_upper_btn sell_step_4 next_step" id="sell_car_step_4_need_login" data-toggle="modal" data-target="#signUpModal">
+                    Sechedule an Inspection
+                </div>
+            <% else %>
+                <div class="col-xs-3 sell_car_nav_bar_upper_btn sell_step_4 next_step" id="sell_car_step_4">
+                    Sechedule an Inspection
+                </div>
+            <% end %>
+        </div>
+        <div class="hidden-xs hidden-sm hidden-md col-lg-1">
+        </div>
+    </div>
+    <div class="col-xs-12 sell_car_nav_bar_lower">
+        <div class="hidden-xs hidden-sm hidden-md col-lg-1">
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10 sell_car_nav_bar_lower_content">
+            <div class="step_line_offset">
+            </div>
+            <div class="step_line" style="width:75%; float:left;">
+            </div>
+            <div class="step_line_offset">
+            </div>
+        </div>
+        <div class="hidden-xs hidden-sm hidden-md col-lg-1">
+        </div>        
+    </div>
+    <div class="col-xs-12 sell_car_nav_bar_dotted">
+        <div class="hidden-xs hidden-sm hidden-md col-lg-1">
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10 sell_car_nav_bar_lower_content">
+            <div class="col-xs-3 sell_step_1_circle" align="center">
+                <div class="last_step_circle" style="display:none">
+                    <i class="fa fa-circle"></i>
+                </div>
+                <div class="current_step_circle" >
+                    <div class='current_step_circle_border'>
+                    <i class="fa fa-circle"></i>
+                    </div>
+                </div>
+                <div class="next_step_circle" style="display:none">
+                    <i class="fa fa-circle"></i>
+                </div>
+            </div>
+            
+            <div class="col-xs-3 sell_step_2_circle" align="center">
+                <div class="last_step_circle" style="display:none">
+                    <i class="fa fa-circle"></i>
+                </div>
+                <div class="current_step_circle" style="display:none">
+                    <div class='current_step_circle_border'>
+                    <i class="fa fa-circle"></i>
+                    </div>
+                </div>
+                <div class="next_step_circle">
+                    <i class="fa fa-circle"></i>
+                </div>
+            </div>
+            
+            <div class="col-xs-3 sell_step_3_circle" align="center">
+                <div class="last_step_circle" style="display:none">
+                    <i class="fa fa-circle"></i>
+                </div>
+                <div class="current_step_circle" style="display:none">
+                    <div class='current_step_circle_border'>
+                    <i class="fa fa-circle"></i>
+                    </div>
+                </div>
+                <div class="next_step_circle">
+                    <i class="fa fa-circle"></i>
+                </div>
+            </div>
+            
+            <div class="col-xs-3 sell_step_4_circle" align="center">
+                <div class="last_step_circle" style="display:none">
+                    <i class="fa fa-circle"></i>
+                </div>
+                <div class="current_step_circle" style="display:none">
+                    <div class='current_step_circle_border'>
+                    <i class="fa fa-circle"></i>
+                    </div>
+                </div>
+                <div class="next_step_circle">
+                    <i class="fa fa-circle"></i>
+                </div>   
+            </div>
+            
+        </div>
+        <div class="hidden-xs hidden-sm hidden-md col-lg-1">
+        </div>        
+    </div>
+</div>
+<div class="col-xs-12 sell_car_container" id="sell_car_container_step1" style="display:block">
+    <div class="col-xs-12 sell_car_container_title" align="center">
+        <div class="col-xs-12">
+            Tell us about your car
+        </div>
+        <div class="col-xs-12">
+            Get a free quote for up to 30% more than a dealer trade-in
+        </div>
+    </div>
+    <div class="hidden-xs hidden-sm hidden-md col-lg-1 ">
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10 sell_car_selector_cotainer">
+        <div class="col-xs-12 sell_car_container_upper all-to-none">
+            <div class="col-xs-4 sell_car_container_list_content_0 sell_car_container_list_content">
+                <ul class="col-xs-12 sell_car_list_ul">
+                    <li class="dropdown-toggle sell_car_list_title">
+                        <span class="col-xs-9" id="sell_car_list_current_year">
+                            Year
+                            <span class="error_text">
+                                Year Required
+                            </span>
+                        </span>
+                        <span class="col-xs-3">
+                            <i class="fa fa-angle-down"></i>
+                        </span>
+                    </li>
+                    <ul class="sell_car_list_main">
+                        <li class="sell_car_list_main_li" value="2015" id="car_year_2015">
+                            <span class="col-xs-6">
+                                2015
+                            </span>
+                            <span class="col-xs-6">
+                                <i class="fa fa-check"></i>
+                            </span>
+                        </li>
+                        <li class="sell_car_list_main_li" value="2014" id="car_year_2014">
+                            <span class="col-xs-6">
+                                2014
+                            </span>
+                            <span class="col-xs-6">
+                                <i class="fa fa-check"></i>
+                            </span>
+                        </li>
+                        <li class="sell_car_list_main_li" value="2013" id="car_year_2013">
+                            <span class="col-xs-6">
+                                2013
+                            </span>
+                            <span class="col-xs-6">
+                                <i class="fa fa-check"></i>
+                            </span>
+                        </li>
+                        <li class="sell_car_list_main_li" value="2012" id="car_year_2012">
+                            <span class="col-xs-6">
+                                2012
+                            </span>
+                            <span class="col-xs-6">
+                                <i class="fa fa-check"></i>
+                            </span>
+                        </li>
+                        <li class="sell_car_list_main_li" value="2011" id="car_year_2011">
+                            <span class="col-xs-6">
+                                2011
+                            </span>
+                            <span class="col-xs-6">
+                                <i class="fa fa-check"></i>
+                            </span>
+                        </li>
+                        <li class="sell_car_list_main_li" value="2010" id="car_year_2010">
+                            <span class="col-xs-6">
+                                2010
+                            </span>
+                            <span class="col-xs-6">
+                                <i class="fa fa-check"></i>
+                            </span>
+                        </li>
+                        <li class="sell_car_list_main_li" value="2009" id="car_year_2009">
+                            <span class="col-xs-6">
+                                2009
+                            </span>
+                            <span class="col-xs-6">
+                                <i class="fa fa-check"></i>
+                            </span>
+                        </li>
+                        <li class="sell_car_list_main_li" value="2008" id="car_year_2008">
+                            <span class="col-xs-6">
+                                2008
+                            </span>
+                            <span class="col-xs-6">
+                                <i class="fa fa-check"></i>
+                            </span>
+                        </li>                        
+                        <li class="sell_car_list_main_li" value="2007" id="car_year_2007">
+                            <span class="col-xs-6">
+                                2007
+                            </span>
+                            <span class="col-xs-6">
+                                <i class="fa fa-check"></i>
+                            </span>
+                        </li>
+                    </ul>
+                </ul>
+            </div>
+            <div class="col-xs-4 sell_car_container_list_content_1 sell_car_container_list_content disabled_ul">
+                <ul class="col-xs-12 sell_car_list_ul">
+                    <li class="dropdown-toggle sell_car_list_title">
+                        <span class="col-xs-9" id="sell_car_list_current_make">
+                            Make
+                            <span class="error_text">
+                                Make Required
+                            </span>
+                        </span>
+                        <span class="col-xs-3">
+                            <i class="fa fa-angle-down"></i>
+                        </span>
+                    </li>
+                    <ul class="sell_car_list_main sell_car_list_main_1">
+                    </ul>
+                </ul>
+            </div>
+            <div class="col-xs-4 sell_car_container_list_content_2 sell_car_container_list_content disabled_ul">
+                <ul class="col-xs-12 sell_car_list_ul">
+                    <li class="dropdown-toggle sell_car_list_title">
+                        <span class="col-xs-9" id="sell_car_list_current_model">
+                            Model
+                            <span class="error_text">
+                                Model Required
+                            </span>
+                        </span>
+                        <span class="col-xs-3">
+                            <i class="fa fa-angle-down"></i>
+                        </span>
+                    </li>
+                    <ul class="sell_car_list_main sell_car_list_main_2">
+                    </ul>
+                </ul>
+            </div>
+        </div>
+        <div class="col-xs-12 sell_car_container_lower all-to-none">
+            <div class="col-xs-4 sell_car_container_list_content_3 sell_car_container_list_content disabled_ul">
+                <ul class="col-xs-12 sell_car_list_ul">
+                    <li class="dropdown-toggle sell_car_list_title">
+                        <span class="col-xs-9" id="sell_car_list_current_body_style">
+                            Body
+                            <span class="error_text">
+                                Body Required
+                            </span>
+                        </span>
+                        <span class="col-xs-3">
+                            <i class="fa fa-angle-down"></i>
+                        </span>
+                    </li>
+                    <ul class="sell_car_list_main sell_car_list_main_3">
+                    </ul>
+                </ul>
+            </div>
+            <div class="col-xs-4 sell_car_container_list_content_4 sell_car_container_list_content disabled_ul">
+                <ul class="col-xs-12 sell_car_list_ul">
+                    <li class="dropdown-toggle sell_car_list_title">
+                        <span class="col-xs-9" id="sell_car_list_current_trim">
+                            Trim
+                            <span class="error_text">
+                                Trim Required
+                            </span>
+                        </span>
+                        <span class="col-xs-3">
+                            <i class="fa fa-angle-down"></i>
+                        </span>
+                    </li>
+                    <ul class="sell_car_list_main sell_car_list_main_4">
+                    </ul>
+                </ul>
+            </div>
+            <div class="col-xs-4 sell_car_container_list_content_5 sell_car_container_list_content">
+                <ul class="col-xs-12 sell_car_list_ul">
+                    <input type="tel" class="col-xs-12 sell_car_list_title" id="sell_car_list_current_mileage" placeholder="Mileage" tabindex="0" style="cursor:text; outline:none !important" />
+                    <span class="input_letter animated fadeInLeft">
+                        Miles
+                    </span>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="hidden-xs hidden-sm hidden-md col-lg-1">
+    </div>
+    <div class="step_1_submit_btn_container col-xs-12" align="center">
+        <div id="step_1_to_2" class="submit_btn">
+            Next Step
+        </div>
+    </div>
+</div>
+<div class="col-xs-12 sell_car_container" id="sell_car_container_step2" style="display:none">
+    <div class="col-xs-12 sell_car_container_title" align="center">
+        <div class="col-xs-12">
+            Tell us more about your car
+        </div>
+        <div class="col-xs-12">
+            Get a free quote for up to 30% more than a dealer trade-in
+        </div>
+    </div>
+    <div class="hidden-xs hidden-sm hidden-md col-lg-1 ">
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10 sell_car_selector_cotainer">
+        <div class="col-xs-12 sell_car_container_upper">
+            <div class="col-xs-4 sell_car_container_list_content_6 sell_car_container_list_content">
+                <ul class="col-xs-12 sell_car_list_ul">
+                    <li class="dropdown-toggle sell_car_list_title">
+                        <span class="col-xs-9" id="sell_car_list_current_drivetrain">
+                            Drivetrain
+                            <span class="error_text">
+                                Drivetrain Required
+                            </span>
+                        </span>
+                        <span class="col-xs-3">
+                            <i class="fa fa-angle-down"></i>
+                        </span>
+                    </li>
+                    <ul class="sell_car_list_main sell_car_list_main_6">
+                    </ul>
+                </ul>
+            </div>
+            <div class="col-xs-4 sell_car_container_list_content_7 sell_car_container_list_content disabled_ul">
+                <ul class="col-xs-12 sell_car_list_ul">
+                    <li class="dropdown-toggle sell_car_list_title">
+                        <span class="col-xs-9" id="sell_car_list_current_transmission">
+                            Transmission
+                            <span class="error_text">
+                                Transmission Required
+                            </span>
+                        </span>
+                        <span class="col-xs-3">
+                            <i class="fa fa-angle-down"></i>
+                        </span>
+                    </li>
+                    <ul class="sell_car_list_main sell_car_list_main_7">
+                    </ul>
+                </ul>
+            </div>
+            <div class="col-xs-4 sell_car_container_list_content_8 sell_car_container_list_content">
+                <ul class="col-xs-12 sell_car_list_ul">
+                    <input type="tel" class="col-xs-12 sell_car_list_title" id="sell_car_list_current_zipcode" placeholder="Zipcode" tabindex="0" style="cursor:text; outline:none !important" maxlength="5"/>
+                    <span class="input_letter animated fadeInLeft">
+                        Zipcode
+                    </span>
+                </ul>
+            </div>
+        </div>
+        <div class="col-xs-12 sell_car_container_lower">
+            <div class="col-xs-12 sell_car_container_list_content_9 sell_car_container_list_content">
+                <ul class="col-xs-12 sell_car_list_ul">
+                    <input type="tel" class="col-xs-12 sell_car_list_title" id="sell_car_list_current_vin" placeholder="Vin Number" tabindex="0" style="cursor:text; outline:none !important" />
+                    <span class="input_letter animated fadeInLeft">
+                        Vin Number
+                    </span>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="hidden-xs hidden-sm hidden-md col-lg-1 ">
+    </div>
+    <div class="step_1_submit_btn_container col-xs-6" align="center">
+        <div id="step_2_to_1" class="submit_btn">
+            Previous Step
+        </div>
+    </div>
+    <div class="step_1_submit_btn_container col-xs-6" align="center">
+        <div id="step_2_to_3" class="submit_btn">
+            Next Step
+        </div>
+    </div>
+</div>
+
+<div class="col-xs-12 sell_car_container" id="sell_car_container_step3" style="display:none">
+    <div class="col-xs-12 sell_car_container_title" align="center">
+        <div class="col-xs-12">
+            See how much you can get
+        </div>
+        <div class="col-xs-12">
+            Get a free quote for up to 30% more than a dealer trade-in
+        </div>
+    </div>
+    <div class="col-xs-12 hidden_container" style="position:relative; top:10px;">
+        <div class="col-xs-6 tradeIn_price_container" align="right">
+            <div class="tradeIn_price_container_box">
+                <span class="col-xs-12 all-to-none" id="tradeIn_price">
+                </span>
+                <span class="col-xs-12 all-to-none">
+                    Trade in Price
+                </span>
+            </div>
+        </div>
+        <div class="col-xs-6 clean_price_container">
+            <div class="clean_price_container_box">
+                <span id="clean_price" class="col-xs-12 all-to-none">
+                </span>
+                <span class="col-xs-12 all-to-none" style="font-size:18px">
+                    Great Condition
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 car_price_cart_cotainer" align="center">
+        <span class="loading-img col-xs-12" align="center">
+        </span>
+        <div class="col-xs-12 sell_car_canvas_cotainer" align="center">
+<!--
+            <canvas id="sell_car_canvas" width="400" height="300">
+                This text is displayed if your browser does not support HTML5 Canvas tag.
+            </canvas>
+-->
+            <img id="sell_car_canvas" src="<%= asset_path 'chart/Price-Sell.png' %>"/>
+        </div>
+        
+<!--
+        <ul class="col-xs-12 sell_car_list_ul" style="posistion:relative; top:-40px;">
+            <input type="tel" class="col-xs-12 sell_car_list_title" id="sell_car_list_current_address" placeholder="Address" tabindex="0" style="cursor:text; outline:none !important" />
+            <span class="input_letter animated fadeInLeft">
+                  Address
+            </span>
+        </ul>
+-->
+        <div class="col-xs-12 cannot_find_price" align="center">
+            <div>
+                Sorry, but we do not accept this car...
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 hidden_container" style="postion:relative; top:-72px;">
+        <div class="col-xs-6 fair_price_container" align='right' style="position:relative; top:3px;left:42px;">
+            <div class="fair_price_container_box">
+                <span id="fair_price" class="col-xs-12 all-to-none">
+                </span>
+                <span class="col-xs-12 all-to-none">
+                    Fair Condition
+                </span>
+            </div>
+        </div>
+        <div class="col-xs-6 outstanding_price_container" align='left'>
+            <div class="outstanding_price_container_box">
+                <span id="outstanding_price" class="col-xs-12 all-to-none">
+                </span>
+                <span class="col-xs-12 all-to-none" style="font-size:18px">
+                    Outstanding Condition
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="step_1_submit_btn_container step_3_btn_container_back col-xs-6" align="center" style="margin-top:0px;">
+        <div id="step_3_to_2" class="submit_btn">
+            Previous Step
+        </div>
+    </div>
+    <div class="step_1_submit_btn_container step_3_btn_container_go col-xs-6" align="center" style="margin-top:0px;">
+        <% if not(expert_signed_in? or user_signed_in?)%>
+            <div id="step_3_to_4_need_login" class="submit_btn" data-toggle="modal" data-target="#signUpModal">
+                Next Step
+            </div>
+        <% else%>
+            <div id="step_3_to_4" class="submit_btn">
+                Next Step
+            </div>
+        <% end%>
+    </div>
+</div>
+
+<div class="col-xs-12 sell_car_container" id="sell_car_container_step4" style="display:none;">
+    
+    <div class="col-xs-12 sell_car_container_title" align="center" style="margin-top:-30px">
+        <div class="col-xs-12">
+            Schedule an Inspection
+        </div>
+        <div class="col-xs-12">
+            You are almost done
+        </div>
+    </div>
+    
+    <div class="hidden-xs hidden-sm hidden-md col-lg-1">
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10 sell_car_selector_cotainer" align="center">
+        <div class="col-xs-12 sell_car_container_list_content_10 sell_car_container_list_content" align="center">
+            <div class="address_container">
+                <div class="col-xs-6 address_input_container">
+                    <div class="col-xs-2 address_input_title">
+                        Name
+                    </div>
+                    <input class="col-xs-10 address_input" type="text" id="sell_car_list_current_addressName" placeholder="Name"/>
+
+                </div>
+                <div class="col-xs-6 address_input_container">
+                    <div class="col-xs-2 address_input_title">
+                        &nbsp;&nbsp;&nbsp;&nbsp;Phone
+                    </div>
+                    <input class="col-xs-10 address_input" type="text" id="sell_car_list_current_addressPhone" placeholder="Phone"/>
+
+                </div>
+                <div class="col-xs-12 address_input_container" style="margin-top:23px;">
+                    <div class="col-xs-1 address_input_title">
+                        Address
+                    </div>
+                    
+                    <input id="sell_request_lat" style="display: none;"/>
+                    <input id="sell_request_lng" style="display: none;"/>
+                    <input id="street_number" style="display: none;"/>
+                    <input id="route" style="display: none"/>
+                    <input id="state_name" style="display: none"/>
+                    <input id="county_name" style="display: none"/>
+                    <input id="country" style="display: none"/>
+                    <input id="postal_code" style="display: none"/>
+                    <input id="type" style="display: none"/>
+                    <input id="city_name" style="display:none"/>
+                    
+                    <input class="col-xs-11 address_input ui-autocomplete-input" type="text" id="sell_car_list_current_addressStreet" placeholder="Street Address" style=""/>
+
+                </div>
+            </div>
+            <span class="loading-img_1 col-xs-12" align="center">
+            </span>
+            <div class='schedule_time_container'>
+                <div class="col-xs-12 schedule_time_tile" align="center">
+                </div>
+                <div class="col-xs-12 schedule_time_week" align='center'>
+                    <div class="col_7 day_0">
+                        SUN
+                    </div>
+                    <div class="col_7 day_1">
+                        MON
+                    </div>
+                    <div class="col_7 day_2">
+                        TUE
+                    </div>
+                    <div class="col_7 day_3">
+                        WED
+                    </div>
+                    <div class="col_7 day_4">
+                        THU
+                    </div>
+                    <div class="col_7 day_5">
+                        FRI
+                    </div>
+                    <div class="col_7 day_6">
+                        SAT
+                    </div>
+                </div>
+                <div class="col-xs-12 schedule_time_number_container" align="center">
+                    <% tw_idx = 0 %>
+                    <%(0..6).step(1) do |hour_column|%>
+                        <div class="col_7 schedule_time_hour_item">
+                            <div>
+                                9am - 11am
+                            </div>
+                        </div>
+                    <%end%>
+                    <%(0..6).step(1) do |hour_column|%>
+                        <div class="col_7 schedule_time_hour_item">
+                            <div>
+                                11am - 1pm
+                            </div>
+                        </div>
+                    <%end%>
+                    <%(0..6).step(2) do |hour_row|%>
+                        <%(0..6).step(1) do |hour_column|%>
+                            <div class="col_7 schedule_time_hour_item">
+                                <div>
+                                    <%= hour_row + 1%>pm - <%= hour_row + 3%>pm
+                                </div>
+                            </div>
+                        <%end%>
+                    <%end%>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="hidden-xs hidden-sm hidden-md col-lg-1">
+    </div>
+    
+    <div class="step_1_submit_btn_container col-xs-12" align="center" style="margin-top:321px;">
+        <div id="step_4_to_submit" class="submit_btn">
+            Great!
+        </div>
+    </div>
+    
+</div>
+
+<div class="col-xs-12 sell_car_container" id="inspection_success" style="display:none;">
+    <div class="col-xs-12 sell_car_container_title inspection_success_title" align="center">
+        <div class="col-xs-12 all-to-none" style="margin-top:40px;">
+            Congratulations!
+        </div>
+        <div class="col-xs-12" style="margin-top:7px;">
+            Thank you! An confirmation Email has been sent to your email. Our staff will contact you soon.
+        </div>
+    </div>
+    <div class="buy_container_left buy_container_left_4" align='center' align='center'>
+            <div class="confirmation_container">
+                <div class="col-xs-6 all-to-none confirmation_container_left">
+                    <span class="confirmation_container_left_title">
+                        CAR INFORMATION
+                    </span>
+                    <div class="col-xs-12 all-to-none" align="left">
+                        <div class="confirmation_container_image">
+                            <div class="buy_car_image" style="background-image:url()" ></div>
+                            <div class="buy_car_image_text">
+                                <span class="col-xs-12 all-to-none">
+                                    <%= "#{ @car }"%>
+                                </span>
+                                <span class="col-xs-12 all-to-none">
+                                    Sedan | white
+                                </span>
+                                <span class="col-xs-12 all-to-none">
+                                       41,000                             
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='col-xs-12 all-to-none confirmation_car_detail_title' align='left'>
+                        Car Detail
+                    </div>
+                    <div class='col-xs-12 all-to-none confirmation_car_detail_container' align='left'>
+                        <ul class='confirmation_car_detail_content_title'>
+                            <li>
+                                Mileage
+                            </li>
+                            <li>
+                                Body Style
+                            </li>
+                            <li>
+                                Engine
+                            </li>
+                            <li>
+                                Drivetrain
+                            </li>
+                            <li>
+                                Exterior Color
+                            </li>
+                            <li>
+                                Interior Color
+                            </li>
+                            <li>
+                                Fuel
+                            </li>
+                            <li>
+                                Vin Number
+                            </li>
+                        </ul>
+                        <ul class="confirmation_car_detail_content">
+                            <li>
+                                 
+                            </li>
+                            <li>
+                                
+                            </li>
+                            <li>
+                                 
+                            </li>
+                            <li>
+                                 
+                            </li>
+                            <li>
+                                
+                            </li>
+                            <li>
+                                 
+                            </li>
+                            <li>
+                                
+                            </li>
+                            <li>
+                                
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-xs-6 all-to-none confirmation_container_right " style="height:100%;">
+                    <span class="confirmation_container_left_title">
+                        INSPECTION INFORMATION
+                    </span>
+                    <ul class="col-xs-12 all-to-none confirmation_container_buyer_information confirmation_container_inspection_information">
+                        <li>
+                            <span>
+                                Inspection Date
+                            </span>
+                        </li>
+                        <li>
+                            <span>
+                                Inspection Address
+                            </span>
+                        </li>
+                    </ul>
+                    <span class="confirmation_container_left_title" style="margin-top:25px;">
+                        AUTO GENIUS INFORMATION
+                    </span>
+                     <div class="confirmation_container_image">
+                            <div class="buy_car_image" style="background-image:url()" ></div>
+                            <div class="buy_car_image_text" style="text-align:left;">
+                                <span class="col-xs-12 all-to-none">
+                                    Daniel Lucas
+                                </span>
+                                <span class="col-xs-12 all-to-none">
+                                    5 Years Experience
+                                </span>
+                                <span class="col-xs-12 all-to-none">
+                                    Tripalink Certificate                             
+                                </span>
+                            </div>
+                      </div>
+<!--
+                      <span class="confirmation_container_left_title" style="margin-top:25px;">
+                        AUTO GENIUS INFORMATION
+                      </span>
+                      <ul class="col-xs-12 all-to-none confirmation_container_buyer_information confirmation_container_inspection_information">
+                        <li>
+                            Tuolei Ge
+                        </li>
+                        <li>
+                            TuoleiGe@gmail.com
+                        </li>
+                        <li>
+                            (919)8020464
+                        </li>
+                     </ul>
+-->
+                </div>
+            </div>
+        </div>
+</div>
+
+
+
+
+<!--  ******************************** content script ******************************** -->
+
+<script>
+    var html ='';
+    
+    var car_make;
+    var car_make_total_number;
+
+    var car_make_name = '';
+    var year_number ;
+    
+    var car_model;
+    var car_model_name;
+    var car_model_total_number;
+ 
+        
+    var car_body_style;
+    var car_body_style_name;
+    var car_body_style_total_number;
+        
+    var car_trim;
+    var car_trim_name;
+    var car_trim_total_number;
+    
+    var car_drivetrain;
+    var car_drivetrain_name;
+    var car_drivetrain_total_number;
+    
+    var car_transmission;
+    var car_transmission_name;
+    var car_transmission_total_number;
+    
+    var final_car_year;
+    var final_car_make;
+    var final_car_model;
+    var final_car_body;
+    var final_car_trim;
+    var final_car_mile;
+    var final_car_drivetrain;
+    var final_car_transmission;
+    var final_car_zipcode;
+    var final_car_vin;
+    
+    var current_step_number = 1;
+    
+    var final_car_style_id;
+    var final_car_outstanding_price;
+    var final_car_clean_price;
+    var final_car_average_price;
+    var final_car_rough_price;
+    var final_car_model_id;
+    
+    var actived_number;
+    var lat = 0;
+    var lng = 0;
+    var address_street;
+    var address_phone;
+    var address_name;
+    var address_time_id;
+    
+    var current_month_name;
+    
+    for(year_number = 2007; year_number <= 2017; year_number ++){
+        (function(year_number) {
+            $('#car_year_' + year_number).click(function(){
+                empty_all_ul_content(1);
+                initial_all_title(1);
+                disable_all_others(1);
+                
+                $.ajax({
+                    url: '../car_models/get_make.json?year=' + year_number,
+                    type: 'get',
+                    data: 'year=' + encodeURIComponent(year_number),
+                    dataType: 'json',
+                    success: function(json){
+                        var count = 0;
+                        //console.log(json);
+                        $('.sell_car_container_list_content_1').removeClass('disabled_ul');
+                        $('#sell_car_list_current_year').html(year_number);
+                        car_make = json;
+                        car_make_total_number = car_make.length;
+                        if(car_make_total_number == 1){
+                            $('#sell_car_list_current_make').html(car_make[0]);
+                        }
+                        for(count = 0; count < car_make_total_number; count ++){
+                            html += '<li class="sell_car_list_main_li"' + ' value="' + car_make[count] + '" id="car_make_' + (count) + '">';
+                            html += '<span class="col-xs-9" id="car_make_name_' + (count) + '">';
+                            html += car_make[count];
+                            html += '</span>';
+                            html += '<span class="col-xs-3">';
+                            html += '<i class="fa fa-check"></i>';
+                            html += '</span>';
+                            html += '</li>';
+                            //console.log(html);
+                            $('.sell_car_list_main_1').append(html);
+                            html = '';
+                        }
+                        upload_car_make_info(year_number);
+                        final_car_year = year_number;
+                    }
+                })
+            })
+        })(year_number);
+    }
+    
+    
+    function upload_car_make_info(year){
+        //console.log(year);
+        for(var car_make_count = 0; car_make_count <= car_make_total_number; car_make_count ++){
+            (function(car_make_count) {
+                $('#car_make_' + car_make_count).click(function(){
+                    empty_all_ul_content(2);
+                    
+                    
+                    car_make_name = $('#car_make_' + car_make_count).attr('value');
+                    
+                    $.ajax({
+                        url: '../car_models/get_model.json?year=' + year + '&make=' + car_make_name,
+                        type: 'get',
+                        //data: 'year=' + encodeURIComponent(year) + '&make=' + encodeURIComponent(car_make_name),
+                        dataType: 'json',
+                        success: function(json){
+                            var count = 0;
+                            
+                            $('#sell_car_list_current_make').html(car_make_name);
+                            $('.sell_car_container_list_content_2').removeClass('disabled_ul');
+                            //console.log(json);
+                            car_model = json;
+                            car_model_total_number = car_model.length;
+                            //console.log(car_model_total_number);
+                            if(car_model_total_number == 1){
+                                $('#sell_car_list_current_model').html(car_model[0]);
+                                upload_car_model(year,car_make_name,0,car_model[0]);   
+                            }else{
+                                initial_all_title(2);
+                                disable_all_others(2);
+                            }
+                            for(count = 0; count < car_model_total_number; count ++){
+                                html += '<li class="sell_car_list_main_li"' + ' value="' + car_model[count] + '" id="car_model_' + (count) + '">';
+                                html += '<span class="col-xs-9" id="car_model_name_' + (count) + '">';
+                                html += car_model[count];
+                                html += '</span>';
+                                html += '<span class="col-xs-3">';
+                                html += '<i class="fa fa-check"></i>';
+                                html += '</span>';
+                                html += '</li>';
+                                //console.log(html);
+                                $('.sell_car_list_main_2').append(html);
+                                html = '';
+                            }
+                            upload_car_model_info(year, car_make_name); 
+                            final_car_year = year;
+                            final_car_make = car_make_name;                         
+                        }
+                    })
+                })
+            })(car_make_count);
+        }
+    }
+    
+    function upload_car_model_info(model_year, model_car_make_name){
+        for(var car_model_count = 0; car_model_count <= car_model_total_number; car_model_count ++){
+            (function(car_model_count) {
+                $('#car_model_' + car_model_count).click(function(){
+                    upload_car_model(model_year,model_car_make_name,car_model_count,'null');
+                })
+            })(car_model_count);
+        }
+    }
+    
+    function upload_car_model(model_year,model_car_make_name,car_model_count,car_model_name){
+        if(car_model_name == 'null'){
+            car_model_name = $('#car_model_' + car_model_count).attr('value'); 
+
+        }
+        empty_all_ul_content(3);
+        $.ajax({
+            url: '../car_models/get_body.json?year=' + model_year + '&make=' + model_car_make_name + '&model=' + car_model_name,
+            type: 'get',
+            dataType: 'json',
+            success: function(json){
+                //console.log(json);
+                var count = 0;
+            
+                $('#sell_car_list_current_model').html(car_model_name);
+                $('.sell_car_container_list_content_3').removeClass('disabled_ul');
+
+                car_body_style = json;
+                car_body_style_total_number = car_body_style.length;
+
+                if(car_body_style_total_number == 1){
+                    $('#sell_car_list_current_body_style').html(car_body_style[ 0 ]);
+                    upload_car_body_style(model_year, model_car_make_name,car_model_name, 0, car_body_style[ 0 ] );
+                     //upload_car_model(model_year,model_car_make_name, car_model_name, 0,car_body_style[0]);  
+                }else{
+                    disable_all_others(3);
+                    initial_all_title(3);
+                }
+                for(count = 0; count < car_body_style_total_number; count ++){
+                    html += '<li class="sell_car_list_main_li"' + ' value="' + car_body_style[count] + '" id="car_body_style_' + (count) + '">';
+                    html += '<span class="col-xs-9" id="car_body_style_name_' + (count) + '">';
+                    html += car_body_style[count];
+                    html += '</span>';
+                    html += '<span class="col-xs-3">';
+                    html += '<i class="fa fa-check"></i>';
+                    html += '</span>';
+                    html += '</li>';
+                    //console.log(html);
+                    $('.sell_car_list_main_3').append(html);
+                    html = '';
+                }
+                upload_car_body_style_info(model_year, model_car_make_name, car_model_name); 
+                final_car_year = model_year;
+                final_car_make = model_car_make_name;
+                final_car_model = car_model_name;
+                               
+            }
+        })
+    }
+    
+    function upload_car_body_style_info(body_style_year, body_style_car_make_name, body_style_car_model_name){
+        for(var car_body_style_count = 0; car_body_style_count <= car_body_style_total_number; car_body_style_count ++){
+            (function(car_body_style_count) {
+                $('#car_body_style_' + car_body_style_count).click(function(){
+                        upload_car_body_style(body_style_year,body_style_car_make_name,body_style_car_model_name,car_body_style_count,'null');
+                })
+            })(car_body_style_count);
+        }
+    }
+    
+    function upload_car_body_style(body_style_year,body_style_car_make_name,body_style_car_model_name,car_body_style_count, car_body_style_name){
+        if(car_body_style_name == 'null'){
+            car_body_style_name = $('#car_body_style_' + car_body_style_count).attr('value');
+        }
+        empty_all_ul_content(4);
+        $.ajax({
+            url: '../car_models/get_trim.json?year=' + body_style_year + '&make=' + body_style_car_make_name + '&model=' + body_style_car_model_name + '&body=' + car_body_style_name,
+            type: 'get',
+            dataType: 'json',
+            success: function(json){
+                var count = 0;
+                $('#sell_car_list_current_body_style').html(car_body_style_name);
+                $('.sell_car_container_list_content_4').removeClass('disabled_ul');
+                
+                car_trim = json;
+                car_trim_total_number = car_trim.length;
+                
+                if(car_trim_total_number == 1){
+                    if(car_trim[ 0 ].length >= 28){
+                        $('#sell_car_list_current_trim').html(car_trim[ 0 ].substring(0, 25) + '...');
+                    }else{
+                        $('#sell_car_list_current_trim').html(car_trim[ 0 ]);
+                    }
+                    upload_car_trim(body_style_year, body_style_car_make_name,body_style_car_model_name, car_body_style_name, 0, car_trim[ 0 ] );
+                }else{
+                    disable_all_others(4);
+                    initial_all_title(4);
+                }
+                for(count = 0; count < car_trim_total_number; count ++){
+                    html += '<li class="sell_car_list_main_li"' + ' value="' + car_trim[count] + '" id="car_trim_' + (count) + '">';
+                    html += '<span class="col-xs-9" id="car_trim_' + (count) + '">';
+                    html += car_trim[count];
+                    html += '</span>';
+                    html += '<span class="col-xs-3">';
+                    html += '<i class="fa fa-check"></i>';
+                    html += '</span>';
+                    html += '</li>';
+                    //console.log(html);
+                    $('.sell_car_list_main_4').append(html);
+                    html = '';
+                    upload_car_trim_info(body_style_year, body_style_car_make_name, body_style_car_model_name, car_body_style_name); 
+                    final_car_year = body_style_year;
+                    final_car_make = body_style_car_make_name;
+                    final_car_model = body_style_car_model_name;
+                    final_car_body = car_body_style_name;
+                    
+                }
+            }           
+        })
+    }
+    function upload_car_trim_info(trim_year, trim_make_name, trim_model_name, trim_body_name){
+        for(var car_trim_count = 0; car_trim_count <= car_trim_total_number; car_trim_count ++){
+            (function(car_trim_count) {
+                $('#car_trim_' + car_trim_count).click(function(){
+                        upload_car_trim(trim_year,trim_make_name,trim_model_name, trim_body_name, car_trim_count,'null');
+                })
+            })(car_trim_count);
+        }
+    }
+    function upload_car_trim(car_trim_year, car_trim_make_name, car_trim_model_name, car_trim_body_name, car_trim_count, car_trim_name){
+        
+        if(car_trim_name == 'null'){
+            car_trim_name = $('#car_trim_' + car_trim_count).attr('value');
+        }
+        empty_all_ul_content(5);
+        if(car_trim_name.length >= 28){
+            $('#sell_car_list_current_trim').html(car_trim_name.substring(0, 25) + '...');
+        }else{
+            $('#sell_car_list_current_trim').html(car_trim_name);
+        }
+        final_car_year = car_trim_year;
+        final_car_make = car_trim_make_name;
+        final_car_model = car_trim_model_name;
+        final_car_body = car_trim_body_name;
+        final_car_trim = car_trim_name;
+        $('.sell_car_container_list_content_4 .sell_car_list_title ').removeClass('error_border');
+    }
+    
+    $('#step_1_to_2').click(function(){
+        
+        var step_1_check;
+        final_car_mile = $('#sell_car_list_current_mileage').val();
+        
+        step_1_check = check_step_1_done();
+        if(step_1_check == true){
+            $('#back_button').fadeIn();
+            ga('send', 'event', 'step_1_to_2', 'click', 'step_2_page');
+            $('#sell_car_container_step1').fadeOut(function(){
+                $("html, body").animate({ scrollTop: 0 }, "fast");
+                $('#sell_car_container_step2').fadeIn();
+                send_step_1_data(final_car_year, final_car_make, final_car_model, final_car_body, final_car_trim, final_car_mile);
+                var current_url = window.location.href;
+               
+            });
+            
+            $('#sell_car_step_2').removeClass('last_step');
+            $('#sell_car_step_2').removeClass('next_step');        
+            $('#sell_car_step_2').addClass('current_step');
+            $('.sell_step_2_circle > .last_step_circle').css('display','none');
+            $('.sell_step_2_circle > .next_step_circle').css('display','none');
+            $('.sell_step_2_circle > .current_step_circle').css('display','block');
+
+            $('#sell_car_step_1').removeClass('current_step');
+            $('#sell_car_step_1').addClass('last_step');
+            $('#sell_car_step_1').removeClass('next_step');
+            $('.sell_step_1_circle > .last_step_circle').css('display','block');
+            $('.sell_step_1_circle > .next_step_circle').css('display','none');
+            $('.sell_step_1_circle > .current_step_circle').css('display','none');
+            
+            current_step_number = 2;
+        }
+    })
+    
+    $('#step_2_to_1').click(function(){
+        $('#back_button').fadeOut();
+        $('#sell_car_container_step2').fadeOut(function(){
+            $('#sell_car_container_step1').fadeIn();
+            $("html, body").animate({ scrollTop: 0 }, "fast");
+        });
+        $('#sell_car_step_1').removeClass('last_step');
+        $('#sell_car_step_1').removeClass('next_step');        
+        $('#sell_car_step_1').addClass('current_step');
+        $('.sell_step_1_circle > .last_step_circle').css('display','none');
+        $('.sell_step_1_circle > .next_step_circle').css('display','none');
+        $('.sell_step_1_circle > .current_step_circle').css('display','block');
+        
+        $('#sell_car_step_2').removeClass('current_step');
+        $('#sell_car_step_2').removeClass('last_step');
+        $('#sell_car_step_2').addClass('next_step');
+        $('.sell_step_2_circle > .last_step_circle').css('display','none');
+        $('.sell_step_2_circle > .next_step_circle').css('display','block');
+        $('.sell_step_2_circle > .current_step_circle').css('display','none');
+        
+        current_step_number = 1;
+    })
+    $('#step_3_to_2').click(function(){
+        $('#sell_car_container_step3').fadeOut(function(){
+            $('#sell_car_container_step2').fadeIn();
+            $("html, body").animate({ scrollTop: 0 }, "fast");
+        });
+        $('#sell_car_step_2').removeClass('last_step');
+        $('#sell_car_step_2').removeClass('next_step');        
+        $('#sell_car_step_2').addClass('current_step');
+        $('.sell_step_2_circle > .last_step_circle').css('display','none');
+        $('.sell_step_2_circle > .next_step_circle').css('display','none');
+        $('.sell_step_2_circle > .current_step_circle').css('display','block');
+        
+        $('#sell_car_step_3').removeClass('current_step');
+        $('#sell_car_step_3').removeClass('last_step');
+        $('#sell_car_step_3').addClass('next_step');
+        $('.sell_step_3_circle > .last_step_circle').css('display','none');
+        $('.sell_step_3_circle > .next_step_circle').css('display','block');
+        $('.sell_step_3_circle > .current_step_circle').css('display','none');
+        
+        current_step_number = 2;
+    })
+    $('#step_2_to_3').click(function(){
+        
+        var step_2_check;
+        final_car_zipcode = $('#sell_car_list_current_zipcode ').val();
+        final_car_vin = $('#sell_car_list_current_vin').val();
+        
+        step_2_check = check_step_2_done();
+        //console.log(step_2_check);
+        if(step_2_check == true){
+            ga('send', 'event', 'step_2_to_3', 'click', 'step_3_page');
+            $('#sell_car_container_step2').fadeOut(function(){
+                $('#sell_car_container_step3').fadeIn();
+                $("html, body").animate({ scrollTop: 0 }, "fast");
+                send_step_2_data(final_car_year, final_car_make, final_car_model, final_car_body, final_car_trim, final_car_mile, final_car_drivetrain, final_car_transmission, final_car_style_id, final_car_zipcode, final_car_vin);
+            });
+            $('#sell_car_step_3').removeClass('last_step');
+            $('#sell_car_step_3').removeClass('next_step');        
+            $('#sell_car_step_3').addClass('current_step');
+            $('.sell_step_3_circle > .last_step_circle').css('display','none');
+            $('.sell_step_3_circle > .next_step_circle').css('display','none');
+            $('.sell_step_3_circle > .current_step_circle').css('display','block');
+
+            $('#sell_car_step_2').removeClass('current_step');
+            $('#sell_car_step_2').addClass('last_step');
+            $('#sell_car_step_2').removeClass('next_step');
+            $('.sell_step_2_circle > .last_step_circle').css('display','block');
+            $('.sell_step_2_circle > .next_step_circle').css('display','none');
+            $('.sell_step_2_circle > .current_step_circle').css('display','none');
+
+            current_step_number = 3;
+        }
+    })
+    $('#sell_car_step_1, .sell_step_1_circle').click(function(){
+        $('#back_button').fadeOut();
+        if(current_step_number == 2){
+            $('#sell_car_container_step2').fadeOut(function(){
+                $('#sell_car_container_step1').fadeIn();
+                $("html, body").animate({ scrollTop: 0 }, "fast");
+                current_step_number = 1;
+            });
+        }
+        if(current_step_number == 3){
+            $('#sell_car_container_step3').fadeOut(function(){
+                $('#sell_car_container_step1').fadeIn();
+                $("html, body").animate({ scrollTop: 0 }, "fast");
+                current_step_number = 1;
+            });
+        }
+        if(current_step_number == 4){
+            
+            $('#sell_car_container_step4').fadeOut(function(){
+                $('#sell_car_container_step1').fadeIn();
+                $("html, body").animate({ scrollTop: 0 }, "fast");
+                current_step_number = 1;
+            });
+        }
+
+        $('#sell_car_step_1').removeClass('last_step');
+        $('#sell_car_step_1').removeClass('next_step');        
+        $('#sell_car_step_1').addClass('current_step');
+        $('.sell_step_1_circle > .last_step_circle').css('display','none');
+        $('.sell_step_1_circle > .next_step_circle').css('display','none');
+        $('.sell_step_1_circle > .current_step_circle').css('display','block');
+        
+        $('#sell_car_step_2').removeClass('current_step');
+        $('#sell_car_step_2').removeClass('last_step');
+        $('#sell_car_step_2').addClass('next_step');
+        $('.sell_step_2_circle > .last_step_circle').css('display','none');
+        $('.sell_step_2_circle > .next_step_circle').css('display','block');
+        $('.sell_step_2_circle > .current_step_circle').css('display','none');
+        
+        $('#sell_car_step_3').removeClass('current_step');
+        $('#sell_car_step_3').removeClass('last_step');
+        $('#sell_car_step_3').addClass('next_step');
+        $('.sell_step_3_circle > .last_step_circle').css('display','none');
+        $('.sell_step_3_circle > .next_step_circle').css('display','block');
+        $('.sell_step_3_circle > .current_step_circle').css('display','none');
+        
+        $('#sell_car_step_4').removeClass('current_step');
+        $('#sell_car_step_4').removeClass('last_step');
+        $('#sell_car_step_4').addClass('next_step');
+        $('.sell_step_4_circle > .last_step_circle').css('display','none');
+        $('.sell_step_4_circle > .next_step_circle').css('display','block');
+        $('.sell_step_4_circle > .current_step_circle').css('display','none');
+        
+        
+    
+    })
+    
+    $('#sell_car_step_2, .sell_step_2_circle').click(function(){
+//        $('#sell_car_container_step1').addClass("animated fadeOutLeft").one("webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend",function(){
+//		   $(this).removeClass("animated fadeOutLeft");
+//           $(this).css('display','none');
+//           $('#sell_car_container_step2').css('display','block');
+//           $("#sell_car_container_step2").addClass("animated fadeInRight").one("webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend",function(){
+//               $(this).removeClass("animated fadeInLeft");
+//
+//           });
+//	    });
+        var step_1_check;
+        //console.log(current_step_number);
+        final_car_mile = $('#sell_car_list_current_mileage').val();
+        step_1_check = check_step_1_done();
+        if(step_1_check == true){
+            $('#back_button').fadeIn();
+            if(current_step_number == 1){
+                $('#sell_car_container_step1').fadeOut(function(){
+                    $('#sell_car_container_step2').fadeIn();
+                    $("html, body").animate({ scrollTop: 0 }, "fast");
+                    current_step_number = 2;
+                    send_step_1_data(final_car_year, final_car_make, final_car_model, final_car_body, final_car_trim, final_car_mile);
+                });
+            }
+            if(current_step_number == 3){
+                $('#sell_car_container_step3').fadeOut(function(){
+                    $('#sell_car_container_step2').fadeIn();
+                    $("html, body").animate({ scrollTop: 0 }, "fast");
+                    current_step_number = 2;
+                });
+            }
+            if(current_step_number == 4){
+                $('#sell_car_container_step4').fadeOut(function(){
+                    $('#sell_car_container_step2').fadeIn();
+                    $("html, body").animate({ scrollTop: 0 }, "fast");
+                    current_step_number = 2;
+                });
+            }
+            
+            
+            
+            $('#sell_car_step_2').removeClass('last_step');
+            $('#sell_car_step_2').removeClass('next_step');        
+            $('#sell_car_step_2').addClass('current_step');
+            $('.sell_step_2_circle > .last_step_circle').css('display','none');
+            $('.sell_step_2_circle > .next_step_circle').css('display','none');
+            $('.sell_step_2_circle > .current_step_circle').css('display','block');
+
+            $('#sell_car_step_1').removeClass('current_step');
+            $('#sell_car_step_1').addClass('last_step');
+            $('#sell_car_step_1').removeClass('next_step');
+            $('.sell_step_1_circle > .last_step_circle').css('display','block');
+            $('.sell_step_1_circle > .next_step_circle').css('display','none');
+            $('.sell_step_1_circle > .current_step_circle').css('display','none');
+
+            $('#sell_car_step_3').removeClass('current_step');
+            $('#sell_car_step_3').removeClass('last_step');
+            $('#sell_car_step_3').addClass('next_step');
+            $('.sell_step_3_circle > .last_step_circle').css('display','none');
+            $('.sell_step_3_circle > .next_step_circle').css('display','block');
+            $('.sell_step_3_circle > .current_step_circle').css('display','none');
+
+            $('#sell_car_step_4').removeClass('current_step');
+            $('#sell_car_step_4').removeClass('last_step');
+            $('#sell_car_step_4').addClass('next_step');
+            $('.sell_step_4_circle > .last_step_circle').css('display','none');
+            $('.sell_step_4_circle > .next_step_circle').css('display','block');
+            $('.sell_step_4_circle > .current_step_circle').css('display','none');
+            
+        }
+    
+    })
+    $('#sell_car_step_3, .sell_step_3_circle').click(function(){
+        var step_2_check;
+        
+        final_car_mile = $('#sell_car_list_current_mileage').val();
+        final_car_zipcode = $('#sell_car_list_current_zipcode ').val();
+        final_car_vin = $('#sell_car_list_current_vin').val();
+        
+        step_2_check = check_step_2_done();
+        if(step_2_check == true){
+            $('#back_button').fadeIn();
+            if(current_step_number == 1){
+                $('#sell_car_container_step1').fadeOut(function(){
+                    $('#sell_car_container_step3').fadeIn();
+                    $("html, body").animate({ scrollTop: 0 }, "fast");
+                    current_step_number = 3;
+                });
+            }
+            if(current_step_number == 2){
+                $('#sell_car_container_step2').fadeOut(function(){
+                    $('#sell_car_container_step3').fadeIn();
+                    $("html, body").animate({ scrollTop: 0 }, "fast");
+                    send_step_2_data(final_car_year, final_car_make, final_car_model, final_car_body, final_car_trim, final_car_mile, final_car_drivetrain, final_car_transmission, final_car_style_id, final_car_zipcode, final_car_vin);
+                    current_step_number = 3;
+                });
+            }
+            if(current_step_number == 4){
+                $('#sell_car_container_step4').fadeOut(function(){
+                    $('#sell_car_container_step3').fadeIn();
+                    $("html, body").animate({ scrollTop: 0 }, "fast");
+                    current_step_number = 3;
+                });
+            }
+
+            $('#sell_car_step_3').removeClass('last_step');
+            $('#sell_car_step_3').removeClass('next_step');        
+            $('#sell_car_step_3').addClass('current_step');
+            $('.sell_step_3_circle > .last_step_circle').css('display','none');
+            $('.sell_step_3_circle > .next_step_circle').css('display','none');
+            $('.sell_step_3_circle > .current_step_circle').css('display','block');
+
+            $('#sell_car_step_2').removeClass('current_step');
+            $('#sell_car_step_2').addClass('last_step');
+            $('#sell_car_step_2').removeClass('next_step');
+            $('.sell_step_2_circle > .last_step_circle').css('display','block');
+            $('.sell_step_2_circle > .next_step_circle').css('display','none');
+            $('.sell_step_2_circle > .current_step_circle').css('display','none');
+
+            $('#sell_car_step_1').removeClass('current_step');
+            $('#sell_car_step_1').addClass('last_step');
+            $('#sell_car_step_1').removeClass('next_step');
+            $('.sell_step_1_circle > .last_step_circle').css('display','block');
+            $('.sell_step_1_circle > .next_step_circle').css('display','none');
+            $('.sell_step_1_circle > .current_step_circle').css('display','none');
+
+            $('#sell_car_step_4').removeClass('current_step');
+            $('#sell_car_step_4').removeClass('last_step');
+            $('#sell_car_step_4').addClass('next_step');
+            $('.sell_step_4_circle > .last_step_circle').css('display','none');
+            $('.sell_step_4_circle > .next_step_circle').css('display','block');
+            $('.sell_step_4_circle > .current_step_circle').css('display','none');
+        }
+    
+    })
+    $('#sell_car_step_4, .sell_step_4_circle').click(function(){
+        var step_2_check;
+        
+        final_car_mile = $('#sell_car_list_current_mileage').val();
+        final_car_zipcode = $('#sell_car_list_current_zipcode ').val();
+        final_car_vin = $('#sell_car_list_current_vin').val();
+        
+        step_2_check = check_step_2_done();
+        if(step_2_check == true){
+            $('#back_button').fadeIn();
+            if(current_step_number == 1){
+                $('#sell_car_container_step1').fadeOut(function(){
+                    $('#sell_car_container_step4').fadeIn();
+                    $("html, body").animate({ scrollTop: 0 }, "fast");
+                    current_step_number = 4;
+                });
+            }
+            if(current_step_number == 2){
+                $('#sell_car_container_step2').fadeOut(function(){
+                    $('#sell_car_container_step4').fadeIn();
+                    $("html, body").animate({ scrollTop: 0 }, "fast");
+                    current_step_number = 4;
+                });
+            }
+            if(current_step_number == 3){
+                $('#sell_car_container_step3').fadeOut(function(){
+                    $("html, body").animate({ scrollTop: 0 }, "fast");
+                    $('#sell_car_container_step4').fadeIn();
+                    current_step_number = 4;
+                });
+            }
+
+            $('#sell_car_step_4').removeClass('last_step');
+            $('#sell_car_step_4').removeClass('next_step');        
+            $('#sell_car_step_4').addClass('current_step');
+            $('.sell_step_4_circle > .last_step_circle').css('display','none');
+            $('.sell_step_4_circle > .next_step_circle').css('display','none');
+            $('.sell_step_4_circle > .current_step_circle').css('display','block');
+
+            $('#sell_car_step_2').removeClass('current_step');
+            $('#sell_car_step_2').addClass('last_step');
+            $('#sell_car_step_2').removeClass('next_step');
+            $('.sell_step_2_circle > .last_step_circle').css('display','block');
+            $('.sell_step_2_circle > .next_step_circle').css('display','none');
+            $('.sell_step_2_circle > .current_step_circle').css('display','none');
+
+            $('#sell_car_step_1').removeClass('current_step');
+            $('#sell_car_step_1').addClass('last_step');
+            $('#sell_car_step_1').removeClass('next_step');
+            $('.sell_step_1_circle > .last_step_circle').css('display','block');
+            $('.sell_step_1_circle > .next_step_circle').css('display','none');
+            $('.sell_step_1_circle > .current_step_circle').css('display','none');
+
+            $('#sell_car_step_3').removeClass('current_step');
+            $('#sell_car_step_3').addClass('last_step');
+            $('#sell_car_step_3').removeClass('next_step');
+            $('.sell_step_3_circle > .last_step_circle').css('display','block');
+            $('.sell_step_3_circle > .next_step_circle').css('display','none');
+            $('.sell_step_3_circle > .current_step_circle').css('display','none');
+
+            current_step_number = 4;
+        }
+
+    })
+    $('#back_button').click(function(){
+            if(current_step_number == 2){
+                $('#sell_car_container_step2').fadeOut(function(){
+                    $('#sell_car_container_step1').fadeIn();
+                    $("html, body").animate({ scrollTop: 0 }, "fast");
+                    $("html, body").animate({ scrollTop: 0 }, "fast");
+                    $(this).fadeOut();
+                    current_step_number = 1;
+                });
+                $('#sell_car_step_1').removeClass('last_step');
+                $('#sell_car_step_1').removeClass('next_step');        
+                $('#sell_car_step_1').addClass('current_step');
+                $('.sell_step_1_circle > .last_step_circle').css('display','none');
+                $('.sell_step_1_circle > .next_step_circle').css('display','none');
+                $('.sell_step_1_circle > .current_step_circle').css('display','block');
+
+                $('#sell_car_step_2').removeClass('current_step');
+                $('#sell_car_step_2').addClass('last_step');
+                $('#sell_car_step_2').removeClass('next_step');
+                $('.sell_step_2_circle > .last_step_circle').css('display','none');
+                $('.sell_step_2_circle > .next_step_circle').css('display','block');
+                $('.sell_step_2_circle > .current_step_circle').css('display','none');
+
+                $('#sell_car_step_4').removeClass('current_step');
+                $('#sell_car_step_4').addClass('last_step');
+                $('#sell_car_step_4').removeClass('next_step');
+                $('.sell_step_4_circle > .last_step_circle').css('display','none');
+                $('.sell_step_4_circle > .next_step_circle').css('display','block');
+                $('.sell_step_4_circle > .current_step_circle').css('display','none');
+
+                $('#sell_car_step_3').removeClass('current_step');
+                $('#sell_car_step_3').addClass('last_step');
+                $('#sell_car_step_3').removeClass('next_step');
+                $('.sell_step_3_circle > .last_step_circle').css('display','none');
+                $('.sell_step_3_circle > .next_step_circle').css('display','block');
+                $('.sell_step_3_circle > .current_step_circle').css('display','none');
+            }
+            if(current_step_number == 3){
+                $('#sell_car_container_step3').fadeOut(function(){
+                    $('#sell_car_container_step2').fadeIn();
+                    $("html, body").animate({ scrollTop: 0 }, "fast");
+                    current_step_number = 2;
+                });
+                $('#sell_car_step_2').removeClass('last_step');
+                $('#sell_car_step_2').removeClass('next_step');        
+                $('#sell_car_step_2').addClass('current_step');
+                $('.sell_step_2_circle > .last_step_circle').css('display','none');
+                $('.sell_step_2_circle > .next_step_circle').css('display','none');
+                $('.sell_step_2_circle > .current_step_circle').css('display','block');
+
+                $('#sell_car_step_1').removeClass('current_step');
+                $('#sell_car_step_1').addClass('last_step');
+                $('#sell_car_step_1').removeClass('next_step');
+                $('.sell_step_1_circle > .last_step_circle').css('display','block');
+                $('.sell_step_1_circle > .next_step_circle').css('display','none');
+                $('.sell_step_1_circle > .current_step_circle').css('display','none');
+
+                $('#sell_car_step_4').removeClass('current_step');
+                $('#sell_car_step_4').addClass('last_step');
+                $('#sell_car_step_4').removeClass('next_step');
+                $('.sell_step_4_circle > .last_step_circle').css('display','none');
+                $('.sell_step_4_circle > .next_step_circle').css('display','block');
+                $('.sell_step_4_circle > .current_step_circle').css('display','none');
+
+                $('#sell_car_step_3').removeClass('current_step');
+                $('#sell_car_step_3').addClass('last_step');
+                $('#sell_car_step_3').removeClass('next_step');
+                $('.sell_step_3_circle > .last_step_circle').css('display','none');
+                $('.sell_step_3_circle > .next_step_circle').css('display','block');
+                $('.sell_step_3_circle > .current_step_circle').css('display','none');
+            }
+            if(current_step_number == 4){
+                $('#sell_car_container_step4').fadeOut(function(){
+                    $("html, body").animate({ scrollTop: 0 }, "fast");
+                    $('#sell_car_container_step3').fadeIn();
+                    current_step_number = 3;
+                });
+                $('#sell_car_step_3').removeClass('last_step');
+                $('#sell_car_step_3').removeClass('next_step');        
+                $('#sell_car_step_3').addClass('current_step');
+                $('.sell_step_3_circle > .last_step_circle').css('display','none');
+                $('.sell_step_3_circle > .next_step_circle').css('display','none');
+                $('.sell_step_3_circle > .current_step_circle').css('display','block');
+
+                $('#sell_car_step_1').removeClass('current_step');
+                $('#sell_car_step_1').addClass('last_step');
+                $('#sell_car_step_1').removeClass('next_step');
+                $('.sell_step_1_circle > .last_step_circle').css('display','block');
+                $('.sell_step_1_circle > .next_step_circle').css('display','none');
+                $('.sell_step_1_circle > .current_step_circle').css('display','none');
+
+                $('#sell_car_step_2').removeClass('current_step');
+                $('#sell_car_step_2').addClass('last_step');
+                $('#sell_car_step_2').removeClass('next_step');
+                $('.sell_step_2_circle > .last_step_circle').css('display','block');
+                $('.sell_step_2_circle > .next_step_circle').css('display','none');
+                $('.sell_step_2_circle > .current_step_circle').css('display','none');
+
+                $('#sell_car_step_3').removeClass('current_step');
+                $('#sell_car_step_3').addClass('last_step');
+                $('#sell_car_step_3').removeClass('next_step');
+                $('.sell_step_3_circle > .last_step_circle').css('display','none');
+                $('.sell_step_3_circle > .next_step_circle').css('display','block');
+                $('.sell_step_3_circle > .current_step_circle').css('display','none');
+            }
+
+    })
+    function empty_all_ul_content(item){
+        if(item == 1){
+            $('.sell_car_list_main_1').empty();
+            $('.sell_car_list_main_2').empty();
+            $('.sell_car_list_main_3').empty();
+            $('.sell_car_list_main_4').empty();
+            $('.sell_car_list_main_6').empty();
+            $('.sell_car_list_main_7').empty();
+
+            final_car_year         = null;
+            final_car_make         = null;
+            final_car_model        = null;
+            final_car_body         = null;
+            final_car_trim         = null;
+            final_car_drivetrain   = null;
+            final_car_transmission = null;
+
+        }else if(item == 2){
+            $('.sell_car_list_main_2').empty();
+            $('.sell_car_list_main_3').empty();
+            $('.sell_car_list_main_4').empty();
+            $('.sell_car_list_main_6').empty();
+            $('.sell_car_list_main_7').empty();
+
+            final_car_make         = null;
+            final_car_model        = null;
+            final_car_body         = null;
+            final_car_trim         = null;
+            final_car_drivetrain   = null;
+            final_car_transmission = null;
+
+        }else if(item == 3){
+            $('.sell_car_list_main_3').empty();
+            $('.sell_car_list_main_4').empty();
+            $('.sell_car_list_main_6').empty();
+            $('.sell_car_list_main_7').empty();
+            
+            final_car_model = null;
+            final_car_body  = null;
+            final_car_trim  = null;
+            final_car_drivetrain   = null;
+            final_car_transmission = null;
+            
+        }else if(item == 4){
+            $('.sell_car_list_main_4').empty();
+            $('.sell_car_list_main_6').empty();
+            $('.sell_car_list_main_7').empty();
+            
+            final_car_body = null;
+            final_car_trim = null;
+            final_car_drivetrain   = null;
+            final_car_transmission = null;
+            
+        }else if(item == 5){
+            $('.sell_car_list_main_6').empty();
+            $('.sell_car_list_main_7').empty();
+            
+            final_car_trim = null;
+            final_car_drivetrain   = null;
+            final_car_transmission = null;  
+        }else if(item == 6){
+            $('.sell_car_list_main_7').empty();
+            
+            final_car_drivetrain   = null;
+            final_car_transmission = null;  
+        }else if(item == 7){
+            
+            final_car_transmission = null;  
+        }
+        
+    }
+    function initial_all_title(item){
+        if(item == 1){
+            $('.sell_car_container_list_content_0 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_1 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_2 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_3 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_4 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_5 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_6 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_7 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_8 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_9 .sell_car_list_title ').removeClass('error_border');
+            
+            $('#sell_car_list_current_make').html('Make');
+            $('#sell_car_list_current_model').html('Model');
+            $('#sell_car_list_current_body_style').html('Body Style');
+            $('#sell_car_list_current_trim').html('Trim');
+            $('#sell_car_list_current_mileage').html('Mileage');
+            $('#sell_car_list_current_drivetrain').html('Drivetrain');
+            $('#sell_car_list_current_transmission').html('Transmission');
+        }else if(item == 2){
+            $('.sell_car_container_list_content_0 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_1 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_2 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_3 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_4 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_5 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_6 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_7 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_8 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_9 .sell_car_list_title ').removeClass('error_border');
+            
+            $('#sell_car_list_current_model').html('Model');
+            $('#sell_car_list_current_body_style').html('Body Style');
+            $('#sell_car_list_current_trim').html('Trim');
+            $('#sell_car_list_current_mileage').html('Mileage');
+            $('#sell_car_list_current_drivetrain').html('Drivetrain');
+            $('#sell_car_list_current_transmission').html('Transmission');           
+        }else if(item == 3){
+            $('.sell_car_container_list_content_0 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_1 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_2 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_3 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_4 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_5 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_6 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_7 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_8 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_9 .sell_car_list_title ').removeClass('error_border'); 
+            
+            $('#sell_car_list_current_body_style').html('Body Style');
+            $('#sell_car_list_current_trim').html('Trim');
+            $('#sell_car_list_current_mileage').html('Mileage');
+            $('#sell_car_list_current_drivetrain').html('Drivetrain');
+            $('#sell_car_list_current_transmission').html('Transmission');            
+        }else if(item == 4){
+            $('.sell_car_container_list_content_0 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_1 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_2 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_3 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_4 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_5 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_6 .sell_car_list_title ').removeClass('error_border');  
+            $('.sell_car_container_list_content_7 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_8 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_9 .sell_car_list_title ').removeClass('error_border');
+            
+            $('#sell_car_list_current_trim').html('Trim');
+            $('#sell_car_list_current_mileage').html('Mileage');
+            $('#sell_car_list_current_drivetrain').html('Drivetrain');
+            $('#sell_car_list_current_transmission').html('Transmission');           
+        }else if(item == 5){
+            $('.sell_car_container_list_content_0 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_1 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_2 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_3 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_4 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_5 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_6 .sell_car_list_title ').removeClass('error_border');  
+            $('.sell_car_container_list_content_7 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_8 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_9 .sell_car_list_title ').removeClass('error_border');
+            
+            $('#sell_car_list_current_mileage').html('Mileage');
+            $('#sell_car_list_current_drivetrain').html('Drivetrain');
+            $('#sell_car_list_current_transmission').html('Transmission');
+        }else if(item == 6){
+            $('.sell_car_container_list_content_0 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_1 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_2 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_3 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_4 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_5 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_6 .sell_car_list_title ').removeClass('error_border');  
+            $('.sell_car_container_list_content_7 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_8 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_9 .sell_car_list_title ').removeClass('error_border');
+            
+            $('#sell_car_list_current_drivetrain').html('Drivetrain');
+            $('#sell_car_list_current_transmission').html('Transmission');          
+        }else if(item == 7){
+            $('.sell_car_container_list_content_0 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_1 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_2 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_3 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_4 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_5 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_6 .sell_car_list_title ').removeClass('error_border');  
+            $('.sell_car_container_list_content_7 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_8 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_9 .sell_car_list_title ').removeClass('error_border');
+            
+            $('#sell_car_list_current_transmission').html('Transmission');          
+        }else if(item == 8){
+            $('.sell_car_container_list_content_0 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_1 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_2 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_3 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_4 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_5 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_6 .sell_car_list_title ').removeClass('error_border');  
+            $('.sell_car_container_list_content_7 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_8 .sell_car_list_title ').removeClass('error_border');
+            $('.sell_car_container_list_content_9 .sell_car_list_title ').removeClass('error_border');
+        }
+    }
+    function disable_all_others(item){
+        if(item == 1){
+            $('.sell_car_container_list_content_2').addClass('disabled_ul');
+            $('.sell_car_container_list_content_3').addClass('disabled_ul');
+            $('.sell_car_container_list_content_4').addClass('disabled_ul');
+            $('.sell_car_container_list_content_6').addClass('disabled_ul');
+            $('.sell_car_container_list_content_7').addClass('disabled_ul');
+
+        }else if(item == 2){
+            $('.sell_car_container_list_content_3').addClass('disabled_ul');
+            $('.sell_car_container_list_content_4').addClass('disabled_ul');
+            $('.sell_car_container_list_content_6').addClass('disabled_ul');
+            $('.sell_car_container_list_content_7').addClass('disabled_ul');
+
+        }else if(item == 3){
+            $('.sell_car_container_list_content_4').addClass('disabled_ul');
+            $('.sell_car_container_list_content_6').addClass('disabled_ul');
+            $('.sell_car_container_list_content_7').addClass('disabled_ul');
+
+        }else if(item == 5){
+            $('.sell_car_container_list_content_6').addClass('disabled_ul');
+            $('.sell_car_container_list_content_7').addClass('disabled_ul');
+        }else if(item == 6){
+            $('.sell_car_container_list_content_7').addClass('disabled_ul');
+        }
+    }
+    
+    function check_step_1_done(){
+        var is_a_number;
+        var flag = true;
+        is_a_number = isNumber(final_car_mile);
+        //console.log(is_a_number);
+        if(final_car_year == null){
+            $('.sell_car_container_list_content_0 .sell_car_list_title').addClass('error_border');
+            $('.sell_car_container_list_content_0 .error_text').css('visibility', 'visible');
+            flag = false;
+        }
+        if(final_car_make == null){
+            $('.sell_car_container_list_content_1 .sell_car_list_title').addClass('error_border');
+            $('.sell_car_container_list_content_1 .error_text').css('visibility', 'visible');
+            flag = false;
+        }
+        if(final_car_model == null){
+            $('.sell_car_container_list_content_2 .sell_car_list_title').addClass('error_border');
+            $('.sell_car_container_list_content_2 .error_text').css('visibility', 'visible');
+            flag = false;
+        }
+        if(final_car_body == null){
+            $('.sell_car_container_list_content_3 .sell_car_list_title').addClass('error_border');
+            $('.sell_car_container_list_content_3 .error_text').css('visibility', 'visible');
+            flag = false;
+        }
+        if(final_car_trim == null){
+            $('.sell_car_container_list_content_4 .sell_car_list_title').addClass('error_border');
+            $('.sell_car_container_list_content_4 .error_text').css('visibility', 'visible');
+            flag = false;
+        }
+        if(final_car_mile.length === 0 || !is_a_number ){
+            $('#sell_car_list_current_mileage').addClass('error_border');
+            flag = false;
+            //$('#sell_car_container_list_content_5 .error_text').css('visibility', 'visible');
+        }else{
+            $('#sell_car_list_current_mileage').removeClass('error_border');
+        }
+        return flag;
+    }
+    
+    function check_step_2_done(){
+        var is_a_number;
+        var flag = true;
+        is_a_number = isNumber(final_car_zipcode);
+        flag = check_step_1_done();
+        if(final_car_drivetrain == null){
+            $('.sell_car_container_list_content_6 .sell_car_list_title').addClass('error_border');
+            $('.sell_car_container_list_content_6 .error_text').css('visibility', 'visible');
+            flag = false;
+        }
+        if(final_car_transmission == null){
+            $('.sell_car_container_list_content_7 .sell_car_list_title').addClass('error_border');
+            $('.sell_car_container_list_content_7 .error_text').css('visibility', 'visible');
+            flag = false;
+        }
+        if(final_car_zipcode.length != 5){
+            $('#sell_car_list_current_zipcode').addClass('error_border');
+            flag = false;
+            return flag;
+        }else if(!is_a_number){
+            $('#sell_car_list_current_zipcode').addClass('error_border');
+            flag = false;
+            return flag;
+        }else{
+            $('#sell_car_list_current_zipcode').removeClass('error_border');
+        }
+        if(final_car_vin.length < 11){
+            $('#sell_car_list_current_vin').addClass('error_border');
+            flag = false;
+        }else{
+            $('#sell_car_list_current_vin').removeClass('error_border');
+//            console.log(final_car_style_id, final_car_vin);
+            flag = send_style_id_vin(final_car_style_id, final_car_vin);
+        }
+//        console.log(flag)
+        return flag;
+    }
+    function send_style_id_vin(style_id, vin){
+        var flag;
+        $.ajax({
+            async: false,
+            url:'../sell_requests/get_vininfo?style_id=' + final_car_style_id + '&vin=' + final_car_vin,
+            type:'get',
+            global: false,
+            dataType:'json',
+            success: function(json){
+//                console.log(json);
+                if(json['result'] == false){
+                    $('#sell_car_list_current_vin').addClass('error_border'); 
+                    flag = false;
+                    alert("Vin number does not match the style id of the car!");
+                }else{
+                    flag = true;
+                }
+
+            }
+        })
+//        console.log(flag);
+        return flag;
+    }
+    function isNumber(final_car_mile) {
+            return !isNaN(parseFloat(final_car_mile)) && isFinite(final_car_mile);
+    }
+    
+    function send_step_1_data(year, make, model, body, trim, mile){
+        empty_all_ul_content(5);
+        $('.sell_car_container_list_content_6').removeClass('disabled_ul');
+        //console.log(year, make, model, body, trim, mile);
+        $.ajax({
+            url: '../car_models/get_drivetrain.json?year=' + year + '&make=' + make + '&model=' + model + '&body=' + body + '&trim=' + trim,
+            type: 'get',
+            dataType: 'json',
+            success: function(json){
+                        var count = 0;
+                        //console.log(json);
+                        $('.sell_car_container_list_content_7').removeClass('disabled_ul');
+                        car_drivetrain = json;
+                        car_drivetrain_total_number = car_drivetrain.length;
+                        if(car_drivetrain_total_number == 1){
+                            $('#sell_car_list_current_drivetrain').html(car_drivetrain[0]);
+                            upload_car_transmission(year, make, model, body, trim, mile, 0, car_drivetrain[0]);
+                        }else{
+                            disable_all_others(5);
+                            initial_all_title(5);
+                        }
+                        for(count = 0; count < car_drivetrain_total_number; count ++){
+                            html += '<li class="sell_car_list_main_li"' + ' value="' + car_drivetrain[count] + '" id="car_drivetrain_' + (count) + '">';
+                            html += '<span class="col-xs-9" id="car_drivetrain_name_' + (count) + '">';
+                            html += car_drivetrain[count];
+                            html += '</span>';
+                            html += '<span class="col-xs-3">';
+                            html += '<i class="fa fa-check"></i>';
+                            html += '</span>';
+                            html += '</li>';
+                            //console.log(html);
+                            $('.sell_car_list_main_6').append(html);
+                            html = '';
+                        }
+                        upload_car_transmission_info(year, make, model, body, trim, mile);
+                        final_car_year = year;
+                        final_car_make = make;
+                        final_car_model = model;
+                        final_car_body = body;
+                        final_car_trim = trim;
+                        final_car_mile = mile;
+            }
+        })
+    }
+    
+//----------------------------step 2 data functions----------------------------------
+    
+    function upload_car_transmission_info(year, make, model, body, trim, mile){
+        for(var car_drivetrain_count = 0; car_drivetrain_count <= car_drivetrain_total_number; car_drivetrain_count ++){
+            (function(car_drivetrain_count) {
+                $('#car_drivetrain_' + car_drivetrain_count).click(function(){
+                        //console.log(year,make,model, body, trim, mile, car_drivetrain_count);
+                        upload_car_transmission(year,make,model, body, trim, mile, car_drivetrain_count, 'null');
+                })
+            })(car_drivetrain_count);
+        }
+    }
+    
+    function upload_car_transmission(year,make,model, body, trim, mile, car_drivetrain_count, car_drivetrain_name){
+        //console.log(year,make,model, body, trim, mile, car_drivetrain_count, car_drivetrain_name);
+        if(car_drivetrain_name == 'null'){
+            car_drivetrain_name = $('#car_drivetrain_' + car_drivetrain_count).attr('value');
+        }
+        empty_all_ul_content(6);
+        
+        $.ajax({
+            url: '../car_models/get_transmission.json?year=' + year + '&make=' + make + '&model=' + model + '&body=' + body + '&trim=' + trim + '&drivetrain=' + car_drivetrain_name,
+            type: 'get',
+            dataType: 'json',
+            beforeSend: function(){
+                //console.log(year, make, model, body, trim, car_drivetrain_name);
+            },
+            success: function(json){
+                var count = 0;
+                $('#sell_car_list_current_drivetrain').html(car_drivetrain_name);
+                $('.sell_car_container_list_content_7').removeClass('disabled_ul');
+                
+                car_transmission = json;
+                car_transmission_total_number = car_transmission.length;
+                
+                
+                
+                if(car_transmission_total_number == 1){
+                    if(car_transmission[ 0 ].split(' # ')[0].length >= 28){
+                        $('#sell_car_list_current_transmission').html(car_transmission[ 0 ].split(' # ')[0].substring(0, 25) + '...');
+                    }else{
+                        $('#sell_car_list_current_transmission').html(car_transmission[ 0 ].split(' # ')[0]);
+                    }
+                    final_car_style_id = car_transmission[ 0 ].split(' # ')[1];
+                    final_car_model_id = car_transmission[ 0 ].split(' # ')[2];
+                    upload_car_data_until_transmission(year, make, model, body, trim, mile, car_drivetrain_name, 0, car_transmission[ 0 ].split(' # ')[0]);
+                    
+                }else{
+                    disable_all_others(7);
+                    initial_all_title(7);
+                }
+                for(count = 0; count < car_transmission_total_number; count ++){
+                    
+                    html += '<li class="sell_car_list_main_li"' + ' value="' +  car_transmission[count].split(' # ')[0] + '" id="car_transmission_' + (count) + '">';
+                    html += '<span class="col-xs-9" id="car_transmission_' + (count) + '">';
+                    html += car_transmission[count].split(' # ')[0];
+                    html += '</span>';
+                    html += '<span class="col-xs-3">';
+                    html += '<i class="fa fa-check"></i>';
+                    html += '</span>';
+                    html += '</li>';
+                    //console.log(html);
+                    $('.sell_car_list_main_7').append(html);
+                    html = '';
+                    upload_car_data_until_transmission_info(year, make, model, body, trim, mile, car_drivetrain_name); 
+                    
+                    final_car_year = year;
+                    final_car_make = make;
+                    final_car_model = model;
+                    final_car_body = body;
+                    final_car_trim = trim;
+                    final_car_mile = mile;
+                    final_car_drivetrain = car_drivetrain_name;
+                    
+                }
+            }           
+        })        
+    }
+    
+    function upload_car_data_until_transmission_info(year, make, model, body, trim, mile, car_drivetrain_name){
+        for(var car_transmission_count = 0; car_transmission_count <= car_transmission_total_number; car_transmission_count ++){
+            (function(car_transmission_count) {
+                $('#car_transmission_' + car_transmission_count).click(function(){
+                    upload_car_data_until_transmission(year,make,model, body, trim, mile, car_drivetrain_name, car_transmission_count, 'null');
+                })
+            })(car_transmission_count);
+        }
+    }
+    function upload_car_data_until_transmission(year, make, model, body, trim, mile, car_drivetrain_name, car_transmission_count, car_transmission_name){
+        if(car_transmission_name == 'null'){
+            car_transmission_name = $('#car_transmission_' + car_transmission_count).attr('value');
+            final_car_style_id = car_transmission[ car_transmission_count ].split(' # ')[1];
+            final_car_model_id = car_transmission[ car_transmission_count ].split(' # ')[2];
+            if(car_transmission_name.length >= 28){
+                $('#sell_car_list_current_transmission').html(car_transmission_name.substring(0, 25) + '...');
+            }else{
+                $('#sell_car_list_current_transmission').html(car_transmission_name);
+            }
+        }
+        empty_all_ul_content(7);
+        final_car_year = year;
+        final_car_make = make;
+        final_car_model = model;
+        final_car_body = body;
+        final_car_trim = trim;
+        final_car_mile = mile;
+        final_car_drivetrain = car_drivetrain_name;
+        final_car_transmission = car_transmission_name;
+        initial_all_title(8);
+        //console.log(final_car_year, final_car_make, final_car_model, final_car_body, final_car_trim, final_car_mile, final_car_drivetrain, final_car_transmission, final_car_style_id);
+
+    }
+    function send_step_2_data(year, make, model, body, trim, mile, drivetrain, transmission, style_id, zipcode, vin){
+
+            $('#sell_car_list_current_vin').removeClass('error_border');
+            $('.loading-img').empty();
+            $('#sell_car_canvas').css('display','none');
+            $('.hidden_container').css('display','none');
+            $('.cannot_find_price').css('display','none');
+            $('.step_3_btn_container_back').css('display', 'none');
+            $('.step_3_btn_container_go').css('display', 'none');
+            $('.step_3_btn_container_back').removeClass('col-xs-12').addClass('col-xs-6');
+            $('.loading-img').before('<span class="wait">&nbsp;<img src="https://www.myfrs.com/assets/myfrs/images/loading.gif"  width="230" height="230" /></span>');
+            $.ajax({
+                url:'../sell_requests/get_all_price?style_id=' + style_id + '&mileage=' + mile + '&zipcode=' + zipcode,
+                type: 'get',
+                dataType: 'json',
+                success: function(json){
+                    var price_data_length = Object.keys(json).length;
+
+                    if(price_data_length === 0){
+                        $('.wait').empty();
+                        $('.cannot_find_price').css('display','block');
+                        $('.step_3_btn_container_back').removeClass('col-xs-6').addClass('col-xs-12').fadeIn();
+                    }else{
+                        final_car_outstanding_price = json['outstanding_price'];
+                        final_car_clean_price       = json['clean_price'];
+                        final_car_average_price     = json['average_price'];
+                        final_car_rough_price       = json['rough_price'];
+                        $('#fair_price').html('$' + final_car_rough_price);
+                        $('#outstanding_price').html('$' + final_car_outstanding_price);
+                        $('#clean_price').html('$' + final_car_clean_price);
+                        $('#tradeIn_price').html('$' + final_car_average_price);
+                        price_chart(final_car_outstanding_price, final_car_clean_price, final_car_average_price, final_car_rough_price);
+                    }
+                }
+            })
+   
+
+    }
+    function price_chart(op, cp, ap, rp){
+        var myColor = ["rgb(74, 144, 226)","rgb(255, 236, 136)","rgb(237, 237, 242)"];
+        var data_0 = op - rp;
+        var data_1 = op - ap;
+        var data_2 = op - cp + 1000;
+//        //var myData = [op, cp, ap, rp];
+//        var myData = [data_0, data_1, data_2];
+//        console.log(data_0, data_1, data_2);
+//        function getTotal(){
+//            var myTotal = 0;
+//            for (var j = 0; j < myData.length; j++) {
+//                myTotal += (typeof myData[j] == 'number') ? myData[j] : 0;
+//            }
+//            return myTotal;
+//        }
+//
+//        function plotData() {
+//            var canvas;
+//            var ctx;
+//            var lastend = 0;
+//            var myTotal = getTotal();
+//        
+//           
+//            
+//            canvas = document.getElementById("sell_car_canvas");
+//            ctx = canvas.getContext("2d");
+//            ctx.clearRect(0, 0, canvas.width, canvas.height);
+//
+//            for (var i = 0; i < myData.length; i++) {
+//
+//                ctx.fillStyle = myColor[ i ];
+//                ctx.beginPath();
+//                ctx.moveTo(200, 150);
+//                ctx.arc(200, 150, 150, lastend, lastend+
+//                  (Math.PI * (myData[ i ] / data_0)), false);
+//                ctx.lineTo(200, 150);
+//                ctx.fill();
+//                
+//                //console.log( myColor[ i ], lastend, lastend + (Math.PI * (myData[ 1 ] / op)))
+//                //lastend += Math.PI*(myData[i]/myTotal);
+//            }
+//        }
+        $('.wait').empty();
+        $('#sell_car_canvas').fadeIn();
+        $('.hidden_container').fadeIn();
+        $('.step_3_btn_container_back').fadeIn();
+        $('.step_3_btn_container_go').fadeIn();
+        //plotData();
+    }
+    $('#step_3_to_4').click(function(){
+        
+        $('#sell_car_container_step3').fadeOut(function(){
+            $('.loading-img_1').empty();
+            $('.schedule_time_container').css('display', 'none');
+            $('#step_4_to_submit').css('display','none');
+            $("html, body").animate({ scrollTop: 0 }, "fast");
+            $('#sell_car_container_step4').fadeIn();
+            current_step_number = 4;
+            ga('send', 'event', 'step_3_to_4', 'click', 'step_4_page');
+        });
+        
+        
+        
+        $('#sell_car_step_4').removeClass('last_step');
+        $('#sell_car_step_4').removeClass('next_step');        
+        $('#sell_car_step_4').addClass('current_step');
+        $('.sell_step_4_circle > .last_step_circle').css('display','none');
+        $('.sell_step_4_circle > .next_step_circle').css('display','none');
+        $('.sell_step_4_circle > .current_step_circle').css('display','block');
+        
+        $('#sell_car_step_2').removeClass('current_step');
+        $('#sell_car_step_2').addClass('last_step');
+        $('#sell_car_step_2').removeClass('next_step');
+        $('.sell_step_2_circle > .last_step_circle').css('display','block');
+        $('.sell_step_2_circle > .next_step_circle').css('display','none');
+        $('.sell_step_2_circle > .current_step_circle').css('display','none');
+        
+        $('#sell_car_step_1').removeClass('current_step');
+        $('#sell_car_step_1').addClass('last_step');
+        $('#sell_car_step_1').removeClass('next_step');
+        $('.sell_step_1_circle > .last_step_circle').css('display','block');
+        $('.sell_step_1_circle > .next_step_circle').css('display','none');
+        $('.sell_step_1_circle > .current_step_circle').css('display','none');
+        
+        $('#sell_car_step_3').removeClass('current_step');
+        $('#sell_car_step_3').addClass('last_step');
+        $('#sell_car_step_3').removeClass('next_step');
+        $('.sell_step_3_circle > .last_step_circle').css('display','block');
+        $('.sell_step_3_circle > .next_step_circle').css('display','none');
+        $('.sell_step_3_circle > .current_step_circle').css('display','none');
+        
+        current_step_number = 4;
+    })
+    
+    //------schedule time-----//
+    var from_date;
+    var to_date;
+    var day_0, day_1, day_2, day_3, day_4, day_5, day_6;
+    var first_selected_time_0;
+    var first_selected_time_1;
+    var first_selected_time_2;
+    var selected_time = [];
+ 
+    $('.schedule_time_hour_item').click(function(){
+        actived_number = $('.schedule_time_hour_item_actived').length;
+        if($(this).children().hasClass('schedule_time_hour_item_actived')){
+            
+            $(this).children().removeClass('schedule_time_hour_item_actived');
+            
+            
+        }else if(actived_number == 0){
+            
+            $(this).children().addClass('schedule_time_hour_item_actived');
+            first_selected_time_0 = $(this).children();
+            selected_time[0] = $(this).attr('id');
+            
+        }else if(actived_number >= 1){
+            
+            $(this).children().addClass('schedule_time_hour_item_actived');
+            first_selected_time_0.removeClass('schedule_time_hour_item_actived');
+            first_selected_time_0 = $(this).children();
+            selected_time[0] = $(this).attr('id');
+            
+        }
+        //console.log(selected_time);
+    })
+
+    //            $('.loading-img_1').before('<span class="wait">&nbsp;<img src="http://www.schultzlawoffice.com/img/loading/loading-x.gif" alt="" /></span>');
+//
+    
+    
+    function getTimeItemData() {
+        //get the location
+        var lat, lan;
+        lat = $('#sell_request_lat').val();
+        lng = $('#sell_request_lng').val();
+        //console.log(lat, lng);
+        getTimeData(lat, lng, from_date, to_date);
+//        if (navigator.geolocation) {
+//            navigator.geolocation.getCurrentPosition(sh4``owPosition);
+//        } else { 
+//            lat = 0;
+//            lng = 0;
+//            alert("Geolocation is not supported by this browser.");
+//        }
+    }
+  
+    function showPosition(position) {
+        lat = position.coords.latitude;
+        lng = position.coords.longitude;
+        
+        getTimeData(lat, lng, from_date, to_date);
+        
+    }
+    
+    function getTimeData(latitude, longtitude, from, to){
+        //console.log(latitude, longtitude)
+        $.ajax({
+            url: '../sell_requests/available_time_windows.json?lat=' + latitude + '&lng=' + longtitude + '&from_date=' + from + '&to_date=' + to,
+            type: 'get',
+            dataType: 'json',
+            success: function(json){
+                //console.log(json);
+                $('.schedule_time_hour_item').each(function(i){
+                   $(this).addClass('schedule_time_hour_item' + i); 
+                    
+                });
+
+                var count = 0;
+                for(var i = 0; i < 6; i ++){
+                    for(var j = 0; j < 7; j ++ ){
+                        //console.log(i * 7 + j, json[i][j]['id']);
+                        $('.schedule_time_hour_item' + (i * 7 + j)).attr('id', json[i][j]['id']);
+                        if(json[i][j]['status'] == 'notavailable'){
+                            $('.schedule_time_hour_item' + (i * 7 + j)).addClass('schedule_time_hour_item_disabled');
+                        }
+                    }
+                }
+                $('.wait').empty();
+                $('.schedule_time_container').css('display', 'block');
+                $('#step_4_to_submit').css('display','block');
+                //console.log(json);    
+            }
+        })
+    }
+    function addresspicker_helper(){
+        $( "#sell_car_list_current_addressStreet" ).addresspicker({
+            regionBias: "us",
+            componentsFilter: 'country:US',
+            elements: {
+                lat:      "#sell_request_lat",
+                lng:      "#sell_request_lng",
+                street_number: '#street_number',
+                route: '#route',
+                locality: '#locality',
+                administrative_area_level_2: '#county_name',
+                administrative_area_level_1: '#state_name',
+                country:  '#country',
+                postal_code: '#postal_code',
+                type:    '#type'
+            }
+        });
+    }
+    $('#step_4_to_submit').click(function(){
+        ga('send', 'event', 'step_4_to_submit', 'click', 'step_4_to_submit');
+        var check_step_4;
+        check_step_4 = check_step_4_done();
+        if(check_step_4){
+            $.ajax({
+                url: '../sell_requests/create_appointment',
+                type:'post',
+                data:'lat=' + encodeURIComponent($('#sell_request_lat').val()) + '&lng=' + encodeURIComponent($('#sell_request_lng').val()) + '&address=' + encodeURIComponent(address_street) + '&city=' + encodeURIComponent($('#county_name').val()) + '&state=' +encodeURIComponent($('#state_name').val()) + '&zipcode=' + encodeURIComponent($('#postal_code').val()) + '&name=' + encodeURIComponent(address_name) + '&phone=' + encodeURIComponent(address_phone) + '&time_window_ids[]=' + encodeURIComponent(selected_time[0]) + '&car_model_id=' + encodeURIComponent(final_car_model_id) + '&vin=' + final_car_vin + '&clean_price=' + encodeURIComponent(final_car_clean_price) + '&outstanding_price=' + encodeURIComponent(final_car_outstanding_price) + '&average_price=' + encodeURIComponent(final_car_average_price) + '&trade_in_rough_price=' + encodeURIComponent(final_car_rough_price) + '&mileage=' + encodeURIComponent(final_car_mile),
+                dataType: 'json',
+                beforeSend: function() {
+                    console.log('lat=' + encodeURIComponent($('#sell_request_lat').val()) + '&lng=' + encodeURIComponent($('#sell_request_lng').val()) + '&address=' + encodeURIComponent(address_street) + '&city=' + encodeURIComponent($('#county_name').val()) + '&state=' +encodeURIComponent($('#state_name').val()) + '&zipcode=' + encodeURIComponent($('#postal_code').val()) + '&name=' + encodeURIComponent(address_name) + '&phone=' + encodeURIComponent(address_phone) + '&time_window_ids[]=' + encodeURIComponent(selected_time[0]) + '&car_model_id=' + encodeURIComponent(final_car_model_id) + '&vin=' + final_car_vin + '&clean_price=' + encodeURIComponent(final_car_clean_price) + '&outstanding_price=' + encodeURIComponent(final_car_outstanding_price) + '&average_price=' + encodeURIComponent(final_car_average_price) + '&trade_in_rough_price=' + encodeURIComponent(final_car_rough_price) + '&mileage=' + encodeURIComponent(final_car_mile));
+                },
+                success: function(json){
+                    
+                    if(json['status'] == true){
+                        $('.sell_car_nav_bar').fadeOut();
+                        $('#sell_car_container_step4').fadeOut();
+                        $('#inspection_success').css('display','block').fadeIn();
+                        $("html, body").animate({ scrollTop: 0 }, "fast");
+                        ga('send', 'event', 'step_4_to_submit', 'click', 'sell_sucess');
+                    }else{
+                        $("html, body").animate({ scrollTop: 0 }, "fast");
+                        ga('send', 'event', 'step_4_to_submit', 'click', 'sell_failed');
+                        alert('inspection failed!');
+                    }
+                }
+                
+            })
+        }
+        //console.log(selected_time);
+        
+    })
+    function check_step_4_done(){
+        var return_variable = true;
+        if(!$('#sell_car_list_current_addressName').val()){
+            $('#sell_car_list_current_addressName').addClass('error_border');
+            return_variable = false;
+        }else{
+            $('#sell_car_list_current_addressName').removeClass('error_border');
+            address_name = $('#sell_car_list_current_addressName').val();
+        }
+        if(!$('#sell_car_list_current_addressPhone').val() || !isNumber($('#sell_car_list_current_addressPhone').val())){
+            $('#sell_car_list_current_addressPhone').addClass('error_border');
+            return_variable = false;
+        }else{
+            $('#sell_car_list_current_addressPhone').removeClass('error_border');
+            address_phone = $('#sell_car_list_current_addressPhone').val();
+        }
+        if(selected_time.length == 0){
+            $('.schedule_time_container').addClass('error_border');
+            return_variable = false;
+        }else{
+            $('.schedule_time_container').removeClass('error_border');
+            address_time_id = selected_time;
+        }
+        if($('#sell_car_list_current_addressStreet').val().length <= 5){
+           $('#sell_car_list_current_addressStreet').addClass('error_border');
+            return_variable = false;
+        }else{
+           $('#sell_car_list_current_addressStreet').removeClass('error_border');
+           address_street = $('#sell_car_list_current_addressStreet').val();
+        }
+        
+        return return_variable;
+    }
+    $(document).ready(function(){
+        var today       = new Date();
+        var nextweek    = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 7);
+        
+        var from_dd     = today.getDate();
+        var from_mm     = today.getMonth() + 1;
+        var from_yyyy   = today.getFullYear();
+        
+        var to_dd       = nextweek.getDate();
+        var to_mm       = nextweek.getMonth() + 1;
+        var to_yyyy     = nextweek.getFullYear();
+        
+        var weekday = new Array(7);
+        
+        weekday[0] = "SUN";
+        weekday[1] = "MON";
+        weekday[2] = "TUE";
+        weekday[3] = "WED";
+        weekday[4] = "THU";
+        weekday[5] = "FRI";
+        weekday[6] = "SAT";
+        
+        for(var i = 0; i < 7; i ++){
+            $('.day_' + i).html(weekday[(today.getDay() + i) % 7]);
+        }
+        
+        if(from_dd < 10) {
+            from_dd = '0' + from_dd;
+        }
+        
+        if(to_dd < 10) {
+            to_dd = '0' + to_dd;
+        }
+        
+        if(from_mm < 10) {
+            from_mm = '0' + from_mm;
+        }
+        
+        if(to_mm < 10) {
+            to_mm = '0' + to_mm;
+        }
+        
+        if(from_mm == '01'){
+            current_month_name = 'JANUARY';
+        }else if(from_mm == '02'){
+            current_month_name = 'FEBRUARY'
+        }else if(from_mm == '03'){
+            current_month_name = 'MARCH';
+        }else if(from_mm == '04'){
+            current_month_name = 'APRIL';
+        }else if(from_mm == '05'){
+            current_month_name = 'MAY';
+        }else if(from_mm == '06'){
+            current_month_name = 'JUNE';
+        }else if(from_mm == '07'){
+            current_month_name = 'JULY';
+        }else if(from_mm == '08'){
+            current_month_name = 'AUGUST';
+        }else if(from_mm == '09'){
+            current_month_name = 'SEPTEMBER';
+        }else if(from_mm == '10'){
+            current_month_name = 'OCTOBER';
+        }else if(from_mm == '11'){
+            current_month_name = 'NOVEMBER';
+        }else if(from_mm == '12'){
+            current_month_name = 'DECEMBER';
+        }
+        
+        $('.schedule_time_tile').html(current_month_name + ' ' + from_yyyy);
+        from_date = from_yyyy + '-' + from_mm + '-' + from_dd;
+        to_date   = to_yyyy   + '-' + to_mm   + '-' + to_dd;
+        
+        //console.log(current_month_name + ' ' + from_yyyy);
+            
+//        $(this).data('stored', $(this).val());
+        $('#sell_car_list_current_addressStreet').bind('keyup', function(e){
+            check_address_input_change($(this));
+        })
+           
+        $('#sell_car_list_current_addressStreet').bind('simpleChange', function(e){
+            //addresspicker_helper();
+            var lat, lan;
+            lat = $('#sell_request_lat').val();
+            lng = $('#sell_request_lng').val();
+            getTimeItemData();
+
+        })
+
+//    
+//        $('#sell_car_list_current_addressStreet').on('input', function() {
+//            getTimeItemData();
+//        })
+
+    })
+    
+    function check_address_input_change($this){
+        var value = $this.val();
+        var sv = $this.data('stored');
+        
+        if(value!=sv)
+            $this.trigger('simpleChange');
+    }
+
+</script>
+<script>
+  $(function() {
+      $(window).scroll(function(){
+          var scrollTop = $(window).scrollTop();
+          if(scrollTop != 0) {
+            $('header').css('background','rgba(74,144,226,1)');
+            $('.nav_title, .nav_item > a > div, .signInBtn').css('color','white');  
+            $('.signUpBtn').css('background-color','white');
+            $('.signUpBtn, .signout a').css('color','rgba(74,144,226,1)'); 
+          }
+          else {
+            $('header').css('background','rgba(74,144,226,1)');
+            $('.nav_title, .nav_item > a > div, .signInBtn').css('color','white');  
+            $('.signUpBtn').css('background-color','white');
+            $('.signUpBtn, .signout a').css('color','rgba(74,144,226,1)'); 
+          }
+      });
+      $( "#sell_car_list_current_addressStreet" ).addresspicker({
+            regionBias: "us",
+            componentsFilter: 'country:US',
+            elements: {
+                lat:      "#sell_request_lat",
+                lng:      "#sell_request_lng",
+                street_number: '#street_number',
+                route: '#route',
+                locality: '#locality',
+                administrative_area_level_2: '#county_name',
+                administrative_area_level_1: '#state_name',
+                country:  '#country',
+                postal_code: '#postal_code',
+                type:    '#type'
+            }
+       });
+  });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

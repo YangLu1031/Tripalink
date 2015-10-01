@@ -1,0 +1,59 @@
+<% if not defined? status %>
+  <% status = "undefined" %>
+<% end %>
+<%= content_tag "div",
+                class: "col-md-4 col-sm-4 col-xs-12 car_clickable_outline",
+                data: {status: status} do %>
+  <span class="product-thumb-info car_clickable">
+    <% if car.status == 5 %>
+      <% soldstring = car.soldinndays == -1 ? "Sold" : car.soldinndays == 0 ? "Sold instantly" : "Sold in #{car.soldinndays} #{"day".pluralize(car.soldinndays)}" %>
+        <div class="ribbon-wrapper-green default">
+            <div class="ribbon-green address_list_tag">
+                <span><%= soldstring %></span>
+            </div>
+        </div>
+    <% end %>
+    <% if car.status == 4 %>
+        <div class="ribbon-wrapper-green default">
+            <div class="ribbon-green address_list_tag">
+                <span>Sell Pending</span>
+            </div>
+        </div>
+    <% end %>
+    <% if car.status != 5 && car.status != 4 %>  
+        <a href="<%= car_path car %>">
+    <% end  %>
+      <div class="car_clickable_img">
+        <% if !car.car_pictures.nil? and !car.car_pictures.first.nil? %>
+          <div class="car_clickable_img-img" style="background-image:url(<%= car.car_pictures.first.picture.url%>)">
+          </div>
+          
+        <% else %>
+          <div class="car_clickable_img-img" style="background-image:url(<%= 'img/products/product-1.jpg'%>)">
+          </div>
+          
+        <% end %>
+      </div>
+      <div class="col-xs-12 car_clickable_img_detail">
+        <div class="col-xs-9">
+          <span class="col-xs-12 all-to-none">
+            <%=car.car_model.year%> <%= car.car_model.make %>
+          </span>
+          <span class="col-xs-12 all-to-none">
+            <%= car.car_model.model %>
+          </span>
+        </div>
+        <div class="col-xs-3">
+          $<%= number_with_delimiter(car.price) %>
+        </div>
+        <div class="col-xs-12">
+          <%= number_with_delimiter(car.mileage) %> Miles | <%= car.car_model.body%>
+        </div>
+      </div>
+    
+    <% if car.status != 5 && car.status != 4 %>  
+       </a>
+    <% end  %>
+      
+  </span>
+<% end %>

@@ -1,0 +1,509 @@
+<% provide(:title, "Cars") %>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<style>
+  header{
+    background-color: rgb(74,144,226);
+  }
+    body{
+        overflow-x:none;
+    }
+    .buy_car_container{
+        height:auto;
+        background-color:rgb(240,240,240);
+    }
+    .signUpBtn > span > a{
+        color:rgb(74,144,226);
+    }
+    .nav_title, .nav_item > a > div{
+        color:white;
+    }
+    .signInBtn{
+        color:white;
+    }
+    .signUpBtn{
+        color:rgb(74,144,226);
+        background-color:white;
+    }
+    .buy_car_container{
+        margin-top:50px !important;
+    }    
+  .car_header_img{
+    font-size: 50px;
+    color:white;
+    font-weight: 500;
+    text-shadow: 2px 2px 2px rgba(0,0,0,0.6);
+  }
+  .car_header_img_section{
+    height:200px;
+    line-height: 205px;
+    vertical-align: middle;
+    text-align: center;
+    background-image:url(<%= asset_path "buypage/buy_page_banner.jpg" %>);
+    background-size: cover;
+    background-repeat:no-repeat;
+    background-position: center 76%;
+    z-index:999;
+  }
+  .searchBar{
+    margin-top: 30px;
+    height: 50px;
+  }
+  .all-to-none{
+    margin: 0;
+    padding: 0;
+  }
+
+  .searchBar_searchInput{
+    border:0;
+    outline: 0;
+    border-bottom: 1px solid rgba(100,100,100,0.7);
+    height: 100%;
+    font-size: 20px;
+  }
+  .searchBar > span{
+    height: 50px;
+    line-height: 50px;
+    vertical-align: middle;
+    border-bottom: 1px solid rgba(100,100,100,0.7);
+    font-size: 30px;
+    color:rgb(63,144,220);
+  }
+  .searchBar > div{
+    height: 50px;
+    line-height: 50px;
+    vertical-align: middle; 
+    padding: 0;  
+  }
+
+  .search_btn_outline{
+    padding:3px;
+    padding-right: 0;
+  }
+  .search_btn{
+    float: right;
+    margin-top: 20px;
+    height:30px;
+    line-height: 30px;
+    vertical-align: middle;
+    border-radius: 15px;
+    border:1px solid rgba(135,135,135,0.9);
+    color:rgba(135,135,135,0.9);
+    max-width: 103px;
+    text-align: center;
+    cursor: pointer;
+
+  }
+  .search_btn:hover{
+    border:1px solid rgba(74,144,226,1);
+    color:rgba(74,144,226,1);
+  }
+  .search_btn .fa{
+    font-size: 15px;
+    position: relative;
+    top:1px;
+  }
+  .search_btn > span{
+    padding:0;
+  }
+
+    .filter_bar{
+        background-color:white;
+        height:200px;
+        margin-top:10px;
+        
+    }
+    .filter_bar_container{
+        padding:15px;
+        z-index:99;
+    }
+    .car_filter_form{
+        border:1px solid rgb(68,145,222) !important;
+        color:rgb(68,145,222);
+        font-weight:200 !important;
+        font-size:15px !important;
+        border-radius: 8px !important;
+        height:34px;
+        line-height:34px;
+        vertical-align:middle;
+        width:100%;
+        background-color:white;
+        cursor:pointer;
+    }
+    .car_filter_form:hover{
+        background-color:rgba(74,144,226,1);
+        color:white;
+    }
+    .ui-state-default{
+       width:12px !important;
+       height:12px  !important;
+       border-radius:6px !important;
+       background:rgb(70,145,222)!important;
+        outline:0;
+        border:0 !important;
+    }
+    .ui-slider{
+        height:4px;
+        border-radius:2px;
+        width:100%;
+        border:0;
+        
+    }
+    #slider-range{
+        background-color:rgb(154,162,181) !important;
+    }
+    #slider-range_1{
+        background-color:rgb(154,162,181) !important;
+    }
+    #slider-range_2{
+        background-color:rgb(154,162,181) !important;
+    }
+    .ui-slider-range{
+        background-color:rgb(160,199,231) !important;
+    }
+    .ui-widget-content{
+        background:rgba(0,0,0,0);
+    }
+    .ui-widget-header{
+        background:rgba(0,0,0,0);
+    }
+    .slider_bar_container{
+        margin-top:20px;
+    }
+    .slider_bar_container_title{
+        color:rgb(109,122,142);
+        font-size:15px;
+        font-weight:200;
+        padding-left:0;
+    }
+    .slider_bar_container_slider{
+        margin-top:10px;
+    }
+    .slider_bar_subtitle{
+        color:rgb(153,161,180);
+        font-weight:200;
+        margin-top:8px;
+    }
+    @media (min-width: 992px)
+        .col-05, .col-90{
+            float:left;
+        }
+    @media (min-width: 992px)
+        .col-05{
+            width:5%;
+        }
+    @media (min-width: 992px)
+        .col-90{
+            width:90%;
+        }
+
+    .ComingCard{
+      display: none;
+    }
+    .ComingSoon{
+        height: 100%;
+        line-height:360px;
+        vertical-align:middle;
+        font-size:30px;
+        
+    }
+    .sort_filter_btn:hover{
+        content:url(<%= asset_path 'homepage/sort_0.png' %>);
+        cursor:pointer;
+    }
+
+</style>
+<!--<p id="notice"><%= notice %></p>-->
+
+<div class="col-xs-12 all-to-none buy_car_container">
+
+
+  <section class="car_header_img_section">
+    <div class="container car_header_img">
+      Your Dream Car is Here
+    </div>
+  </section>
+
+  <div class="container" style="padding-left:10px; padding-right:10px;">
+      <div class="col-05 hidden-sm hidden-xs all-to-none">
+      </div>
+      <div class="col-90 col-sm-12 col-xs-12 all-to-none">
+          <div class="col-xs-12 filter_bar_container">
+            <div class="col-xs-12 filter_bar">
+                <%= form_for(@search, url: "/search/cars") do |f| %>
+                    <div class="col-md-12 col-lg-12 hidden-xs hidden-sm filter_bar_laptop" style="padding-top:40px;">
+                    <div class="col-xs-11" style="padding-left:0;">  
+                        <div class="col-xs-3">
+                            <%= select(:search, 'car_model.make', CarModel.order('make').joins(:cars).pluck('DISTINCT make'), { prompt: "Select Make" }, { class: "car_filter_form"}) %>
+                        </div>
+                        <div class="col-xs-3">
+                             <%= select(:search, 'car_model.model', CarModel.order('model').joins(:cars).pluck('DISTINCT model'), { prompt: "Select Model" }, { class: " car_filter_form" } ) %>
+                        </div>
+                        <div class="col-xs-3">
+                            <%= select(:search, 'car_model.body', CarModel.order('body').pluck('DISTINCT body'), { prompt: "Select Body" }, { class: " car_filter_form" } ) %>
+                        </div> 
+                        <div class="col-xs-3">
+                             <%= select(:search, 'ext_color', Car.order('ext_color').pluck('DISTINCT ext_color'), { prompt: "Select Color" }, { class: " car_filter_form" } ) %>
+                        </div>
+                    </div>
+                    <div class="col-xs-1" align="right">
+                        <img class="sort_filter_btn" src="<%= asset_path 'homepage/sort.png' %>" width="34px" height="34px" id="sort_filter_button">
+                    </div>
+                    <div class="col-xs-12 all-to-none slider_bar_container">
+                        <div class="col-xs-4">
+                            <div class="col-xs-12 slider_bar_container_title">
+                                Mileage
+                            </div>
+                            <div class="col-xs-12 all-to-none slider_bar_container_slider">
+                                <div id="slider-range"></div>
+                            </div>
+                            <div class="col-xs-12 all-to-none slider_bar_subtitle">
+                                <div class="col-xs-6 all-to-none" style="text-align:left;">
+                                    <span class="all-to-none" id="min_mileage">
+                                        0 Mile
+                                    </span>
+                                </div>
+                                <div class="col-xs-6 all-to-none" style="text-align:right;">
+                                    <span class="all-to-none" id="max_mileage">
+                                        100000 Mile
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="col-xs-12 slider_bar_container_title">
+                                Price
+                            </div>
+                            <div class="col-xs-12 all-to-none slider_bar_container_slider">
+                                <div id="slider-range_1"></div>
+                            </div>
+                            <div class="col-xs-12 all-to-none slider_bar_subtitle">
+                                <div class="col-xs-6 all-to-none" style="text-align:left;">
+                                    <span class="all-to-none" id="min_price">
+                                        $0
+                                    </span>
+                                </div>
+                                <div class="col-xs-6 all-to-none" style="text-align:right;">
+                                    <span class="all-to-none" id="max_price">
+                                        $100000
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="col-xs-12 slider_bar_container_title">
+                                Year
+                            </div>
+                            <div class="col-xs-12 all-to-none slider_bar_container_slider">
+                                <div id="slider-range_2"></div>
+                            </div>
+                            <div class="col-xs-12 all-to-none slider_bar_subtitle">
+                                <div class="col-xs-6 all-to-none" style="text-align:left;">
+                                    <span class="all-to-none" id="min_year">
+                                        2005
+                                    </span>
+                                </div>
+                                <div class="col-xs-6 all-to-none" style="text-align:right;">
+                                    <span class="all-to-none" id="max_year">
+                                        2016
+                                    </span>
+                                </div>
+                            </div>                          
+                        </div>
+                    </div>
+                </div>
+                    <div class="col-xs-12 col-sm-12 hidden-md hidden-lg filter_bar_mobile" style="padding-top:20px;">
+                            <div class="col-xs-12 filter_bar_mobile_list" style="margin-bottom:8px;">
+                                <%= select(:search, 'car_model.make', CarModel.order('make').joins(:cars).pluck('DISTINCT make'), { prompt: "Select Make" }, { class: "car_filter_form"}) %>
+                            </div>
+                            <div class="col-xs-12 filter_bar_mobile_list"  style="margin-bottom:8px;">
+                                 <%= select(:search, 'car_model.model', CarModel.order('model').joins(:cars).pluck('DISTINCT model'), { prompt: "Select Model" }, { class: " car_filter_form" } ) %>
+                            </div>
+                            <div class="col-xs-12 filter_bar_mobile_list"  style="margin-bottom:8px;">
+                                <%= select(:search, 'car_model.body', CarModel.order('body').pluck('DISTINCT body'), { prompt: "Select Body" }, { class: " car_filter_form" } ) %>
+                            </div> 
+                            <div class="col-xs-12 filter_bar_mobile_list"  style="margin-bottom:8px;">
+                                 <%= select(:search, 'ext_color', Car.order('ext_color').pluck('DISTINCT ext_color'), { prompt: "Select Color" }, { class: " car_filter_form" } ) %>
+                            </div>
+                        </div>
+                <% end %>
+            </div>
+        </div>
+      </div>
+      <div class="col-05 hidden-sm hidden-xs all-to-none">
+      </div>
+      <div class="col-05 hidden-sm hidden-xs all-to-none">
+      </div>
+      <div class="col-90 col-sm-12 col-xs-12 all-to-none car_img_list_content" align="center">
+        <%= render partial: "shared/car", collection: @cars %>
+        <div class="col-md-4 col-sm-4 col-xs-12 car_clickable_outline ComingCard" data-status="undefined">
+          <span class="product-thumb-info car_clickable">
+                <div class="ComingSoon">
+                    Coming Soon...
+              </div>
+          </span>
+        </div>
+      </div>
+      <div class="col-05 hidden-sm hidden-xs all-to-none">
+      </div>
+      <div class="col-md-12">
+        <div class="p2"><%= will_paginate @cars, :class => "pagination" %></div>
+      </div>
+  </div>
+
+</div>
+<%= render 'dynamic_js' %>
+<script>
+    $("#search_car_model\\.make").bind('change', function() {
+        upload_car_info();
+    });
+    $("#search_car_model\\.model").bind('change', function() {
+        upload_car_info();
+    });
+    $("#search_car_model\\.body").bind('change', function() {
+        upload_car_info();
+    });
+    $("#search_ext_color").bind('change', function() {
+        upload_car_info();
+    });
+    $('#slider-range').on("mousedown.box", function() {
+        $(document).one("mouseup.box", function() {
+            upload_car_info();    
+        })
+    })
+    $('#slider-range_1').on("mousedown.box", function() {
+        $(document).one("mouseup.box", function() {
+            upload_car_info();    
+        })
+    })
+    $('#slider-range_2').on("mousedown.box", function() {
+        $(document).one("mouseup.box", function() {
+            upload_car_info();    
+        })
+    })
+    var car_make = '';
+    var car_model = '';
+    var car_body = '';
+    var car_color = '';
+    var min_mile = '';
+    var max_mile = '';
+    var min_price = '';
+    var max_price = '';
+    var min_year = '';
+    var max_year = '';
+    $(function() {
+        $( "#slider-range" ).slider({
+          range: true,
+          min: 0,
+          max: 100,
+          values: [ 0, 100 ],
+          slide: function( event, ui ) {
+            min_mile = ui.values[ 0 ] * 1000;
+            max_mile = ui.values[ 1 ] * 1000;
+            //console.log(min_mile + "------" + max_mile);
+              
+            $('#min_mileage').html(ui.values[ 0 ] * 1000 + " Mile");
+            $('#max_mileage').html(ui.values[ 1 ] * 1000 + " Mile");
+          }
+        });
+          
+        min_mile = $( "#slider-range" ).slider( "values", 0 ) * 1000;
+        max_mile = $( "#slider-range" ).slider( "values", 1 ) * 1000;
+        //console.log(min_mile + "------" + max_mile); 
+    });
+    $(function() {
+        $( "#slider-range_1" ).slider({
+          range: true,
+          min: 0,
+          max: 100,
+          values: [ 0, 100 ],
+          slide: function( event, ui ) {
+            min_price = ui.values[ 0 ] * 1000;
+            max_price = ui.values[ 1 ] * 1000; 
+            //console.log(min_price + "----" + max_price);
+
+            $('#min_price').html("$" + ui.values[ 0 ] * 1000);
+            $('#max_price').html("$" + ui.values[ 1 ] * 1000);
+          }
+        });
+          
+        min_price = $( "#slider-range_1" ).slider( "values", 0 ) * 1000;
+        max_price = $( "#slider-range_1" ).slider( "values", 1 ) * 1000;
+          //console.log(min_price + "----" + max_price);
+    });
+    $(function() {
+        $( "#slider-range_2" ).slider({
+          range: true,
+          min: 2005,
+          max: 2016,
+          values: [ 2005, 2016 ],
+          slide: function( event, ui ) {
+            min_year = ui.values[ 0 ];
+            max_year = ui.values[ 1 ];
+            console.log(min_year + "-----" + max_year);
+            
+            $('#min_year').html(ui.values[ 0 ]);
+            $('#max_year').html(ui.values[ 1 ]);
+          }
+        });
+        min_year = $( "#slider-range_2" ).slider( "values", 0 );
+        max_year = $( "#slider-range_2" ).slider( "values", 1 );
+        console.log(min_year + "-----" + max_year);
+
+    });
+    $(function() {
+      if ($(".pagination .next_page.disabled").size() != 0) {
+        $(".ComingCard").css("display", "block");
+      }
+    });
+        
+//      $('#submit_car_filter_data').click(function(){
+    function upload_car_info(){
+          car_make = $('#search_car_model\\.make').val();
+          car_model = $('#search_car_model\\.model').val();
+          car_body = $('#search_car_model\\.body').val();
+          car_color = $('#search_ext_color').val();
+          console.log(car_make + " " + car_model + ' ' + car_body + ' ' + car_color + ' ' + min_mile + ' ' + max_mile + ' ' + min_price + ' ' + max_price + ' ' + min_year + ' ' + max_year);
+          $.ajax({
+                url: '/search/cars',
+                type: 'post',
+                data: 'utf8=' + encodeURIComponent('✓') + '&authenticity_token=' + encodeURIComponent($("input[name='authenticity_token']").val()) + '&search[car_model.make]=' + encodeURIComponent(car_make) + '&search[car_model.model]=' + encodeURIComponent(car_model) + '&search[car_model.body]=' + encodeURIComponent(car_body) + '&search[ext_color]=' + encodeURIComponent(car_color) + '&search[car_model.year_greater_than_or_equal_to]=' + encodeURIComponent(min_year) + '&search[car_model.year_less_than_or_equal_to]=' + encodeURIComponent(max_year) + '&search[mileage_greater_than_or_equal_to]=' + encodeURIComponent(min_mile) + '&search[mileage_less_than_or_equal_to]=' + encodeURIComponent(max_mile) + '&search[price_greater_than_or_equal_to]=' + encodeURIComponent(min_price) + '&search[price_less_than_or_equal_to]=' + encodeURIComponent(max_price),
+                dataType: 'html',
+                success: function(html){
+                    $('.car_img_list_content').empty();
+                    $('.car_img_list_content').append($(".car_img_list_content", html).children());
+                }
+          })
+    } 
+</script>
+<script>
+  $(function() {
+      if($(window).width() >= 768){
+        $('.filter_bar_mobile').empty();
+      }else{
+        $('.filter_bar_laptop').empty();
+      }
+      $(window).scroll(function(){
+          var scrollTop = $(window).scrollTop();
+          if(scrollTop != 0) {
+            $('header').css('background','rgba(74,144,226,0.8)');
+            $('.nav_title, .nav_item > a > div, .signInBtn').css('color','white');  
+            $('.signUpBtn').css('background-color','white');
+            $('.signUpBtn, .signout a').css('color','rgba(74,144,226,1)');
+            $('#blue_logo').fadeOut(50,function(){
+                $('#white_logo').fadeIn(50);
+            }) 
+          }
+          else {
+            $('header').css('background','rgba(74,144,226,0.8)');
+            $('.nav_title, .nav_item > a > div, .signInBtn').css('color','white');  
+            $('.signUpBtn').css('background-color','white');
+            $('.signUpBtn, .signout a').css('color','rgba(74,144,226,1)');
+            $('#blue_logo').fadeOut(50,function(){
+                $('#white_logo').fadeIn(50);
+            }) 
+          }
+      });
+  });
+</script> 

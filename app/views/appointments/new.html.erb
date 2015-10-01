@@ -1,0 +1,700 @@
+<style>
+#sell_request_miles{
+    display: none;
+}
+
+#sell_request_zipcode{
+    display: none;
+}
+
+#sell_request_style_id{
+    display: none;
+}
+    .sell_car_container_list_content{
+        display:inline-block;
+        //min-width:300px;
+    }
+    .sell_car_container{
+        height:650px;
+        margin-top:30px;
+    }
+    header{
+        background-color: rgb(74,144,226);
+    }
+    ul{
+        list-style-type: none;
+    }
+    .address_input_container{
+        padding-left:0;
+        padding-right:0;
+    }
+    .address_input_title{
+        padding-left:0;
+        padding-right:0;
+        height:40px;
+        line-height:40px;
+        vertical-align:middle;
+        color: rgb(10,10,10);
+        text-align:left;
+    }
+    .address_input{
+        font-size:15px;
+        border:1px solid rgb(200, 200, 200);
+        border-radius: 8px;
+        text-align:left;
+        height:40px;
+        line-height:40px;
+        vertical-align:middle;
+        color:rgb(10, 10, 10);
+        padding-left:15px;
+    }
+    .sell_car_list_title{
+        width:100%;
+        font-size:12px;
+        border:1px solid rgb(74,144,226);
+        border-radius: 8px;
+        text-align:left;
+        height:50px;
+        line-height:50px;
+        vertical-align:middle;
+        color:rgb(74,144,226);
+        padding-left:15px;
+        cursor:pointer;
+    }
+    .sell_car_list_title span:nth-child(1){
+        float:left;
+        height:100%;
+        padding-right:0;
+    }
+    .sell_car_list_title span:nth-child(2){
+        text-align:right;
+        font-size:30px;
+    }
+    .sell_car_list_main{
+        width:100%;
+        display:none;
+        background-color:rgb(237,237,242);
+        height:auto;
+        max-height:300px;
+        overflow-y:auto;
+        border-radius:8px;
+        margin-top:10px;
+        padding-left:15px;
+    }
+    .sell_car_list_ul{
+        height:61px;
+    }
+    .sell_car_list_ul:hover .sell_car_list_title{
+        background-color:rgb(237,237,242);
+    }
+    .sell_car_list_ul:hover .sell_car_list_main{
+        display:block;
+    }
+    .sell_car_list_main > li{
+        height:48px;
+        color:rgb(123,131,147);
+        font-size:12px;
+        line-height:48px;
+        vertical-align:middle;
+    }
+    .sell_car_list_main_li:hover{
+        cursor:pointer;
+        color:rgb(74,144,226);
+        
+    }
+    .sell_car_list_main_li:hover .fa{
+        visibility: visible;
+    }
+    .sell_car_list_main_li .fa{
+        visibility: hidden;
+    }
+    .sell_car_list_main_li span:nth-child(1){
+        text-align:left;
+    }
+    .sell_car_list_main_li span:nth-child(2){
+        text-align:right;
+    }
+    .disabled_ul{
+        pointer-events:none;
+    }
+    .disabled_ul .sell_car_list_title{
+        color: rgba(0,0,0,0.2) !important;
+    }
+    .disabled_ul .sell_car_list_title{
+        border: 1px solid rgba(0,0,0,0.2);
+    }
+    .sell_car_nav_bar{
+        margin-top:80px;
+        height:80px;
+        background-color:rgb(250,250,250);
+    }
+    .sell_car_nav_bar_upper{
+        text-align:center;
+    }
+    .sell_car_nav_bar_upper_content{
+        height:50px;
+        line-height:50px;
+        vertical-align:middle;
+        margin-bottom:5px;
+    }
+    .last_step{
+        color:rgb(143,185,236);
+        font-size:15px;
+        font-weight:300;
+    }
+    .current_step{
+        color:rgb(69,150,226);
+        font-size:15px;
+        font-weight:400;
+    }
+    .next_step{
+        color:rgb(200,200,200);
+        font-size:15px;
+        font-weight:300;
+    }
+    .sell_car_container_upper{
+        height:65px;
+        z-index:99;
+    }
+    .sell_car_container_lower{
+        margin-top:10px;
+        height:65px;
+        z-index:1;
+    }
+    .error {
+        color: #e21c78;
+        text-align: left;
+        margin-bottom: 10px;
+        margin-top: -8px;
+        display: none;
+        border-width: 1px;
+        border-style: solid;
+        padding: 9px 13px;
+        position: relative;
+        background-color: #fff;
+        font-size: 12px;
+        border-radius: 5px;
+        border-color: rgba(0,0,0,.1);
+        background-clip: padding-box;
+    }
+    .error.shown {
+        display: table;
+    }
+    .sell_car_container_title{
+        color:rgb(69,150,226);
+    }
+    .sell_car_container_title div:nth-child(1){
+        height:60px;
+        line-height:60px;
+        vertical-align:middle;
+        text-align:center;
+        font-size:40px;
+        margin-top:40px;
+        
+    }
+    .sell_car_container_title div:nth-child(2){
+        height:30px;
+        line-height:30px;
+        vertical-align:middle;
+        text-align:center;
+        font-size:18px;
+        font-weight:200;
+        margin-bottom:40px;
+    }
+    .sell_car_selector_cotainer{
+        height:140px;
+    }
+    .step_line{
+        height:1px;
+        background-color:rgba(0,0,0,0.2);
+    }
+
+    .step_line_offset{
+        height:30px; 
+        width:12.5%; 
+        float:left;
+    }
+    .last_step_circle{
+        background-color: rgb(250,250,250);
+        width:40px;
+        position:relative;
+        top:-40px;
+        color:rgb(143,185,236);
+    }
+    .current_step_circle{
+        background-color: rgb(250,250,250);
+        width:40px;
+        position:relative;
+        top:-44px;
+        color:rgb(69,150,226);
+    }
+    .next_step_circle{
+        background-color: rgb(250,250,250);
+        width:40px;
+        position:relative;
+        top:-40px;
+        color:rgb(200,200,200);
+    }
+    .current_step_circle_border{
+        width:28px;
+        line-height:26px;
+        height:28px;
+        vertical-align:middle;
+        border-radius:14px;
+        border:1px solid rgb(69,150,226);
+    }
+    .sell_car_nav_bar_upper_btn{
+        opacity:0.8;
+        cursor:pointer;
+    }
+    .sell_car_nav_bar_upper_btn:hover{
+        opacity:1;
+    }
+    .sell_step_1_circle, .sell_step_2_circle, .sell_step_3_circle, .sell_step_4_circle{
+        cursor:pointer;
+    }
+    .step_1_submit_btn_container{
+        margin-bottom:50px;margin-top:30px;height:30px;
+    }
+    .submit_btn {
+        width:200px;
+        text-align:center;
+        height:40px;
+        border-radius:5px;
+        line-height:40px;
+        vertical-align:middle;
+        background-color:rgb(67,146,220);
+        color:rgba(255,255,255,0.95);
+        opacity:0.9;
+        cursor:pointer;
+    }
+    .submit_btn:hover{
+        opacity:1;
+    }
+    .input_letter{
+        float:right;
+        padding-right:11px;
+        position:relative;
+        top:-34px;
+        display:none;
+        color:rgb(87,157,223)
+    }
+    #sell_car_list_current_addressName:focus +.input_letter {
+        display:block;
+    }
+    #sell_car_list_current_addressPhone:focus +.input_letter {
+        display:block;
+    }
+    #sell_car_list_current_addressStreet:focus +.input_letter {
+        display:block;
+    }
+    #sell_car_list_current_mileage:focus +.input_letter {
+        display:block;
+    }
+    #sell_car_list_current_zipcode:focus +.input_letter {
+        display:block;
+    }
+    #sell_car_list_current_vin:focus +.input_letter {
+        display:block;
+    }
+    .error_border{
+        border:1px solid rgb(250,50,50) !important;
+    }
+    .error_text{
+        color: rgb(250,50,50);
+        float:right !important;
+        visibility:hidden;
+    }
+    .car_price_cart_cotainer{
+        height:auto;
+        margin-bottom:-160px;
+    }
+
+    #sell_car_canvas{
+        -ms-transform: rotate(180deg); /* IE 9 */
+        -webkit-transform: rotate(180deg); /* Safari */
+        transform: rotate(180deg);
+    }
+    .cannot_find_price div{
+        height:300px;
+        width:400px;
+    }
+    .address_container{
+        width:80%;
+        padding-left:0px;
+        padding-right:0px;
+        height:125px;
+        color:rgb(74,144,226);
+    }
+    .schedule_time_container{
+        width:80%;
+        padding-left:25px;
+        padding-right:25px;
+        border:1px solid rgb(222, 222, 222);
+        border-radius:8px;
+        height: 300px;
+    }
+    .schedule_time_tile{
+        height:50px;
+        line-height:50px;
+        font-size:16px;
+        font-weight:400;
+        border-bottom: 1px solid rgb(222, 222, 222);
+    }
+    .schedule_time_week{
+        padding-left:0;
+        padding-right:0;
+        height:50px;
+        color:rgb(74,144,226);
+    }
+    .col_7{
+        width: 14.2857142857%;
+        float:left;
+        line-height:50px;
+        vertical-align: middle;
+        height:100%;
+    }
+    .schedule_time_number_container{
+        padding-left:0;
+        padding-right:0;       
+    }
+    .schedule_time_hour_item{
+        margin-top:5px;
+        padding-left:5px;
+        padding-right:5px;
+        height:24px;
+        line-height:24px;
+        vertical-align: middle;
+        text-align:center;
+        font-size:15px;
+        cursor:pointer;
+        
+    }
+    .schedule_time_hour_item div:hover{
+        background-color:white;
+        border:1px solid rgb(74, 144, 226);
+        color: rgb(74, 144, 226);
+    }
+    .schedule_time_hour_item div{
+        height:24px;
+        background-color:rgb(250, 250, 250);
+        border-radius:3px;
+        border:1px solid rgb(250, 250, 250);
+    }
+    .schedule_time_hour_item_actived{
+        background-color:rgb(74, 144, 226) !important;
+        border:1px solid rgb(74, 144, 226) !important;
+        color: white !important;
+    }
+    .schedule_time_hour_item_disabled{
+        color: rgb(220, 220, 220);
+        pointer-events:none;
+    }
+</style>
+<%= provide(:title, 'Appointment') %>
+
+
+<div class="container" style="overflow:hidden;">
+  <hr class="tall">
+  <div class="row" style="margin-bottom:30px;">
+    <div class="col-md-12">
+      <h2 class="mb-none" align="center" style="color:rgb(74, 144, 226);">
+          Make Appointment to Test Drive
+      </h2>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+
+
+      <%= form_for(@apt) do |f|%>
+      <%= render 'shared/error_messages', object: f.object %>
+        <div class="row">
+          <div class="form-group">
+            <div class="col-md-4">
+              <%= f.text_field :name, placeholder: 'Name', class: 'form-control', disabled: user_signed_in? %>
+            </div>
+            <div class="col-md-4">
+              <%= f.text_field :email, placeholder: 'Email', class: 'form-control', disabled: user_signed_in? %>
+            </div>
+            <div class="col-md-4">
+              <%= f.text_field :phone, placeholder: 'Phone', class: 'form-control' %>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group">
+            <div class="col-md-8">
+              <%= f.text_field :address, placeholder: 'Address', class: 'form-control' %>
+            </div>
+            <div class="col-md-4" style="padding-left: 0; padding-right: 0;">
+              <div class="col-md-5">
+                <%= f.text_field :city, placeholder: 'City', class: 'form-control' %>
+              </div>
+              <div class="col-md-3">
+                <%= f.text_field :state, placeholder: 'State', class: 'form-control' %>
+              </div>
+              <div class="col-md-4">
+                <%= f.text_field :zipcode, placeholder: 'Zipcode', class: 'form-control' %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="divider divider-primary">
+          <i class="fa fa-chevron-down"></i>
+        </div>
+        <div class="panel-heading">
+          <h4 class="panel-title" align="center">
+            Available Time Windows:
+          </h4>
+        </div>
+        <div class="row" align="center">
+          <div class="form-group">
+            <div class="col-md-12">
+<!--              <%= render 'shared/time_window' %>-->
+                <div class='schedule_time_container'>
+                    <div class="col-xs-12 schedule_time_tile" align="center">
+                    </div>
+                    <div class="col-xs-12 schedule_time_week" align='center'>
+                        <div class="col_7 day_0">
+                            SUN
+                        </div>
+                        <div class="col_7 day_1">
+                            MON
+                        </div>
+                        <div class="col_7 day_2">
+                            TUE
+                        </div>
+                        <div class="col_7 day_3">
+                            WED
+                        </div>
+                        <div class="col_7 day_4">
+                            THU
+                        </div>
+                        <div class="col_7 day_5">
+                            FRI
+                        </div>
+                        <div class="col_7 day_6">
+                            SAT
+                        </div>
+                    </div>
+                    <div class="col-xs-12 schedule_time_number_container" align="center">
+                        <% tw_idx = 0 %>
+                        <%(0..6).step(1) do |hour_column|%>
+                            <div class="col_7 schedule_time_hour_item">
+                                <div>
+                                    9am - 11am
+                                </div>
+                            </div>
+                        <%end%>
+                        <%(0..6).step(1) do |hour_column|%>
+                            <div class="col_7 schedule_time_hour_item">
+                                <div>
+                                    11am - 1pm
+                                </div>
+                            </div>
+                        <%end%>
+                        <%(0..6).step(2) do |hour_row|%>
+                            <%(0..6).step(1) do |hour_column|%>
+                                <div class="col_7 schedule_time_hour_item">
+                                    <div>
+                                        <%= hour_row + 1%>pm - <%= hour_row + 3%>pm
+                                    </div>
+                                </div>
+                            <%end%>
+                        <%end%>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="time_window_ids">
+          <%= f.hidden_field :time_window_ids, :multiple => true %>
+          <%= f.hidden_field :time_window_ids, :multiple => true %>
+          <%= f.hidden_field :time_window_ids, :multiple => true %>
+        </div>
+        <%= f.hidden_field :car_id %>
+
+        <div class="row">
+          <div class="form-group">
+            <div class="col-md-12">
+                <%= f.submit "Submit", class: "btn btn-primary pull-right mb-xl", id:'submit_app' %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>
+
+<%= render 'shared/time_window_script' %>
+<script>
+  $(function() {
+      $(window).scroll(function(){
+          var scrollTop = $(window).scrollTop();
+          if(scrollTop != 0) {
+            $('header').css('background','rgba(74,144,226,1)');
+          }
+          else {
+            $('header').css('background','rgba(74,144,226,1)');
+          }
+      });
+        var today       = new Date();
+        var nextweek    = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 7);
+        
+        var from_dd     = today.getDate();
+        var from_mm     = today.getMonth() + 1;
+        var from_yyyy   = today.getFullYear();
+        
+        var to_dd       = nextweek.getDate();
+        var to_mm       = nextweek.getMonth() + 1;
+        var to_yyyy     = nextweek.getFullYear();
+        
+        var weekday = new Array(7);
+        
+        weekday[0] = "SUN";
+        weekday[1] = "MON";
+        weekday[2] = "TUE";
+        weekday[3] = "WED";
+        weekday[4] = "THU";
+        weekday[5] = "FRI";
+        weekday[6] = "SAT";
+        
+        for(var i = 0; i < 7; i ++){
+            $('.day_' + i).html(weekday[(today.getDay() + i) % 7]);
+        }
+        
+        if(from_dd < 10) {
+            from_dd = '0' + from_dd;
+        }
+        
+        if(to_dd < 10) {
+            to_dd = '0' + to_dd;
+        }
+        
+        if(from_mm < 10) {
+            from_mm = '0' + from_mm;
+        }
+        
+        if(to_mm < 10) {
+            to_mm = '0' + to_mm;
+        }
+        
+        if(from_mm == '01'){
+            current_month_name = 'JANUARY';
+        }else if(from_mm == '02'){
+            current_month_name = 'FEBRUARY'
+        }else if(from_mm == '03'){
+            current_month_name = 'MARCH';
+        }else if(from_mm == '04'){
+            current_month_name = 'APRIL';
+        }else if(from_mm == '05'){
+            current_month_name = 'MAY';
+        }else if(from_mm == '06'){
+            current_month_name = 'JUNE';
+        }else if(from_mm == '07'){
+            current_month_name = 'JULY';
+        }else if(from_mm == '08'){
+            current_month_name = 'AUGUST';
+        }else if(from_mm == '09'){
+            current_month_name = 'SEPTEMBER';
+        }else if(from_mm == '10'){
+            current_month_name = 'OCTOBER';
+        }else if(from_mm == '11'){
+            current_month_name = 'NOVEMBER';
+        }else if(from_mm == '12'){
+            current_month_name = 'DECEMBER';
+        }
+        
+        $('.schedule_time_tile').html(current_month_name + ' ' + from_yyyy);
+        from_date = from_yyyy + '-' + from_mm + '-' + from_dd;
+        to_date   = to_yyyy   + '-' + to_mm   + '-' + to_dd;      
+        $.ajax({
+            url: '../appointments/available_time_windows.json?car_id=<%= params[:car_id] %>&from_date=' + from_date + '&to_date=' + to_date,
+            type: 'get',
+            dataType: 'json',
+            success: function(json){
+                console.log(json);
+                $('.schedule_time_hour_item').each(function(i){
+                   $(this).addClass('schedule_time_hour_item' + i); 
+                    
+                });
+
+                var count = 0;
+                for(var i = 0; i < 6; i ++){
+                    for(var j = 0; j < 7; j ++ ){
+                        //console.log(i * 7 + j, json[i][j]['id']);
+                        $('.schedule_time_hour_item' + (i * 7 + j)).attr('id', json[i][j]['id']);
+                        if(json[i][j]['status'] == 'notavailable'){
+                            $('.schedule_time_hour_item' + (i * 7 + j)).addClass('schedule_time_hour_item_disabled');
+                        }
+                    }
+                }
+                
+            }
+            
+        
+        })
+      
+    });
+    var from_date;
+    var to_date;
+    var day_0, day_1, day_2, day_3, day_4, day_5, day_6;
+    var first_selected_time_0;
+    var first_selected_time_1;
+    var first_selected_time_2;
+    var selected_time = [];
+ 
+    $('.schedule_time_hour_item').click(function(){
+        actived_number = $('.schedule_time_hour_item_actived').length;
+        if($(this).children().hasClass('schedule_time_hour_item_actived')){
+            
+            $(this).children().removeClass('schedule_time_hour_item_actived');
+            
+            
+        }else if(actived_number == 0){
+            
+            $(this).children().addClass('schedule_time_hour_item_actived');
+            first_selected_time_0 = $(this).children();
+            selected_time[0] = $(this).attr('id');
+            
+        }else if(actived_number == 1){
+            
+            $(this).children().addClass('schedule_time_hour_item_actived');
+            first_selected_time_1 = $(this).children();
+            selected_time[1] = $(this).attr('id');
+            
+        }else if(actived_number == 2){
+            
+            $(this).children().addClass('schedule_time_hour_item_actived');
+            first_selected_time_2 = $(this).children();
+            selected_time[2] = $(this).attr('id');
+            
+        }else if(actived_number >= 3){
+            
+            $(this).children().addClass('schedule_time_hour_item_actived');
+            first_selected_time_0.removeClass('schedule_time_hour_item_actived');
+            
+            first_selected_time_0 = first_selected_time_1;
+            first_selected_time_1 = first_selected_time_2;
+            first_selected_time_2 = $(this).children();
+            
+            selected_time[0] = selected_time[1];
+            selected_time[1] = selected_time[2];
+            selected_time[2] = $(this).attr('id');
+            
+        }
+        //console.log(selected_time);
+        $('#time_window_ids input:nth-child(1)').val(selected_time[0]); 
+        $('#time_window_ids input:nth-child(2)').val(selected_time[1]); 
+        $('#time_window_ids input:nth-child(3)').val(selected_time[2]); 
+    })
+//    $('#submit_app').click(function(){
+//    
+//    })
+</script>

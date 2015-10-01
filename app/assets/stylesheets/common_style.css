@@ -1,0 +1,1370 @@
+    body{
+        min-height: 600px;
+    }
+
+    a { 
+        color: inherit;
+    }
+    ul{
+        list-style-type: none;
+    }
+    .step_line{
+        height:1px;
+        background-color:rgba(0,0,0,0.2);
+    }
+    input{
+      border:none;
+    }
+    .step_line_offset{
+        height:30px; 
+        width:12.5%; 
+        float:left;
+    }
+    .last_step_circle{
+        background-color: rgb(255,255,255);
+        width:40px;
+        position:relative;
+        top:-40px;
+        color:rgb(143,185,236);
+    }
+    .current_step_circle{
+        background-color: rgb(255,255,255);
+        width:40px;
+        position:relative;
+        top:-44px;
+        color:rgb(69,150,226);
+    }
+    .next_step_circle{
+        background-color: rgb(255,255,255);
+        width:40px;
+        position:relative;
+        top:-40px;
+        color:rgb(200,200,200);
+    }
+    .current_step_circle_border{
+        width:28px;
+        line-height:26px;
+        height:28px;
+        vertical-align:middle;
+        border-radius:14px;
+        border:1px solid rgb(69,150,226);
+    }
+    .sell_car_nav_bar_upper_btn{
+        opacity:0.8;
+/*        cursor:pointer;*/
+    }
+    .sell_car_nav_bar_upper_btn:hover{
+        opacity:1;
+    }
+    .sell_step_1_circle, .sell_step_2_circle, .sell_step_3_circle, .sell_step_4_circle{
+/*        cursor:pointer;*/
+    }
+    .sell_car_nav_bar_upper{
+        text-align:center;
+    }
+    .sell_car_nav_bar_upper_content{
+        height:50px;
+        line-height:50px;
+        vertical-align:middle;
+        margin-bottom:5px;
+    }
+    .last_step{
+        color:rgb(143,185,236);
+        font-size:15px;
+        font-weight:300;
+    }
+    .current_step{
+        color:rgb(69,150,226);
+        font-size:15px;
+        font-weight:400;
+    }
+    .next_step{
+        color:rgb(200,200,200);
+        font-size:15px;
+        font-weight:300;
+    }
+     .buy_container_left{
+        width: 72%;
+        float:left;
+        padding-top: 40px;
+        height:650px;
+        background-color:#fff;
+    }
+    .buy_container_right{
+        width:28%;
+        float:right;
+        height:650px;
+        background-color:#ededf2;
+        padding-top:40px;
+        padding-left:30px;
+        padding-right:30px;
+    }
+    .buy_container_title{
+        font-size: 24px;
+        font-weight:500;
+        color:rgb(74, 144, 226);
+    }
+    .buy_container_subtitle{
+        margin-top:10px;
+        font-size:18px;
+        font-weight:400;
+        color:rgb(74, 144, 226);
+        margin-bottom:53px;
+    }
+    .buy_pay_navbar{
+        min-width:1280px;
+        height:80px;
+        margin-top:50px;
+        position:fixed;
+        z-index:999;
+        background-color:#fff;
+        box-shadow:0px 2px 4px 0px rgba(123, 128, 140, 0.5);
+    }
+    .all-to-none{
+        padding:0;
+        margin:0;
+    }
+    .payment_method_container{
+        overflow:hidden; 
+        padding-top:133px; 
+        box-shadow:0px 10px 3px 0px #7b808c; 
+        padding-left:0; 
+        padding-right:0;
+    }
+    .buy_container_right_title{
+        /* CAR DETAIL: */
+/*        font-family: HelveticaNeue-Light;*/
+        font-size: 18px;
+        color: #3A3D42;
+        line-height: 22px;
+        padding-left:0;
+        margin-bottom:11px;
+        font-weight:400;
+    }
+    .buy_car_image{
+        float:left;
+        width:80px;
+        height:80px;
+        border-radius:40px;
+        background-size:cover;
+        background-color:rgb(74, 144, 226);
+        background-position:center center;
+    }
+    .buy_container_right_car_detail{
+        width:210px;
+        height:81px;
+        float:left;
+        /* 2001 VW Beatle: */ 
+    }
+    .payment_method_container{
+        min-width:1170px;
+        overflow:auto;
+        box-shadow:0 0px 8px 0 #7B808C;
+    }
+    .buy_container_right_car_detail_title{
+/*        font-family: HelveticaNeue-Medium;*/
+        font-size: 18px;
+        color: #4A4A4A;
+        line-height: 25px;
+        vertical-align:middle;
+        margin-bottom:19px;
+        font-weight:500;
+        padding-right:0;
+    }
+    .buy_container_right_car_detail_subtitle{
+        /* 2 Doors Coupe: */
+/*        font-family: HelveticaNeue;*/
+        font-size: 14px;
+        color: #5C5C5C;
+        line-height: 16px;
+        margin-bottom:5px;
+        padding-right:0;
+    }
+    .divider {
+        height: 2px;
+        padding: 0;
+        margin: 0;
+        margin-bottom:25px !important;
+        margin-top:25px !important;
+        background: -o-linear-gradient(right, rgba(200,200,200,0.0), rgba(100,100,100,0.2), rgba(200,200,200,0.0));
+        background: -moz-linear-gradient(right, rgba(200,200,200,0.0), rgba(100,100,100,0.2), rgba(200,200,200,0.0));
+        background: linear-gradient(to right, rgba(200,200,200,0.0), rgba(100,100,100,0.2), rgba(200,200,200,0.0));
+    }
+    .payment_detail_0{
+        font-size:14px;
+        color:#5C5C5C;
+        padding-left:0;
+        padding-right:0;
+        maring-bottom:5px;
+        font-weight:300;
+        text-align:left;
+    }
+    .payment_detail_0_b{
+        font-size:18px;
+        color:#5C5C5C;
+        padding-left:0;
+        padding-right:0;
+        maring-bottom:5px;
+        text-align:left;
+        font-weight:500;
+    }
+    .payment_detail_1{
+        font-size:14px;
+        color:#5C5C5C;
+        padding-left:0;
+        padding-right:0;
+        maring-bottom:5px;
+        font-weight:300;
+        text-align:right;
+    }
+    .payment_detail_1_b{
+        font-size:18px;
+        color:#5C5C5C;
+        padding-left:0;
+        padding-right:0;
+        maring-bottom:5px;
+        text-align:right;
+        font-weight:500;
+    }
+    .options_container{
+        padding-left:115px;
+        padding-right:115px;
+    }
+    .options_box_actived{
+        color: #4A90E2 !important;
+        border-color:rgb(74, 144, 226) !important;
+    }
+    .options_box{
+        color: #7B808C ;
+        border-radius:8px;
+        border:2px solid #7B808C;
+        width:290px;
+        cursor:pointer;
+    }
+    .options_box_0{
+        float:left;
+        height: 320px;
+    }
+    .options_box_1{
+        float:right;
+        height: 320px;
+    }
+    .option_img_container{
+        height:150px;
+        padding-top:30px;
+    }
+    .option_img_container img{
+        width:102px;
+        height:102px;
+    }
+    .img_container_main_title{
+        font-size:24px;
+        /* Cashier’s Check: */
+        
+        line-height: 29px;
+        font-weight:500;
+    }
+    .img_container_sub_title{
+        /* You can get a Cashie: */
+        font-size: 14px;
+        
+        line-height: 17px;
+        font-weight:400;
+        margin-top:10px;
+        margin-bottom:66px;
+    }
+    .options_box_0:hover{
+        color: #4A90E2 !important;
+        border-color:rgb(74, 144, 226) !important;
+    }
+    .options_box_0:hover img{
+        content:url(<%= asset_path "buypage/check_0.png" %>)
+    }
+    .options_box_1:hover{
+        color: #4A90E2 !important;
+        border-color:rgb(74, 144, 226) !important;
+    }
+    .options_box_1:hover img{
+        content:url(<%= asset_path "buypage/transfer_0.png" %>)
+    }
+    .credit_card_container{
+        margin-top: 5px;
+        width:574px;
+/*        width:800px;*/
+        height:262px;
+/*        background-color:black;*/
+        padding:0;
+    }
+    .credit_card_container_left{
+        width:302px;
+/*        background-color:red;*/
+        height:100%;
+        float:left;
+        
+    }
+    .input_title_credit_card{
+        /* Name on Card: */
+        font-size: 16px;
+        color: #3A3D42;
+        line-height: 18px;
+        
+    }
+    .input_credit_card{
+        height:32px;
+        width:302px;
+        border:1px solid #CED1D9;
+        margin-bottom:10px;
+        border-radius:5px;
+        padding-left:5px;
+        margin-top:5px;
+    }
+    .horizontal_divider{
+        height:259px;
+        width:35px;
+        border-right:1px dashed #CED1D9;
+        float:left;
+    }
+    .credit_card_container_right{
+        float:left;
+        width:200px;
+        height:200px;
+        margin-top:25px;
+        margin-left:35px;
+    }
+    .credit_card_container_right span:nth-child(1){
+        font-size:16px;
+        color:#4A90E2;
+        font-weight:500;
+        text-align:left;
+    }
+    .credit_card_container_right span:nth-child(2){
+        color:#4A4A4A;
+        font-size:16px;
+        text-align:left;
+    }
+    .paypage_button{
+        width:240px;
+        height:40px;
+        background-color: #4A90E2;
+        color: white;
+        font-size:22px;
+        text-align:center;
+        border-radius:5px;
+        line-height:40px;
+        vertical-align:middle;
+        font-weight:500;
+        margin-top:53px;
+        cursor:pointer;
+        -moz-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+        -webkit-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+        -o-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+        -ms-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+        transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    }
+    .paypage_button:hover{
+         background-color:#3171BA;
+    }
+    .paypage_footer{
+        color:#4A90E2;
+        font-size:14px;
+        margin-top:97px;
+        font-weight:500;
+    }
+    .paypage_footer .fa{
+        font-size:18px;
+        margin-right:3px;
+    }
+    .cash_sample{
+        width:600px;
+        height:247.24px;
+        background-color:#F9F9FB;
+        box-shadow: 0px 1px 2px 0px #ACB1BF;
+        padding:13px;
+        margin-bottom:27px;
+    }
+    .cash_sample_outline{
+        border:1px solid #CED1D9;
+        height:100%;
+    }
+    .cash_sample_outline_title{
+        color:#5C5C5C;
+        font-size:20px;
+        font-weight:500;
+        margin-top:20px;
+        margin-bottom:30px;
+    }
+    .cash_sample_outline_container{
+        width:462px;
+        height:80px;
+    }
+    .cash_sample_outline_container_left{
+        width:87px;
+        height:80px;
+        font-size:14px;
+        color:#5C5C5C;
+        float:left;
+        text-align:left;
+        font-weight:500;
+        margin-left:28px;
+    }
+    .cash_sample_outline_container_left_0{
+        height:35px;
+        margin-bottom: 25px;
+    }
+    .cash_sample_outline_container_left_1{
+        height:20px;
+    }
+    .cash_sample_outline_container_right{
+        width:345px;
+        height:80px;
+        float:left;
+    }
+    .cash_sample_outline_container_right_title{
+        color: #3A3D42;
+        font-size:24px;
+        font-weight:500;
+        text-align:center;
+        margin-bottom:3px;
+    }
+    .cash_sample_outline_container_right_divider{
+        height:1px;
+        width:100%;
+        background-color:#ACB1BF;
+        margin-bottom:5px;
+    }
+    .check_footer{
+        width:292px;
+        height:18px;
+        color:#ACB1BF;
+        font-size:14px;
+        font-weight:500;
+    }
+    .wire_container{
+        width:600px;
+        height:300px;
+        box-shadow: 1px 1px 2px 1px #CED1D9;
+        border-radius:8px;
+        margin-top:122px;
+        padding-left:36px;
+    }
+    .wire_container_title{
+        font-size:18px;
+        color:#4A90E2;
+        font-weight:500;
+        margin-top:25px !important;
+        text-align:left; 
+    }
+    .wire_container_left{
+        width:133px;
+        height:207px;
+        font-size:16px;
+        font-weight:300;
+        color:#4A4A4A;
+        padding:0;
+        margin-top:20px;
+        float:left;
+        margin-right:65px !important;
+    }
+    .wire_container_left span{
+        font-size:16px;
+        color:#4A4A4A;
+        font-weight:300;
+        margin-bottom:15px !important;
+        text-align:left;
+        line-height:22px;
+        vertical-align:middle;
+    }
+    .wire_container_right{
+        width:340px;
+        height:207px;
+        font-size:18px;
+        font-weight:500;
+        color:#4A4A4A;
+        padding:0;
+        margin-top:20px !important;
+        float:left;
+    }
+    .wire_container_right span{
+        font-size:18px;
+        line-height:22px;
+        vertical-align:middle;
+        color:#4A4A4A;
+        font-weight:500;
+        margin-bottom:15px !important;
+        text-align:left;
+    }
+    .after_deposit{
+        font-weight:500;
+    }
+    .after_deposit_line{
+        height:1px;
+        border-bottom:1px dashed #CED1D9;
+        position:relative;
+        top:140px;
+    }
+    .confirmation_container{
+        width:900px;
+        height:430px;
+        border:1px dashed #CED1D9;
+        border-radius:8px;
+    }
+    .buy_container_left_4{
+        width:100%;
+    }
+    .confirmation_container_left{
+        border-right:1px dashed #CED1D9;height:100%;
+        padding-left:45px !important;
+        padding-top:30px !important;
+    }
+    .confirmation_container_right{
+        padding-left:45px !important;
+        padding-top:30px !important;
+    }
+    .confirmation_container_left_title{
+        font-size:18px;
+        font-weight:300;
+        color:#4A90E2;
+        width:100%;
+        float:left;
+        text-align:left;
+        margin-bottom:15px !important;
+    }
+    .confirmation_container_image{
+        width:auto;
+        height:80px;
+    }
+    .confirmation_container_image .buy_car_image{
+        float:left;
+        margin-right:25px !important;
+    }
+    .buy_car_image_text{
+        width:298px;
+        height:80px;
+        float:left;
+    }
+    .buy_car_image_text span:nth-child(1){
+        color:#4A4A4A;
+        font-size:18px;
+        font-weight:500;
+        line-height:29px;
+        vertical-align:middle;
+        margin-bottom:14px;
+    }
+    .buy_car_image_text span:nth-child(2){
+        font-size:14px;
+        font-weight:400;
+        line-height:16px;
+        veritcal-align:middle;
+        margin-bottom:5px;
+    }
+    .buy_car_image_text span:nth-child(3){
+        font-size:14px;
+        font-weight:400;
+        line-height:16px;
+        veritcal-align:middle;
+    }
+    .buy_container_right_subtitle{
+        width:290px;
+    }
+    .confirmation_car_detail_title{
+        font-size:18px;
+        color:#4A4A4A;
+        line-height:21px;
+        vertical-align:middle;
+        font-weight:500;
+        margin-top:40px !important;
+        margin-bottom:16px !important;
+    }
+    .confirmation_car_detail_content_title{
+        width:82px;
+        height:163px;
+        float:left;
+        padding-left:0;
+    }
+    .confirmation_car_detail_content_title li{
+        font-weight:300;
+        font-size:14px;
+        color:#333333;
+        height:16px;
+        line-height:16px;
+        vertical-align:middle;
+        text-align:left;
+        margin-bottom:5px !important;
+        width:100%;
+    }
+    .confirmation_car_detail_content{
+        width:296px;
+        margin-left:25px !important;
+        float:left;
+    }
+    .confirmation_car_detail_content li{
+        height:16px;
+        line-height:16px;
+        vertical-align:middle;
+        text-align:left;
+        font-size:14px;
+        font-weight:500;
+        color:#333;
+        margin-bottom:5px !important;
+        width:100%;
+    }
+    .confirmation_container_buyer_information{
+        text-align:left;
+    }
+    .payment_content_container{
+        color: #5c5c5c;
+        font-size:14px;
+        font-weight:400;
+    }
+    .payment_content_container li{
+        height:16px;
+        line-height:16px;
+        vertical-align:middle;
+        text-align:left;
+        font-size:14px;
+        font-weight:400;
+        color:#333;
+        margin-bottom:5px !important;
+        width:100%;
+    }
+    .balance_li{
+        margin-top:12px !important;
+        color: #3A3D42 !important;
+        height:23px !important;
+        line-height:23px !important;
+        vertical-align:middle !important;
+        font-size:18px !important;
+        margin-bottom:23px !important;
+    }
+    .payment_content_container_left li{
+        padding-right:45px !important;
+        text-align:right;
+    }
+    .home_page_footer{
+        height:146px;
+        background-color:white;
+        color:rgb(108,120,142);
+    }
+    .footer_upper_left{
+        width:25.75%;
+        float:left;
+        min-height:1px;
+    }
+    .footer_upper_middle{
+        min-height:1px;
+        width:48.5%;
+        float:left;
+    }
+    .footer_upper_right{
+        min-height:1px;
+        width:25.75%;
+        float:left;
+    }
+    .footer_upper{
+       margin-top:44px !important;
+       font-size: 20px;
+       font-weight:500;
+    }
+    .footer_lower{
+        margin-top:17px;
+        width:74.296875%;
+        font-size:13px;
+        font-weight:400;
+        text-align:center;
+        
+    }
+    .footer_upper_right{
+        cursor:pointer;
+    }
+    .homepage_sub_title_container{
+        
+        height:104px; 
+    }
+    .homepage_sub_title_container li{
+        font-size:18px;
+        font-weight:500;
+        height:26px;
+        line-height:26px;
+        vertical-align:middle;
+        color:#5C5C5C;
+    }
+    .homepage_main_btn_box{
+        width:420px;
+        height:50px;
+    }
+    .divider-line{
+        margin:0;
+        padding:0;
+        height:1px;
+        background: -o-linear-gradient(right, rgba(200,200,200,0.0), rgba(100,100,100,0.2), rgba(200,200,200,0.0));
+        background: -moz-linear-gradient(right, rgba(200,200,200,0.0), rgba(100,100,100,0.2), rgba(200,200,200,0.0));
+        background: linear-gradient(to right, rgba(200,200,200,0.0), rgba(100,100,100,0.2), rgba(200,200,200,0.0));
+    }
+.user_center_container{
+        width:1170px;
+        margin-top:50px;
+        height:750px;
+    }
+    .user_center_nav{
+        height:40px;
+        line-height:40px;
+        vertical-align:middle;
+        color:rgb(74,144,226);
+        text-align:left;
+        position:fixed
+    }
+    .user_center_left_container{
+        height:100%;
+        width:270px;
+        padding:0;
+        margin:0;
+        float:left;
+    }
+    .user_center_left_bar{
+        float:left;
+        position:fixed;
+        top:90px;
+        width:270px;
+        height:260px;
+        background-color:white;
+        box-shadow:0px 2px 2px 0px #CED1D9;
+        padding-left:20px;
+    }
+    .user_center_left_bar_title{
+        height:50px;
+        font-size:18px;
+        line-height:50px;
+        vertical-align:middle;
+        color:#5C5C5C;
+        text-align:left;
+        font-weight:500;
+    }
+    .user_center_left_bar_list{
+        padding:10px 0 0 0;
+        margin:0;
+        margin-left:-20px;
+    }
+    .user_center_left_bar_list li{
+        height:28px;
+        margin:0 0 10px 0;
+        line-height:28px;
+        vertical-algin:middle;
+        font-size:14px;
+        color:#4A4A4A;
+        padding-left:20px;
+        cursor:pointer;
+    }
+    .user_center_left_bar_list li:hover{
+        background-color:rgba(74, 144, 226, 0.1);
+        color:rgb(74, 144, 226);
+    }
+    .user_center_left_bar_list li:hover .list_square{
+        background-color:rgb(74, 144, 226);
+    } 
+    .list_square{
+        width:14px;
+        height:14px;
+        margin:0;
+        padding:0;
+        background-color:#D8D8D8;
+        margin-right:15px;
+        float:left;
+        margin-top:6px;
+    }
+    .user_center_left_bar_list span{
+        float:left;
+    }
+    .user_center_right_container{
+        width:885px;
+        height:710px;
+        margin-left:15px;
+        background-color:white;
+        float:left;
+        margin-top:40px;
+        box-shadow:0px 2px 2px 0px #CED1D9;
+        padding-left:35px;
+    }
+    .foot_img_0:hover img{
+        content:url('<%= asset_path "homepage/facebook_0.png" %>')
+    }
+    .foot_img_1:hover img{
+        content:url('<%= asset_path "homepage/twitter_0.png" %>')
+    }
+    .foot_img_2:hover img{
+        content:url('<%= asset_path "homepage/weibo_0.png" %>')
+    }
+    .foot_img_3:hover img{
+        content:url('<%= asset_path "homepage/wechat_0.png" %>')
+    }
+    .form_left_column{
+        width: 185px;
+        height:18px;
+        font-size:16px;
+        line-height:18px;
+        vertical-align:middle;
+        text-align:left;
+        float:left;
+        margin-top:20px;
+    }
+    .form_right_column_btn{
+        float:left;
+        height:30px;
+        line-height:30px;
+        vertical-align:middle;
+        width:250px;
+        margin-top:15px;
+        padding-left:0px;
+    }
+    .form_right_column{
+        float:left;
+        height:30px;
+        line-height:30px;
+        vertical-align:middle;
+        width:250px;
+        border:1px solid #E6E7EB;
+        margin-top:15px;
+        padding-left:15px;
+    }
+    .user_center_form_up{
+        padding:0;
+        margin:0;
+        height:auto;
+        width:485px;
+/*        background-color:red;*/
+        float:left;
+    }
+    .user_center_form_below{
+        padding:0;
+        margin:0;
+        height:auto;
+        width:625px;
+        float:left;
+    }
+    .form_user_photo{
+        float:left;
+        width:140px;
+        height:140px;
+        border:1px dashed #E6E7EB;
+        margin-top:15px;
+        padding-top: 26px;
+        -moz-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+        -webkit-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+        -o-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+        -ms-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+        transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+        cursor:pointer;
+    }
+    .form_user_photo div:nth-child(2){
+        margin-top:15px;
+        color:#CED1D9;
+        font-size:12px;
+        width:100%;
+        -moz-transition: color 0.2s ease-in-out, color 0.2s ease-in-out;
+        -webkit-transition: color 0.2s ease-in-out, color 0.2s ease-in-out;
+        -o-transition: color 0.2s ease-in-out, color 0.2s ease-in-out;
+        -ms-transition: color 0.2s ease-in-out, color 0.2s ease-in-out;
+        transition: color 0.2s ease-in-out, color 0.2s ease-in-out;
+    }
+    .form_user_photo div:nth-child(3){
+        color:#6AB96C;
+        font-size:12px;
+        width:100%;
+        -moz-transition: color 0.2s ease-in-out, color 0.2s ease-in-out;
+        -webkit-transition: color 0.2s ease-in-out, color 0.2s ease-in-out;
+        -o-transition: color 0.2s ease-in-out, color 0.2s ease-in-out;
+        -ms-transition: color 0.2s ease-in-out, color 0.2s ease-in-out;
+        transition: color 0.2s ease-in-out, color 0.2s ease-in-out;
+    }
+    .form_user_photo:hover{
+        background-color:#CED1D9;
+    }
+    .form_user_photo:hover .user_photo_text_0{
+        color:rgb(74, 144, 226);
+    }
+    .form_user_photo:hover .user_photo_text_1{
+        color:#6AB96C;
+    }
+
+    .user_save_btn{
+        width:120px;
+        height:30px;
+        background-color:rgb(74, 144, 226);
+        -moz-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+        -webkit-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+        -o-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+        -ms-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+        transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+        cursor:pointer;
+        text-align:center;
+        line-height:27px;
+        vertical-align:middle;
+        color:white;
+        font-weight:500;
+        font-size:18px;
+        float:left;
+        margin-right:10px;
+        outline: 0;
+    }
+    .user_cancel_btn{
+        width:120px;
+        height:30px;
+        background-color:#E6E7EB;
+        -moz-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+        -webkit-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+        -o-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+        -ms-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+        transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+        cursor:pointer;
+        text-align:center;
+        line-height:30px;
+        vertical-align:middle;
+        color:#4A4A4A;
+        font-weight:500;
+        font-size:18px;
+        float:left;
+    }
+    .user_center_active .list_square{
+        background-color:rgb(74, 144, 226) !important;
+    }
+    .user_center_active{
+        color:rgb(74, 144, 226) !important;
+    }
+
+  .car_clickable{
+    width:100%;
+    margin: 0px;
+    padding: 0px;
+    height: 400px;
+    background-color: white;
+    float: left;
+    border-radius:15px;
+    z-index: 99;
+  }
+  .car_clickable_img{
+    padding:17px;
+    height: 280px;
+  }
+  .car_clickable_img-img{
+    width:100%;
+    height:100%;
+    border-radius: 0 !important;
+    background-size: cover;
+    background-position:center center;
+    background-repeat: no-repeat;
+  }
+  .car_img_list_content{
+    margin-top: 30px;
+    height:auto;
+  }
+  .car_clickable_img_detail{
+    height: auto;
+    padding-left:17px;
+    padding-right:17px;
+    
+  }
+    .address_list_tag{
+        color: white;
+        font-weight: lighter;
+        font-size: 15px;
+    }
+    .ribbon-green {
+        font: bold 12px Sans-Serif;
+        color: white;
+        text-align: center;
+        -webkit-transform: rotate(45deg);
+        -moz-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        -o-transform: rotate(45deg);
+        position: relative;
+        padding: 12px 0;
+        left: 33px;
+        top: 21px;
+        width: 150px;
+        background-color: #8bc363;
+    }
+    .ribbon-wrapper-green{
+        width: 150px;
+        height: 150px;
+        overflow: hidden;
+        position: absolute;
+        top: -3px;
+        right: -3px;
+    }
+
+  .car_clickable_img_detail div:nth-child(1){
+    margin-top: 15px;
+    height:40px;
+    line-height: 20px;
+    vertical-align: middle;
+    text-align: left;
+    color:rgba(62,62,62,0.9);
+    padding:0;
+    font-weight: 500;
+    font-size: 19px;
+  }
+  .car_clickable_img_detail div:nth-child(2){
+    margin-top: 10px;
+    height:20px;
+    line-height: 30px;
+    vertical-align: middle;
+    text-align: center;
+    padding:0;
+    color:#4A90E2;
+    font-weight: 500;
+    font-size: 23px;
+  }
+  .car_clickable_img_detail div:nth-child(3){
+    height:20px;
+    line-height: 20px;
+    vertical-align: middle;
+    text-align: left;
+    padding:0;
+    color:#4A4A4A;
+    font-weight: 200;
+    font-size: 15px;
+    padding-top:8px;
+  }
+  .car_clickable:hover{
+    border:1px solid rgba(100,100,100,0.7);
+  }
+
+  .car_clickable_outline{
+    min-width:350px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+.scroll-to-top{
+    bottom:30px !important;
+}
+
+/* nav bar css */
+.all-to-none{
+      margin: 0;
+      padding: 0;
+  }
+  header{
+      width: 100%;
+      position: fixed;
+      top:0;
+      height: 50px;
+      line-height: 50px;
+      vertical-align: middle;
+      text-align: center;
+      background: transparent;
+      z-index: 999;
+      transition: padding 0.5s ease, background 0.5s ease, box-shadow 0.5s ease, border 0.5s ease;
+  }
+  .nav_title{
+      color: rgb(74,144,226);
+      font-size: 18px;
+      font-weight:800;
+  }
+
+  .nav_item{
+    height:50px;
+    line-height: 50px;
+    vertical-align: middle;
+    color:white;
+    font-size: 13px; 
+  }
+  .nav_item > a > div{
+    opacity: 0.9;
+    color:white;
+
+  }
+  .nav_item > div > a:hover{
+  	opacity: 1;
+  	text-decoration: none;
+  }
+  .nav_item > a > div:hover{
+    opacity: 1;
+  }
+  .nav_item > a > div{
+    cursor: pointer;
+    color: rgb(74,144,226);
+    font-weight:500;
+  }
+  .signUpBtn{
+    background-color: rgb(74,144,226);
+    height:24px;
+    line-height: 25px;
+    vertical-align: middle;
+    text-align: center;
+    position: relative;
+    top:13px;
+    border-radius: 12px;
+    color:white;
+    opacity: 0.9;
+    cursor: pointer;
+    transition: padding 0.5s ease, background 0.5s ease, box-shadow 0.5s ease, border 0.5s ease;
+    max-width:120px;
+  }
+  .signUpBtn > s:pan > a{
+	  color:white;
+	  opacity: 0.9;
+  }
+  .signUpBtn:hover{
+	  opacity: 1;
+	  
+  }
+  .signUpBtn:hover a{
+	  text-decoration: none;
+  }
+  .nav_item > div > a{
+	height:80px;
+    line-height: 80px;
+    vertical-align: middle;
+    color:white;
+    font-size: 13px;
+    opacity: 0.9;
+  }
+  .signInBtn{
+	  cursor: pointer;
+      color: rgb(74,144,226);
+      font-weight:500;
+  }
+  .signInBox{
+	  position: relative;
+	  top:0px !important;
+	  width: 600px;
+	  height: 600px;
+      opacity:0.95;
+  }
+  .signInBox_title{
+	  font-size: 50px;
+	  font-weight: 400;
+	  height:250px;
+	  line-height: 250px;
+	  vertical-align: middle;
+	  text-align: center;
+	  color:rgb(101,111,134);
+  }
+  .signInBox_email{
+	  height:50px;
+	  line-height: 50px;
+	  color:rgb(101,111,134);
+	  
+  }
+  .signInBox_email div:nth-child(1){
+	  color:rgb(101,111,134);
+	  font-size: 23px;
+  }
+  .signInBox_password{
+	  height:50px;
+	  line-height: 50px;
+	  color:rgb(101,111,134);
+  }
+  .signInBox_password div:nth-child(1){
+	  color:rgb(101,111,134);
+	  font-size: 23px;
+  }
+    .signInBox_email > input{
+        height:40px;
+        line-height:40px;
+        vertical-align:middle;
+        border-radius:3px;
+        border:1px solid #bdbdbd;
+        position:relative;
+        top:4px;
+    }
+    .signInBox_password > input{
+        height:40px;
+        line-height:40px;
+        vertical-align:middle;
+        border-radius:3px;
+        border:1px solid #bdbdbd;
+        position:relative;
+        top:4px;
+    }
+    #signInModal{
+        cursor:default !important;
+    }
+    .sign_in_button_container{
+        padding-left:220px;
+        padding-right:220px;
+        margin-top:80px;
+    }
+    .sign_in_button{
+        background-color:rgb(74,144,226);
+        border-radius:5px;
+        height:34px;
+        line-height:34px;
+        vertical-align:middle;
+        text-align:center;
+        color:white;
+        cursor:pointer;
+        opacity:0.9;
+    }
+    .sign_in_button:hover{
+        opacity:1;
+    }
+    .account_switch{
+        font-size:14px;
+        font-weight:500;
+        color:#6C788E;
+        margin-top:4px;
+    }
+    .account_switch span{
+        color:#5AA3E8;
+        cursor:pointer;
+    }
+    .account_ul{
+        margin:0;
+        padding:0;
+    }
+    .nav_user_img{
+        position:absolute;
+        width:25px;
+        height:25px;
+        border-radius:12.5px;
+        background-color:#CED1D9;
+        margin-top:12.5px; 
+        margin-left:-30px;
+    }
+    .nav_expert_img{
+        position:absolute;
+        width:25px;
+        height:25px;
+        border-radius:12.5px;
+        margin-top:12.5px; 
+        margin-left:-30px;
+        background-size:cover;
+        background-position:center center;
+    }
+    .account_ul:hover .account_ul_list{
+        display:block;
+    }
+    .account_ul_list{
+        display:none;
+        width:130px;
+        text-align:left;
+        padding-left:15px;
+        padding-top:15px;
+        background-color:white;
+        border:1px solid #CED1D9;
+        color: #7B808C;
+        font-size:12px;
+        height:150px;
+        border-radius:5px;
+    }
+    .account_ul_list li{
+        line-height:23px;
+        vertical-align:middle;
+        height:23px;
+        margin-left:-15px;
+        padding-left:15px;
+        margin-bottom:2px;
+    }
+    .account_ul_list li:hover{
+        color:#4A90E2;
+        background-color:rgba(74, 144, 226, 0.1);
+    }
+    .fb-share-button{
+        top:-10px;
+    }
+
+    .menu-opener, .menu-opener:hover, .menu-opener.active, .menu-opener-inner, .menu-opener-inner::before, .menu-opener-inner::after, .menu, .menu.active {
+      -webkit-transition: 150ms all;
+      transition: 150ms all;
+    }
+    .toggle_menu_btn{
+        width:25px;
+        height:25px;
+        line-height:25px;
+        vertical-align: middle;
+        text-align: center;
+        padding-top:20px;
+    }
+    .menu-opener {
+      margin:0;
+      padding:0;
+      cursor: pointer;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      width:30px;
+      height:30px;
+    }
+    .toggle_menu_list{
+        width:133.33%;
+        margin-top: 17px;
+        padding:0;
+        background-color: rgba(74, 144, 226, 0.5);
+        margin-left: -33.33%;
+        text-align: left;
+    }
+    .toggle_menu_list .nav{
+        margin:0;
+        color:white;
+    }
+    .navbar-header{
+        padding-top: 12px;
+    }
+    .menu-opener-inner {
+      background: white;
+      height: .5rem;
+/*
+      margin-left: .75rem;
+      margin-top: 1.75rem;
+*/
+      width: 2.5rem;
+      margin-top: -10px;
+    }
+    .menu-opener-inner::before, .menu-opener-inner::after {
+      background: white;
+      content: '';
+      display: block;
+      height: .5rem;
+      width: 2.5rem;
+    }
+.menu-opener-inner_white, .menu-opener-inner_white::before, .menu-opener-inner_white::after{
+    background: white !important;
+}
+    .menu-opener-inner::before, .menu-opener-inner_white::before {
+      -webkit-transform: translateY(-0.75rem);
+      -ms-transform: translateY(-0.75rem);
+      transform: translateY(-0.75rem);
+    }
+    .menu-opener-inner::after, .menu-opener-inner_white::after {
+      -webkit-transform: translateY(0.25rem);
+      -ms-transform: translateY(0.25rem);
+      transform: translateY(0.25rem);
+    }
+    .menu-opener-inner.active, .menu-opener-inner_white.active {
+      background: transparent !important;
+    }
+    .menu-opener-inner.active::before, .menu-opener-inner_white.active::before {
+      -webkit-transform: translateY(0rem) rotate(-45deg);
+      -ms-transform: translateY(0rem) rotate(-45deg);
+      transform: translateY(0rem) rotate(-45deg);
+    }
+    .menu-opener-inner.active::after, .menu-opener-inner_white.active::after {
+      -webkit-transform: translateY(-0.5rem) translateX(0rem) rotate(45deg);
+      -ms-transform: translateY(-0.5rem) translateX(0rem) rotate(45deg);
+      transform: translateY(-0.5rem) translateX(0rem) rotate(45deg);
+    }
+
+    .homepage_main_btn_box_s{
+        width:100%;
+        height:50px;
+    }
+.user_list_li li{
+    padding-left: 15px;
+    height:40px;
+    line-height: 40px;
+    vertical-align: middle;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

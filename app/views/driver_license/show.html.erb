@@ -1,0 +1,163 @@
+<style>
+    .signout a{
+        color:rgb(74,144,226);
+    }
+    .signUpBtn > span > a{
+        color:rgb(74,144,226);
+    }
+    header{
+        background-color: rgb(74,144,226);
+    }
+    ul{
+        list-style-type: none;
+    }
+    .nav_title, .nav_item > a > div{
+        color:white;
+    }
+    .signInBtn{
+        color:white;
+    }
+    .signUpBtn{
+        color:rgb(74,144,226);
+        background-color:white;
+    }
+    .driver_license_navbar{
+        height:70px;
+        margin-top:50px;
+        width:100%;
+        line-height:70px;
+        vertical-align:middle;
+        border-bottom:2px solid #E6E7EB;
+        font-size:14px;
+        color:#4A4A4A;
+        text-align:left;
+        padding-left:15px;
+    }
+    .question_container{
+        height:auto;
+        width:100%;
+        text-align:left;
+        padding-left:5%;
+        padding-right:5%;
+        float:left;
+        margin-bottom:10px;
+/*        background-color:red;*/
+        
+    }
+    .driver_license_navbar span:hover{
+        color:rgb(74, 144, 226);
+    }
+    .driver_license_question_container{
+        box-shadow:0px 2px 4px 0px #A0A8BD;
+    }
+    .test_title_container{
+        width:100%;
+        min-height:148px;
+        height:auto;
+        padding-left:5%;
+        padding-right:5%;
+        float:left;
+    }
+    .test_title_container_content_main_title{
+        font-size:24px;
+        color:#3A3D42;
+        min-height:87px;
+        height:auto;
+        padding-top:25px;
+        line-height:30px;
+        vertical-align:middle;
+        
+    }
+    .test_title_container_content_sub_title{
+        min-height:20px;
+        vertical-align:middle;
+        text-align:center;
+        
+    }
+    .question_content{
+        font-size:18px;
+        color:#3A3D42;
+        font-weight:500;
+    }
+    .question_list_item{
+        margin-bottom:10px;
+    }
+</style>
+
+<div class="col-xs-12" align="center" style="padding-left:5%; padding-right:5%;padding-bottom:15px;">
+    <div class="col-xs-12 all-to-none driver_license_question_container">
+        <div class="driver_license_navbar">
+    <!--        Help Center > For Buyer > California Driver License Permit Practice Test-->
+            <a href="/">
+                <span>
+                    Home  
+                </span>
+                >
+            </a>
+            <a href="/faq/">
+                <span>
+                    Help Center 
+                </span>
+                >
+            </a>
+            <a href="/driver_license/1">
+                <span>
+                    Practice Test
+                </span>
+            </a>
+        </div>
+        <div class="test_title_container">
+            <div class="test_title_container_content" align="center">
+                <div class="test_title_container_content_main_title">
+                    California Driver License Permit Practice Test
+                </div>
+                <div class="col-xs-12 test_title_container_content_sub_title">
+                    There are 48 questions. There will be one correct answer. There is no time limit. You will be able to see answers at the end of the test.
+                </div>
+                <div class="col-xs-12 test_title_container_content_sub_title" style="color:#4A90E2; border-bottom:1px solid #4A90E2;line-height:30px;">
+                    48 correct answers to pass (6 mistakes allowed)
+                </div>
+            </div>
+        </div>
+        <div class="question_container">
+            
+            <% @questions.each_with_index do |question, index| %>
+                <div class="question_list">
+                        <div class="question_content">
+                            <%= (index + 1).to_s + '. ' +question["question"] %><br>
+                        </div>
+                       <% if question["image"] %>
+                           <img src="<%= question['image'] %>"><br>
+                       <% end %>
+                       <% question["choices"].each do |choice| %>
+                            <div class="question_list_item">
+                               <input type="radio" value="<%= choice['value'] %>" name="'q<%= index %>'" style="margin-right:5px;"/>
+                               <%= choice["text"].html_safe %><br>
+                           </div>
+                        <% end %>
+                </div>
+            <% end %>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function(){
+      $(window).scroll(function(){
+          var scrollTop = $(window).scrollTop();
+          if(scrollTop != 0) {
+            $('header').css('background','rgba(74,144,226,0.8)');
+            $('.nav_title, .nav_item > a > div, .signInBtn').css('color','white');  
+            $('.signUpBtn').css('background-color','white');
+            $('.signUpBtn, .signout a').css('color','rgba(74,144,226,1)');
+          }
+          else {
+            $('header').css('background','rgba(74,144,226,0.8)');
+            $('.nav_title, .nav_item > a > div, .signInBtn').css('color','white');  
+            $('.signUpBtn').css('background-color','white');
+            $('.signUpBtn, .signout a').css('color','rgba(74,144,226,1)');
+          }
+      });
+    
+    })
+</script>

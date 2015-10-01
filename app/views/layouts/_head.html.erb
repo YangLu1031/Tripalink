@@ -1,0 +1,131 @@
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8">
+  <meta content="IE=edge" http-equiv="X-UA-Compatible">
+  <title><%= full_title(yield(:title)) %></title>
+  <meta content="Tripalink, Tripallink, Automobile,sell,buy auto,sale auto, private car,Trapalink, trade,p2p,o2o,卖车,买车,路行南加,used car, preowned car,二手车,洛杉矶,南加州,Los Angeles,Southern California" name="keywords">
+  <meta name="description" content="Tripalink is a startup service platform that helps private-party buy and sell used cars." >
+  <link rel="shortcut icon" href="<%= asset_path 'homepage/Tripalink_icon.png' %>" />
+  <meta content="tripalink" name="author">
+  <!-- Mobile Metas -->
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta name="google-site-verification" content="d0tMrSPCL5sCRn3OcVjDfQZeRVHd2_VpsDxhqX__OV8" />
+
+  <!-- Web Fonts -->
+  <%= stylesheet_link_tag "http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800%7CShadows+Into+Light" %>
+  <!-- Vendor CSS -->
+  <%= stylesheet_link_tag "vendor/bootstrap/bootstrap.css" %>
+  <%= stylesheet_link_tag "vendor/fontawesome/css/font-awesome.css" %>
+  <%= stylesheet_link_tag "vendor/owlcarousel/owl.carousel.min.css" %>
+  <%= stylesheet_link_tag "vendor/owlcarousel/owl.theme.default.min.css" %>
+  <%= stylesheet_link_tag "vendor/magnific-popup/magnific-popup.css" %>
+  <!-- Theme CSS -->
+  <%= stylesheet_link_tag "css/theme.css" %>
+  <%= stylesheet_link_tag "css/theme-elements.css" %>
+  <%= stylesheet_link_tag "css/theme-blog.css" %>
+  <%= stylesheet_link_tag "css/theme-shop.css" %>
+  <%= stylesheet_link_tag "css/theme-animate.css" %>
+  <%= stylesheet_link_tag "css/swiper.css" %>
+  <link rel="stylesheet" href="https://s3.amazonaws.com/lxnjstatic/assets/stylesheets/flexslider.css" type="text/css" media="screen" />
+  <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+  <!-- Current Page CSS -->
+  <%= stylesheet_link_tag "vendor/rs-plugin/css/settings.css" %>
+  <%= stylesheet_link_tag "vendor/circle-flip-slideshow/css/component.css" %>
+  <!-- Skin CSS -->
+  <%= stylesheet_link_tag "css/skins/default.css" %>
+  <!-- Theme Custom CSS -->
+  <%= stylesheet_link_tag "css/custom.css" %>
+
+  <!-- Head Libs -->
+  <%= javascript_include_tag "vendor/modernizr/modernizr.js"  %>
+  <!-- swiperJS -->
+   
+
+  <!--[if IE]>
+    <link rel="stylesheet" href="css/ie.css">
+  <![endif]-->
+
+  <!--[if lte IE 8]>
+    <script src="vendor/respond/respond.js"></script>
+    <script src="vendor/excanvas/excanvas.js"></script>
+  <![endif]-->
+
+
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <%= javascript_include_tag "http://maps.google.com/maps/api/js?sensor=false" %>
+  <%= javascript_include_tag "jquery.ui.addresspicker.js" %>
+    
+</head>
+<style>
+
+::-webkit-input-placeholder {
+  color: #000;
+  opacity: 0.5;
+  -webkit-transition: opacity 0.35s ease-in-out;
+  transition: opacity 0.35s ease-in-out;
+}
+:-moz-placeholder {
+  color: #000;
+  opacity: 0.5;
+  -moz-transition: opacity 0.35s ease-in-out;
+  transition: opacity 0.35s ease-in-out;
+}
+::-moz-placeholder {
+  color: #000;
+  opacity: 0.5;
+  -moz-transition: opacity 0.35s ease-in-out;
+  transition: opacity 0.35s ease-in-out;
+}
+:-ms-input-placeholder {  
+  color: #000;
+  opacity: 0.5;
+  -ms-transition: opacity 0.35s ease-in-out;
+  transition: opacity 0.35s ease-in-out;
+}
+
+/* Place Holder CSS for Focus */
+:hover::-webkit-input-placeholder {
+  opacity: 0.75;
+  -webkit-transition: opacity 0.35s ease-in-out;
+  transition: opacity 0.35s ease-in-out;
+}
+:hover:-moz-placeholder {
+  opacity: 0.75;
+  -moz-transition: opacity 0.35s ease-in-out;
+  transition: opacity 0.35s ease-in-out;
+}
+:hover::-moz-placeholder {
+  opacity: 0.75;
+  -moz-transition: opacity 0.35s ease-in-out;
+  transition: opacity 0.35s ease-in-out;
+}
+:hover:-ms-input-placeholder {  
+  opacity: 0.75;
+  -ms-transition: opacity 0.35s ease-in-out;
+  transition: opacity 0.35s ease-in-out;
+}
+
+/* Place Holder CSS for Focus */
+:focus::-webkit-input-placeholder {
+  opacity: 0;
+  -webkit-transition: opacity 0.35s ease-in-out;
+  transition: opacity 0.35s ease-in-out;
+}
+:focus:-moz-placeholder {
+  opacity: 0;
+  -moz-transition: opacity 0.35s ease-in-out;
+  transition: opacity 0.35s ease-in-out;
+}
+:focus::-moz-placeholder {
+  opacity: 0;
+  -moz-transition: opacity 0.35s ease-in-out;
+  transition: opacity 0.35s ease-in-out;
+}
+:focus:-ms-input-placeholder {  
+  opacity: 0;
+  -ms-transition: opacity 0.35s ease-in-out;
+  transition: opacity 0.35s ease-in-out;
+}
+</style>

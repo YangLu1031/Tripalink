@@ -1,0 +1,78 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <hr class="tall">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+      <div class="featured-box featured-box-primary align-left mt-xlg" style="">
+        <div class="box-content">
+
+          <div class="row">
+            <div class="col-md-6">
+              <h4 class="heading-primary text-uppercase mb-md">Register An Account</h4>
+            </div>
+            <% if resource_name == :user %>
+              <div class="col-md-6 align-right">
+                or <%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %>
+              </div>
+            <% end %>
+          </div>
+
+          <%= form_for(resource, url: registration_path(resource)) do |f| %>
+            <%= devise_error_messages! %>
+            <div class="row">
+              <div class="form-group">
+                <div class="col-md-12">
+                  <%= f.label :email %> <br>
+                  <%= f.email_field :email, autofocus: true, class: "form-control input-lg" %>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group">
+                <div class="col-md-6">
+                  <%= f.label :name %> <br>
+                  <%= f.text_field :name, class: "form-control input-lg" %>
+                </div>
+
+                <div class="col-md-6">
+                  <%= f.label :phone %> <br>
+                  <%= f.text_field :phone, class: "form-control input-lg" %>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="form-group">
+                <div class="col-md-12">
+                  <%= f.label :password %>
+                  <% if @minimum_password_length %>
+                    <em>(<%= @minimum_password_length %> characters minimum)</em>
+                  <% end %>
+                  <br>
+                  <%= f.password_field :password, autocomplete: "off", class: "form-control input-lg" %>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="form-group">
+                <div class="col-md-12">
+                  <%= f.label :password_confirmation %> <br>
+                  <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control input-lg" %>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <%= f.submit "Sign up", class: "btn btn-primary mb-xl col-md-8 col-md-offset-2" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

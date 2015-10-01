@@ -1,0 +1,33 @@
+<div class="timeline-badge success"><i class="fa fa-bars"></i></div>
+<div class="timeline-panel">
+  <i class="glyphicon glyphicon-chevron-down timeline-panel-btn"></i>
+  <div class="timeline-heading">
+    <h4 class="timeline-title">Inspection Checklist</h4>
+  </div>
+  <div class="timeline-body">
+    <div class="tabbable-panel">
+      <div class="tabbable-line">
+        <% max_num_tabs = 6 %>
+        <ul class="nav nav-tabs ">
+          <% @checklistdefinition.map{ |section| section["section"] }.each_with_index do |val, idx| %>
+            <% if idx < max_num_tabs %>
+              <li><%= link_to val, "#tabs-#{idx + 1}", data: { toggle: "tab" }, class: "tab" %></li>
+            <% end %>
+          <% end %>
+        </ul>
+        <ul class="nav nav-tabs ">
+          <% @checklistdefinition.map{ |section| section["section"] }.each_with_index do |val, idx| %>
+            <% if idx >= max_num_tabs %>
+              <li><%= link_to val, "#tabs-#{idx + 1}", data: { toggle: "tab" }, class: "tab" %></li>
+            <% end %>
+          <% end %>
+        </ul>
+        <div class="tab-content">
+          <% @checklistdefinition.each_with_index do |section, section_id| %>
+            <%= render partial: 'checklist_picker', locals: { section_id: section_id, section: section } %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

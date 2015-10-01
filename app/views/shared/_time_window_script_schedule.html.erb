@@ -1,0 +1,33 @@
+<script>
+
+    var ready = function() {
+        $(".highlighter").click(function (evt) {
+            evt.preventDefault();
+            var apt_id = $(evt.target).attr("data-appointment-id");
+            $(".time-window-btn[apt_ids*=" + apt_id + "]").toggleClass("appointment_outline");
+        });
+        $(".accept_link").click(function (evt) {
+            evt.preventDefault();
+            var apt_id = $(evt.target).attr("data-appointment-id");
+            var tw_id = $(evt.target).attr("data-time-window-id");
+            $("#myModal #appointment_id").val(apt_id);
+            $("#myModal #time_window_id").val(tw_id);
+        });
+    };
+//    $(document).on("page:change", function() {
+//      ready();
+//    });
+    $(window).ready(ready);
+    $(document).on('page:load', ready);
+    $(document).ready(function() {
+        $('.time-window-btn').click(function (evt) {
+            $.each($(evt.target).attr("apt_ids").split(" "),
+                    function(index, obj) {
+                        if (!isNaN(parseInt(obj))) {
+                            $("table.table tr[apt_id=" + obj + "]").toggleClass("appointment_outline");
+                        }
+                    }
+            );
+        });
+    });
+</script>

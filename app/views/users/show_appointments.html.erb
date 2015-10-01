@@ -1,0 +1,677 @@
+<style>
+    body{
+        overflow:auto;
+        background-color:#F9F9FB;
+    }
+    .home_page_footer{
+        background-color:transparent;
+    }
+    header{
+        background-color: rgb(74,144,226);
+        min-width:1280px;
+    }
+    ul{
+        list-style-type: none;
+    }
+    .nav_title, .nav_item > a > div{
+        color:white;
+    }
+    .signInBtn{
+        color:white;
+    }
+    .signUpBtn{
+        color:rgb(74,144,226);
+        background-color:white;
+    }
+    .signUpBtn > span > a {
+        color: rgb(74,144,226);
+    }
+    .form_user_photo:hover img{
+        content:url("<%= asset_path 'user_center/uploader_0.png' %>");
+    }
+    
+    .user_canlender_container{
+        margin:0;
+        padding:0;
+        width:823px;
+        height:495px;
+        background-color:red;
+        margin-left:-35px;
+        background-color:transparent;
+    }
+    .user_canlender_title div:nth-child(1){
+        font-size:20px;
+        color:#4a4a4a;
+        text-align:left;
+        height:40px;
+        line-height:40px;
+        vertical-align:middle;
+        margin-top:3px;
+    }
+    .user_canlender_title div:nth-child(2){
+        color:#4a4a4a;
+        text-align:right;
+        height:40px;
+        line-height:40px;
+        vertical-align:middle;
+        margin-top:13px;
+    }
+    .change_month{
+        width:30px !important;
+        height:20px;
+    }
+    .this_month{
+        width:50px !important;
+        height:20px;
+        font-size:12px;
+    }
+    .month_btn{
+        padding:0;
+        line-height:20px;
+        vertical-align:middle;
+    }
+    .user_canlender_container .fa{
+        font-size:17px;
+        position:relative;
+        top:-1px;
+    }
+    .canlender_cell{
+        width:117px;
+        height:80px;
+        float:left;
+        margin:0;
+        background-color:transparent;
+        border:1px solid #bdbdbd;
+        border-right:0;
+        border-bottom:0;
+        padding:5px;
+    }
+    .canlender_cell:hover{
+        background-color:rgba(74, 144, 226, 0.2);
+        color:rgb(74, 144, 226);
+    }
+    .canlender_cell_day{
+        width:117px;
+        float:left;
+        text-align:right; 
+        padding:5px;
+    }
+    .canlender_cell_06, .canlender_cell_16, .canlender_cell_26, .canlender_cell_36, .canlender_cell_46, .canlender_cell_56{
+        border-right:1px solid #bdbdbd;
+    }
+    .canlender_cell_50, .canlender_cell_51, .canlender_cell_52, .canlender_cell_53, .canlender_cell_54, .canlender_cell_55, .canlender_cell_56{
+        border-bottom:1px solid #bdbdbd;
+    }
+    .holiday_day{
+        color: #949494;
+    }
+    .canlender_cell_00, .canlender_cell_10, .canlender_cell_20, .canlender_cell_30, .canlender_cell_40, .canlender_cell_50{
+        background-color:rgb(245,245,245);
+        color:#949494;
+    }
+    .canlender_cell_06, .canlender_cell_16, .canlender_cell_26, .canlender_cell_36, .canlender_cell_46, .canlender_cell_56{
+        background-color:rgb(245,245,245);
+        color:#949494;
+    }
+    .event_container{
+        padding-top:5px;
+        padding-left:5px;
+        
+    }
+    .event_container_0 {
+        color: #4A90E2;
+        
+    }
+    .event_container_1 {
+        color: #5FC782;
+        
+    }
+    .event_container_2 {
+        color: #F8E71C;
+        
+    }
+    .event_container_box{
+        width:220px;
+        height:250px;
+        border:1px solid #e6e7eb;
+        position:relative;
+        top:-125px;
+        left:12px;
+        display:none;
+        z-index:99;
+        background-color:white;
+        
+    }
+    .event_list{
+        padding-left:20px;
+        margin-top:30px;
+    }
+    .event_container_0_box_container:hover .event_container_box{
+        display:block;
+    }
+    .event_container_0_box_container{
+        width:20px;
+        height:20px;
+        margin:0;
+        padding:0;
+        float:left;
+    }
+    .event_container_1_box_container{
+        width:20px;
+        height:20px;
+        margin:0;
+        padding:0;
+        float:left;
+    }
+    .event_container_2_box_container{
+        width:20px;
+        height:20px;
+        margin:0;
+        padding:0;
+        float:left;
+    }
+    .event_container_1_box_container:hover .event_container_box{
+        display:block;
+    }
+    .event_container_2_box_container:hover .event_container_box{
+        display:block;
+    }
+    .event_title{
+        height:27px;
+        line-height:12px;
+        vertical-align:middle;
+        text-align:left;
+        color:#141C43;
+        font-size:12px;
+        padding-top:11px; 
+        padding-left:15px;
+    }
+    .event_box_left{
+        width:55px;
+        text-align:left;
+        line-height:14px;
+        vertical-align:middle;
+        font-size:12px;
+        color:#4A4A4A;
+        float:left;
+        color:rgb(74, 144, 226);
+    }
+    .event_box_right{
+        width:140px;
+        padding-left:5px;
+        min-height:1px;
+        text-align:left;
+        line-height:14px;
+        vertical-align:middle;
+        font-size:12px;
+        color:#4A4A4A;
+        float:left;
+        
+    }
+    .event_container_box li{
+        margin-bottom:10px;
+        min-height:35px;
+        width:100%;
+    }
+</style>
+<div class="col-xs-12" align="center">
+    <div class="user_center_container">
+        <div class="user_center_left_container">
+            <div class='user_center_nav'>
+                <a href="/">
+                    <span>Home</span>
+                </a>
+                &nbsp;>&nbsp;
+                <span>
+                    User Center
+                </span>
+            </div>
+            <div class="user_center_left_bar">
+                <div class="user_center_left_bar_title">
+                    User Center
+                </div>
+                <div class="divider-line" style="margin-left:-20px;">
+                </div>
+                <ul class="user_center_left_bar_list">
+                    
+                    <a href="<%= buy_transactions_user_path current_user %>">
+                        <li>
+                            <div class="list_square">
+                            </div>
+                            <span>
+                                My Purchasing
+                            </span>
+                        </li>
+                    </a>
+
+
+                    <a href="<%= sell_transactions_user_path current_user %>">
+                        <li>
+                            <div class="list_square">
+                            </div>
+                            <span>
+                                My Selling
+                            </span>
+                        </li>
+                    </a>
+                    
+                    <a href="<%= appointments_user_path current_user %>">
+                        <li class="user_center_active">
+
+                                <div class="list_square">
+                                </div>
+                                <span>
+                                    My Appointment
+                                </span>
+
+                        </li>
+                    </a>
+                    
+                    <a href="<%= user_path current_user %>">
+                        <li>
+                            <div class="list_square">
+                            </div>
+                            <span>
+                                My Profile
+                            </span>
+                        </li>
+                    </a>
+                    
+                    <li style="cursor:not-allowed">
+                        <div class="list_square">
+                        </div>
+                        <span>
+                            My Wish List (Future)
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="user_center_right_container">
+            
+            <div class="user_center_left_bar_title">
+                My Appointment
+            </div>
+            <div class="divider-line" style="margin-left:-20px; z-index:99;">
+            </div>          
+            <div class='user_canlender_container'>
+                <div class='user_canlender_title'>
+                    <div class="col-xs-6" id="current_month_year">
+                        
+                    </div>
+                    <div class="col-xs-6" align="right">
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-default change_month month_btn" id="last_month_button">
+                                <i class="fa fa-angle-left"></i>
+                            </button>
+                            <button type="button" class="btn btn-default this_month month_btn" id="this_month_button">
+                                Today
+                            </button>
+                            <button type="button" class="btn btn-default change_month month_btn" id="next_month_button">
+                                <i class="fa fa-angle-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 all-to-none">
+                    <div class="canlender_cell_day holiday_day">
+                        Sun
+                    </div>
+                    <div class="canlender_cell_day">
+                        Mon
+                    </div>
+                    <div class="canlender_cell_day">
+                        Tue
+                    </div>
+                    <div class="canlender_cell_day">
+                        Wed
+                    </div>
+                    <div class="canlender_cell_day">
+                        Thu
+                    </div>
+                    <div class="canlender_cell_day">
+                        Fri
+                    </div>
+                    <div class="canlender_cell_day holiday_day">
+                        Sat
+                    </div>
+                </div>
+                <div class="col-xs-12 all-to-none">
+                    <% (0...6).step(1) do |week_column| %>
+                        <% (0...7).step(1) do |day_column| %>
+                            <div class="canlender_cell canlender_cell_<%= week_column %><%= day_column %>">
+                                <div class="col-xs-12 all-to-none" align="right">
+                                    <div class="col-xs-7 all-to-none event_container" align='left'>
+<!--
+                                        <ul class="all-to-none event_container_0_box_container">
+                                            <i class="fa fa-circle col-xs-4 all-to-none event_container_0"></i>
+                                            <li class="all-to-none event_container_box">
+                                                <div class="event_title">
+                                                    Test Drive
+                                                </div>
+                                                <div class="divider-line">
+                                                </div>
+                                                <ul class="all-to-none event_list">
+                                                    <li class="all-to-none">
+                                                        <div class="event_box_left">
+                                                            Date
+                                                        </div>
+                                                        <div class="event_box_right event_date">
+                                                            11am-12pm<br>
+                                                            Sep 8, 2015
+                                                        </div>
+                                                    </li>
+                                                    <li class="all-to-none">
+                                                        <div class="event_box_left">
+                                                            Address
+                                                        </div>
+                                                        <div class="event_box_right event_address">
+                                                            1189 w 36th st, apt 1 Los
+                                                        </div>
+                                                    </li>
+                                                    <li class="all-to-none">
+                                                        <div class="event_box_left">
+                                                            Car
+                                                        </div>
+                                                        <div class="event_box_right event_car">
+                                                            2013 audi a5
+                                                        </div>
+                                                    </li>
+                                                    <li class="all-to-none">
+                                                        <div class="event_box_left">
+                                                            Auto Genius
+                                                        </div>
+                                                        <div class="event_box_right event_expert">
+                                                            ricky
+                                                            3239009999
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+-->
+<!--
+                                        <ul><i class="fa fa-circle col-xs-4 all-to-none event_container_0"></i><ul>
+                                        <i class="fa fa-circle col-xs-4 all-to-none event_container_1"></i>
+                                        <i class="fa fa-circle col-xs-4 all-to-none event_container_2"></i>
+-->
+                                    </div>
+                                    <div class='col-xs-5 all-to-none day_number' align='right'>
+                                    </div>
+                                </div>
+                            </div>
+                        <% end %>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 home_page_footer all-to-none">
+          <div class="col-xs-12 all-to-none footer_upper">
+              <div class="footer_upper_left all-to-none">
+                 
+              </div>
+              <div class="footer_upper_middle all-to-none">
+                  <a href="/faq">
+                      <div class="col-xs-3 all-to-none" style="text-align:center;">
+                          FAQ
+                      </div>
+                  </a>
+                  <div class="col-xs-3 all-to-none" style="text-align:center;">
+                      About Us
+                  </div>
+                  <a href="/terms_policy">
+                      <div class="col-xs-3 all-to-none" style="text-align:center;">
+                          Terms & Policy
+                      </div>
+                  </a>
+                  <a href="mailto:tripalink.helpcenter@gmail.com">
+                      <div class="col-xs-3 all-to-none" style="text-align:center;">
+                          Contact Us
+                      </div>
+                  </a>
+              </div>
+              <div class="footer_upper_right all-to-none">
+                  <div style="max-width: 190px;">
+                     <a href="https://www.facebook.com/pages/Tripalink/1045740125437551">      
+                         <div class="col-xs-3 foot_img_0">
+                             <img src="<%= asset_path 'homepage/facebook.png' %>" width="40px" height="40px" />
+                         </div>
+                     </a>
+                     <a href="https://twitter.com/tripalink">
+                         <div class="col-xs-3 foot_img_1">
+                             <img src="<%= asset_path 'homepage/twitter.png' %>" width="40px" height="40px" />
+                         </div>
+                     </a>
+                     <div class="col-xs-3 foot_img_2" style="cursor:not-allowed">
+                         <img src="<%= asset_path 'homepage/weibo.png' %>" width="40px" height="40px" />
+                     </div>
+                     <div class="col-xs-3 foot_img_3" style="cursor:not-allowed">
+                         <img src="<%= asset_path 'homepage/wechat.png' %>" width="40px" height="40px" />
+                     </div>
+                  </div>
+              </div>
+              <div class="col-xs-12" align="center">
+                  <div class='footer_lower'>
+                      2015 Tripalink Corp. All Rights Reserved.
+                  </div>
+              </div>
+           </div>
+       </div>
+</div>
+<script>
+  $(function() {
+      $(window).scroll(function(){
+          var scrollTop = $(window).scrollTop();
+          if(scrollTop != 0) {
+            $('header').css('background','rgba(74,144,226,0.8)');
+            $('.nav_title, .nav_item > a > div, .signInBtn').css('color','white');  
+            $('.signUpBtn').css('background-color','white');
+            $('.signUpBtn, .signout a').css('color','rgba(74,144,226,1)');
+          }
+          else {
+            $('header').css('background','rgba(74,144,226,0.8)');
+            $('.nav_title, .nav_item > a > div, .signInBtn').css('color','white');  
+            $('.signUpBtn').css('background-color','white');
+            $('.signUpBtn, .signout a').css('color','rgba(74,144,226,1)');
+          }
+      });
+      
+      /*canlender table*/
+      var today          = new Date();
+      var year           = today.getFullYear();
+      var month          = today.getMonth();
+      var current_day    = today.getDay();
+      var monthNames     = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+      var monthNames_agg = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+      var current_monthNumber   = month + 1;
+      var current_monthName     = monthNames[month];
+      var current_monthName_agg = monthNames_agg[month];
+      var next_monthName_agg    = monthNames_agg[month + 1];
+      
+      var full_firstDay = new Date(year, month, 1);
+      var full_lastDay  = new Date(year, month + 1, 0);
+       
+      var firstDay_day  = full_firstDay.getDay();
+      var lastDay_day   = full_lastDay.getDay();
+      
+      var firstDay_date = full_firstDay.getDate();
+      var lastDay_date  = full_lastDay.getDate();
+      
+      var full_lastMonth_lastDay = new Date(year, month, 0);
+      var lastMonth_lastDay      = full_lastMonth_lastDay.getDate();
+      var full_nextMonth_firstDay = new Date(year, month + 1, 1);
+      var nextMonth_firstDay = full_nextMonth_firstDay.getDate();
+      console.log(next_monthName_agg);
+      
+      
+      var tmp       = 2;
+      var tmp_last  = lastMonth_lastDay;
+      var tmp_first = 2;
+      
+      var canlender_array = [];
+      for( var i = 0; i < 42; i ++ ){
+        canlender_array[i] = [];
+      }
+      
+      //put the first day of the current month in the week 0 row;
+      $('.canlender_cell_0' + firstDay_day + ' .day_number').html(current_monthName_agg + ' ' + firstDay_date);
+      $('#current_month_year').html(current_monthName + ' ' + year);
+      for(var i = 0; i < 6; i ++){
+        for(var j = 0; j < 7; j ++){
+            $('.canlender_cell_' + i + j + ' .day_number').attr('id', 'day_' + (7 * i + j));
+            $('.canlender_cell_' + i + j + ' .event_container').attr('id', 'event_' + (7 * i + j));
+//          $('.canlender_cell_' + i + j + ' .event_container_0').attr('id', 'event_' + (7 * i + j) + '0');
+//          $('.canlender_cell_' + i + j + ' .event_container_1').attr('id', 'event_' + (7 * i + j) + '1');
+//          $('.canlender_cell_' + i + j + ' .event_container_2').attr('id', 'event_' + (7 * i + j) + '2');
+        }
+      }
+      
+      for(var i = firstDay_day + 1; i < lastDay_date + firstDay_day; i ++){
+        $('#day_' + i).html(tmp);
+        tmp ++;
+      }
+      for(var i = firstDay_day - 1; i >= 0; i --){
+        $('#day_' + i).html(tmp_last);
+        $('#day_' + i).css('color', '#bdbdbd');
+        tmp_last --;  
+      }
+      $('#day_' + (lastDay_date + firstDay_day)).html(next_monthName_agg + ' ' + 1);
+      $('#day_' + (lastDay_date + firstDay_day)).css('color', '#bdbdbd');
+      for(var i = lastDay_date + firstDay_day + 1; i < 42; i ++){
+        $('#day_' + i).html(tmp_first);
+        $('#day_' + i).css('color', '#bdbdbd');
+        tmp_first ++;
+      }
+      
+      //ajax code starts
+      var current_url = window.location.href;
+      var appointment_year = [];
+      var appointment_month = [];
+      var appointment_day = [];
+      var appointment_number = [];
+      var appointment_full_date = [];
+      var appointment_type = [];
+      var appointment_hour = [];
+      var appointment_type_title = ['Sell Request', 'Test Drive', 'Pending schedule'];
+      current_url = current_url.substring(0, current_url.indexOf('appointment'));
+//      var html_start = '<ul class="all-to-none"><i class="fa fa-circle col-xs-4 all-to-none event_container_';
+//      var html_end = '"></i></ul>';
+      var html = '';
+      console.log(current_url);
+      $.ajax({
+            url:current_url + 'appointment_list?today=' + year + '-' + current_monthNumber + '-' + current_day,
+            type: 'get',
+            dataType: 'json',
+            success: function(json){
+                console.log(json);
+                appointment_number = json.length;
+                for(var i = 0; i < appointment_number; i ++){
+                    html = '';
+                    appointment_full_date[i] = json[i]['date'];
+                    appointment_day[i]   = appointment_full_date[i].slice(8, 10);
+                    appointment_month[i] = appointment_full_date[i].slice(5, 7);
+                    appointment_year[i]  = appointment_full_date[i].slice(0, 4);
+                    appointment_type[i]  = json[i]['appointment_type'];
+                    appointment_hour[i]  = json[i]['hour'];
+                    if(Number(appointment_hour[i]) > 12){
+                        appointment_hour[i] -= 12;
+                    }
+                    html += '<ul class="all-to-none event_container_' +  appointment_type[i] + '_box_container">';
+                    html += '<i class="fa fa-circle col-xs-4 all-to-none event_container_' + appointment_type[i] + '"></i>';
+                    html += '<li class="all-to-none event_container_box">';
+                    html += '<div class="event_title">';
+                    html += appointment_type_title[appointment_type[i]];
+                    html += '</div>';
+                    html += '<div class="divider-line"></div>';
+                    html += '<ul class="all-to-none event_list">';
+                    html += '<li class="all-to-none">';
+                    html += '<div class="event_box_left">';
+                    html += 'Date';
+                    html += '</div>';
+                    html += '<div class="event_box_right event_date">';
+                    
+                    html += '</div>';
+                    html += '</li>';
+                    html += '</ul>';
+                    html += '</li>';
+                    html += '</ul>';
+                    
+                    $('#event_' + (Number(appointment_day[i]) + Number(firstDay_date))).append(html);
+                    html = '';
+//                    $('#event_' + (Number(appointment_day[i]) + Number(firstDay_date))).append(html_start + appointment_type[i] + html_end);
+
+                }
+            }  
+      })
+      
+      
+      
+  });
+</script> 
+
+<!--<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <hr class="tall">
+    </div>
+
+    <div class="row checkbox-container">
+      <span class="button-checkbox">
+        <button id="test-drive" type="button" class="btn" data-color="primary">Test Drive</button>
+          <input type="checkbox" class="hidden" />
+      </span>
+      <span class="button-checkbox">
+        <button id="sell" type="button" class="btn" data-color="primary">Sell</button>
+          <input type="checkbox" class="hidden" />
+      </span>
+    </div>
+
+    <% unless @appointments.empty? %>
+      <div class="col-md-12"> <h4>Appointments</h4> </div>
+      <table class="table">
+        <tr>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Appointment Type</th>
+          <th>Address</th>
+          <th>Genius</th>
+          <th>Car</th>
+          <th>Change/Cancel</th>
+        </tr>
+        <% @appointments.each do |apt| %>
+          <%= content_tag "tr", class: "checkbox-content",
+                            data: {status: appointment_type_str(apt)} do %>
+            <% if apt.time_window %>
+              <td><%= "#{apt.time_window.date}, #{apt.time_window.date.strftime("%A")}" %></td>
+              <% if apt.appointment_type == 0 %>
+                <td><a href="<%= sell_request_path(apt.sell_request) %>"><%= "#{apt.time_window.hour}:00".to_time.strftime("%l %P") %></a></td>
+              <% else %>
+                <td><a href="<%= appointment_path(apt) %>"><%= "#{apt.time_window.hour}:00".to_time.strftime("%l %P") %></a></td>
+              <% end %>
+            <% else %>
+              <td>Undetermined</td>
+              <td><%= link_to "Change", edit_appointment_path(apt) %></td>
+            <% end %>
+            <td><%= apt.apt_type %></td>
+            <td><%= "#{apt.address}, #{apt.city}, #{apt.state}, #{apt.zipcode}" %></td>
+                <% if apt.car %>
+            <td><%= link_to "Car detail", car_path(apt.car) %></td>
+                <% else %>
+            <td></td>
+                <% end %>
+            <td>
+              <%= link_to "Change", edit_appointment_path(apt) %> /
+              <%#= link_to "Cancel", appointment_path(apt), method: :delete %>
+              <a data-toggle="modal" data-target="#myModal" href="#">Cancel</a>
+            </td>
+          <% end %>
+        <% end %>
+      </table>
+
+      <%= render 'shared/appointment_cancel_alert' %>
+    <% end %>
+  </div>
+</div>
+<!-- -->
+

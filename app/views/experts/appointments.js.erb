@@ -1,0 +1,4 @@
+$('#appointments').addClass('active in');
+$('#appointments').html("<%= j (render partial: 'appointments') %>");
+$('#appointments').siblings('.tab-pane').removeClass('active in');
+$('#appointments').tab('show');

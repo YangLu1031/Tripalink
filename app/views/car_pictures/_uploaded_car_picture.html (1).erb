@@ -1,0 +1,13 @@
+<div class="col-sm-6 col-md-4">
+  <div class="thumbnail">
+    <%= image_tag car_picture.picture.url,
+                  class: "img-responsive car-picture-preview" %>
+    <div class="caption">
+      <h4><%= car_picture.get_car_picture_type_str %></h4>
+      <p><%= car_picture.description %></p>
+      <p><%= link_to "Delete",
+             car_car_picture_path(@car, car_picture), method: :delete,
+             class: "btn btn-danger btn-block", role: "button" %></p>
+    </div>
+  </div>
+</div>

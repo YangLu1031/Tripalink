@@ -1,0 +1,44 @@
+<% if @apt.apt_type == "Test Drive" %>
+    <% car = @apt.car %>
+    <% car_model = car.car_model %>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12" style="padding-top:50px;">
+          <h1>Your test drive request has been received.</h1>
+          <p>Car info: </p>
+          <p><a href="<%= car_path(car) %>"><%= car_model.year %> <%= car_model.make %> <%= car_model.model %></a></p>
+          <p>Body: <%= car_model.body %>, Trim: <%= car_model.trim %>, Mileage: <%= car.mileage %></p>
+          <% if @apt.time_window_ids && @apt.time_window_ids.size > 0 %>
+              <% TimeWindow.find(@apt.time_window_ids).each do |time_window| %>
+                  <p>The time windows you requested are: <%= "#{time_window.hour}:00".to_time.strftime("%l %P") %> to <%= "#{2 + time_window.hour}:00".to_time.strftime("%l %P") %>, on <%= time_window.date.strftime("%b %d, %Y") %></p>
+              <% end %>
+          <% end %>
+          <p>The address of appointment is: <%= @apt.address %>, <%= @apt.city %>, <%= @apt.state %> <%= @apt.zipcode %></p>
+          <% expert = @apt.expert%>
+          <p>Assigned auto genius: <%= expert.name %></p>
+          <p>Phone: <%= expert.phone %></p>
+        </div>
+      </div>
+    </div>
+<% else %>
+    <% sell_request = @apt.sell_request %>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1>Your test drive request has been received.</h1>
+          <p>Car info: </p>
+          <p><%= sell_request.year %> <%= sell_request.make %> <%= sell_request.model %></p>
+          <p>Body: <%= sell_request.body_style %>, Trim: <%= sell_request.trim %>, Mileage: <%= sell_request.mileage %></p>
+          <% if @apt.time_window_ids && @apt.time_window_ids.size > 0 %>
+              <% TimeWindow.find(@apt.time_window_ids).each do |time_window| %>
+                  <p>The time windows you requested are: <%= "#{time_window.hour}:00".to_time.strftime("%l %P") %> to <%= "#{2 + time_window.hour}:00".to_time.strftime("%l %P") %>, on <%= time_window.date.strftime("%b %d, %Y") %></p>
+              <% end %>
+          <% end %>
+          <p>The address of appointment is: <%= @apt.address %>, <%= @apt.city %>, <%= @apt.state %> <%= @apt.zipcode %></p>
+          <% expert = @apt.expert%>
+          <p>Assigned auto genius: <%= expert.name %></p>
+          <p>Phone: <%= expert.phone %></p>
+        </div>
+      </div>
+    </div>
+<% end %>

@@ -1,0 +1,28 @@
+<div class="col-md-3">
+  <div class="thumbnail">
+    <img class="picture-preview" src="http://placehold.it/320x200"
+    alt="ALT NAME" class="img-responsive" width="320" height="200" />
+    <%= form_for CarPicture.new,
+                 url: car_car_pictures_path(@car),
+                 html: {method: :POST, multipart: true },
+                 class: "car-picture-upload-form" do |f| %>
+    <div class="car-picture-info-container">
+      <label>Picture type</label>
+      <%= f.select :picture_type,
+      options_for_select(@car_picture_types),
+                         class: "selectpicker", data: { size: 5 } %>
+    </div>
+    <div class="car-picture-info-container">
+      <label>Description</label>
+      <%= f.text_area :description, class: "form-control", rows: 3 %>
+    </div>
+    <div class="car-picture-info-container">
+      <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png', class: "picture-file-field" %>
+      <a type="button" class="picture-upload-btn btn btn-block btn-primary">Choose file</a>
+    </div>
+    <div class="car-picture-action-btn">
+      <%= f.submit "Upload", class: "btn btn-success btn-block" %>
+    </div>
+    <% end %>
+  </div>
+</div>

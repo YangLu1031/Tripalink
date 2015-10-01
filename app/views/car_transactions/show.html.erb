@@ -1,0 +1,33 @@
+<%= content_tag "li",
+                class: "col-md-3 col-sm-6 col-xs-12 product checkbox-content",
+                data: {status: @transaction.status} do %>
+  <% car = @transaction.car %>
+  <span class="product-thumb-info">
+    <!-- <a href="shop-cart.html" class="add-to-cart-product">
+      <span><i class="fa fa-shopping-cart"></i> Add to Cart</span>
+    </a> -->
+    <a href="<%= car_path car %>">
+      <span class="product-thumb-info-image"  style="height:200px">
+        <span class="product-thumb-info-act">
+          <span class="product-thumb-info-act-left"><em>View</em></span>
+          <span class="product-thumb-info-act-right"><em><i class="fa fa-plus"></i> Details</em></span>
+        </span>
+        <% if !car.car_pictures.nil? and !car.car_pictures.first.nil? %>
+          <%= image_tag(car.car_pictures.first.picture, class: "img-responsive", alt: "", style: "height:100%; width:100%") %>
+        <% else %>
+          <%= image_tag('img/products/product-1.jpg', class: 'img-responsive') %>
+        <% end %>
+      </span>
+    </a>
+    <span class="product-thumb-info-content">
+      <a href="<%= car_path car %>">
+        <h4><%= car.car_model.make %> <%= car.car_model.model %> @ <%= number_with_delimiter(car.mileage) %> miles </h4>
+        <span class="price">
+          <ins><span class="amount">$<%= number_with_delimiter(car.price) %></span></ins>
+        </span>
+      </a>
+    </span>
+  </span>
+<% end %>
+<p>Payment information received. Please wait.</p>
+<br>

@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row">
+    <ul class="thumbnails">
+      <%= render partial: "car_picture_upload_form" %>
+      <div class="col-md-9">
+        <% counter = 0 %>
+          <% @car_pictures.each do |car_picture| %>
+            <% if counter % 3 == 0 %>
+              <div class="row">
+            <% end %>
+            <% if car_picture.picture.url %>
+              <%= render partial: "uploaded_car_picture",
+                         locals: { car_picture: car_picture} %>
+            <% end %>
+            <% if counter % 3 == 2 %>
+              </div>
+            <% end %>
+            <% counter += 1 %>
+          <% end %>
+        </div>
+      </div>
+    </ul>
+  </div>
+</div>
+
+<script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.5.4/bootstrap-select.js" />
+

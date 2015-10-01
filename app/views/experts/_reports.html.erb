@@ -1,0 +1,29 @@
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 toppad" >
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h4>Reports</h4>
+    </div>
+    <div class="panel-body">
+      <% unless @reports.empty? %>
+      <table class="table">
+        <tr>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Car</th>
+          <th>Report</th>
+        </tr>
+        <% @reports.each do |apt| %>
+        <% car = apt.car %>
+        <% model = car.car_model %>
+        <tr>
+          <td><%= "#{apt.time_window.date}, #{apt.time_window.date.strftime("%A")}" %></td>
+          <td><a href="<%= sell_request_path(apt.sell_request) %>"><%= "#{apt.time_window.hour}:00".to_time.strftime("%l %P") %></a></td>
+          <td><%= link_to "#{model.year} #{model.make}, #{model.model}" , car_path(apt.car) %></td>
+          <td><%= link_to "edit", edit_car_path(apt.car), class: "btn btn-sm btn-primary" %></td>
+        </tr>
+        <% end %>
+      </table>
+      <% end %>
+    </div>
+  </div>
+</div>

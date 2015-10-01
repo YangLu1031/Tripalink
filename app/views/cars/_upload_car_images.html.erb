@@ -1,0 +1,23 @@
+<div class="timeline-badge success"><i class="glyphicon glyphicon-credit-card"></i></div>
+<div class="timeline-panel">
+  <i class="glyphicon glyphicon-chevron-down timeline-panel-btn"></i>
+  <div class="timeline-heading">
+    <h4 class="timeline-title">Photos upload</h4>
+  </div>
+  <div class="timeline-body">
+    <div class="tabbable-panel">
+      <div class="tabbable-line">
+        <div class="row">
+          <div class="col-md-12">
+            <ul class="thumbnails">
+              <% picture_types = CarPicture.get_picture_types %>
+              <% for i in 0..picture_types.count - 1 %>
+                <%= render partial: 'car_image_uploader', locals: { index: i, picture_type: picture_types[i] } %>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

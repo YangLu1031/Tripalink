@@ -1,0 +1,692 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0064)http://www.79nr.com/fy/index.html?from=timeline&isappinstalled=0 -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head runat="server"><meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+          <title>驾照测试：你以为你真的记住了？</title>
+          <meta name="format-detection" content="telephone=no" />
+          <meta name="viewport" content="width=device-width initial-scale=1.0 maximum-scale=1.0 user-scalable=yes" />
+          <meta content="Tripalink, Tripallink, Automobile,sell,buy auto,sale auto, private car,Trapalink, trade,p2p,o2o,卖车,买车,路行南加,used car, preowned car,二手车,洛杉矶,南加州,Los Angeles,Southern California" name="keywords">
+          <meta name="description" content="Tripalink is a startup service platform that helps private-party buy and sell used cars." >
+          <link rel="shortcut icon" href="<%= asset_path 'homepage/Tripalink_icon.png' %>" />
+          <meta content="tripalink" name="author">
+          <!-- Web Fonts -->
+          <%= stylesheet_link_tag "http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800%7CShadows+Into+Light" %>
+          <!-- Vendor CSS -->
+          <%= stylesheet_link_tag "vendor/bootstrap/bootstrap.css" %>
+          <%= stylesheet_link_tag "vendor/fontawesome/css/font-awesome.css" %>
+          <!-- Current Page CSS -->
+          <%= stylesheet_link_tag "vendor/rs-plugin/css/settings.css" %>
+          <%= stylesheet_link_tag "vendor/circle-flip-slideshow/css/component.css" %>
+          <!-- Skin CSS -->
+          <%= stylesheet_link_tag "css/skins/default.css" %>
+          <!-- Theme Custom CSS -->
+          <%= stylesheet_link_tag "css/custom.css" %>
+
+          <!-- Head Libs -->
+          <%= javascript_include_tag "vendor/modernizr/modernizr.js"%>
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+          <%= javascript_include_tag "vendor/bootstrap/bootstrap.js" %>
+    </head>
+    
+    <style>
+        a { color: inherit; }
+        ul{
+            list-style-type: none;
+        }
+        .all-to-none{
+            margin:0;
+            padding:0;
+        }
+        .question_container{
+            width:100%;
+            height:100%;
+        }    
+        .question_title{
+            margin-top:26px;
+            margin-bottom:0;
+        }
+        .question_subtitle{
+            margin-top:50px;
+        }
+        .question_subtitle span:nth-child(1){
+            color:white;
+            font-size:18px
+            
+        }
+        .question_subtitle span:nth-child(2){
+            color:white;
+            font-size:36px;
+            margin-top:20px;
+        }
+        body{
+            background-color:#4A90E2;
+        }
+        .start_button{
+            margin-top:80px;
+            border:2px solid white;
+            border-radius:5px;
+            font-size:24px;
+            height:50px;
+            width:200px;
+            line-height:48px;
+            color:white;
+            margin-bottom:8px;
+            font-weight:600;
+            cursor:pointer;
+        }
+        .start_button_text{
+            color:white !important;
+            font-size:13px !important;
+            height:14px !important;
+            line-height:middle !important;
+            font-weight:600;
+           
+        }
+        .question_footer{
+            color:white;
+            font-size:14px;
+            height:16px;
+            line-height:16px;
+            vertical-align:middle;
+            margin-bottom:3px;
+        }
+        .question_main_title{
+            width:100%;
+            height:100px;
+            color:white;
+            padding-top:20px;
+            background-color:#4A90E2;
+            
+        }
+        .question_main_title span{
+            font-size:18px;
+            line-height:20px;
+            vertical-align:middle;
+            margin-bottom:10px;
+            
+        }
+        .question_main_title img{
+            position:relative;
+            top:-3px;
+        }
+        .question_main_content{
+            height:420px;
+            padding:0;
+        }
+        .question{
+            width:100%;
+            height:auto;
+            padding:0;
+            margin-top:10px;
+            display:none;
+        }
+        #question_0{
+            display:block;
+        }
+        .question_main_content_title{
+            color:black;
+            height:130px;
+            text-align:left;
+            width:100%;
+            padding-left:15px;
+        }
+        .question_main_content_list{
+            width:100%;
+            height:88px;
+            color:black;
+            text-align:left;
+/*            border-top:1px solid #bdbdbd;*/
+            padding-left:15px;
+        }
+        .question_option{
+            height:100%;
+            padding-top:30px;
+        }
+/*
+        .question_main_content_list:hover{
+            background-color:#4A90E2;
+            color:white;
+        }
+*/
+        .question_result{
+            padding-left:0px;
+            padding-right:0px;
+        }
+        .list-group-item{
+            border-bottom:0 !important;
+        }
+        .result_container{
+            width:100%;
+            color:#3A3D42;
+            font-size:24px;
+            text-align:center;
+            margin-top:20px;
+        }
+        .question_button_container{
+            border-radius:3px;
+            border:1px solid #4A90E2;
+            color: #4A90E2;
+            height:34px;
+            width:100px;
+            line-height:34px;
+            vertical-align:middle;
+        }
+        .share_link{
+            width:100%;
+            color: #4A90E2;
+            margin-top:20px;
+            text-align:center;
+        }
+        #mcover {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); display: none; z-index: 20000; 
+        }
+#mcover img {
+            position: fixed; right: 18px; top: 5px; width: 260px!important; height: 180px!important; z-index: 20001; 
+        }
+        .question_main_content_list:active{
+            background-color:#4a90e2;
+            color:white;
+        }
+        .divider{
+            width:80%;
+            height:1px;
+            background-color:#979797;
+            margin-top:14px;
+            margin-bottom:20px;
+        }
+        .result_score{
+            width:100%;
+            color:#3A3D42;
+            font-size:18px;
+            margin-bottom:30px;
+        }
+        .result_page_btn{
+            width:240px; height:40px; border-radius:5px; margin-bottom:10px; background-color:#4A90E2;color:white; line-height:40px; vertical-align:middle; font-size:18px;
+            cursor:pointer;
+        }
+        .page_footer{
+            font-size:14px;
+            color:#4A90E2;
+            margin-top:50px;
+        }
+        .final_result_container{
+            font-size:36px;
+            color:#4A90E2;
+            height:90px;
+            line-height:90px;
+            vertical-align:middle;
+            border-bottom:1px solid #bdbdbd;
+        }
+        .question_content{
+            font-size:18px;
+            color:#3A3D42;
+            font-weight:500;
+        }
+        .question_list_item{
+            margin-bottom:10px;
+            padding-left:5px;
+        }
+        .question_list_item span{
+            margin-top:5px;
+        }
+        .final_result_wrong_list{
+            text-align:left;
+        }
+        .corrent_icon{
+            color:#5FC782;
+            font-size:16px;
+            margin-left:5px;
+        }
+        .wrong_icon{
+            color:#F55949;
+            font-size:16px;
+            margin-left:5px;
+            display:none;
+        }
+        .see_more_btn{
+            width:240px;
+            height:40px;
+            line-height:40px;
+            verical-align:middle;
+            text-align:center;
+            border:1px solid #4A90E2;
+            color:#4A90E2;
+            margin-top:14px;
+            margin-bottom:18px;
+            border-radius:5px;
+            cursor:pointer;
+        }
+        .follow_us_box{
+            min-height:300px;
+            height:auto;
+        }
+        .follow_us_title{
+            margin-top:27px;
+            marign-bottom:15px;
+            line-height:25px;
+            veritcal-align:middle;
+            font-size:24px;
+            color:#3A3D42;
+        }
+    </style>
+
+    <body>
+        <div class="question_container" align="center">
+            <div class="question_title">
+                <a href="http://www.tripalink.com">
+                    <img src="<%= asset_path 'homepage/Tripalink_wechat.png'%>" width='60px' height='60px'>
+                </a>
+            </div>
+            <div class="question_subtitle" align="center">
+                <span class="col-xs-12">
+                    驾照测试:你以为你真的记住了？
+                </span>
+                <span class="col-xs-12">
+                    然而并不是
+                </span>
+                <div class="col-xs-12" align="center" style="margin-bottom:78px;">
+                    <div class="start_button">
+                        不信，开始测试
+                    </div>
+                    <span class="start_button_text">
+                        题目来自加州DMV
+                    </span>
+                </div>
+                <div class="col-xs-12 question_footer" align="center">
+                    优质个人二手车交易服务平台
+                </div>
+                <a href="http://www.tripalink.com">
+                    <div class="col-xs-12 question_footer" align="center">
+                        www.tripalink.com
+                    </div>
+                </a>
+            </div>
+
+        </div>
+        <div class="question_list"   align="center" id="questions_container" style="display:none">
+            <div class="question_main_title" align="center">
+                <span class="col-xs-12 all-to-none">
+                    <a href="http://www.tripalink.com">
+                        <img src="<%= asset_path 'homepage/Tripalink_wechat.png'%>" width='30px' height='30px'> Tripalink.com
+                    </a>
+                </span>
+                    
+                <span  class="col-xs-12 all-to-none">
+                    驾照测试：你以为你真的记住了？
+                </span>
+            </div>
+            <div class="col-xs-12 question_main_content" align="center">
+                <% @questions.each_with_index do |question, index| %>
+                    <div class="question panel-body js_answer" id="question_<%= index%>">
+                        <form action="#" method='POST'>
+                            <a name="result" href="javascript:void(0)"></a>
+                            <div class="question_main_content_title">
+                                <%= index + 1%>/10. <%= question["question"] %>
+                                <% if question["image"] %>
+                                    <img src='<%= question["image"] %>'><br>
+                                <% end %>
+                            </div>
+                            <% question["choices"].each_with_index do |choice, number| %>
+                                <ul class="question_main_content_list list-group list-group-item js_group all-to-none">
+                                    <li  class="score_<%= index %> question_option option_<%= number%> "  value='<%= choice["value"] %>' onclick="change(<%= index %>, this.value, <%= number%>, this)">
+                                        <%= ('a'.ord + number).chr %>. <%= choice["text"].html_safe %><br>
+                                    </li>
+                                </ul>
+                            <% end %>
+                        </form>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+        <div class="question_result" align="center" id="result_container" style="display:none">
+            <div class="question_main_title" align="center">
+                <span class="col-xs-12 all-to-none">
+                    <a href="http://www.tripalink.com">
+                        <img src="<%= asset_path 'homepage/Tripalink_wechat.png'%>" width='30px' height='30px'> Tripalink.com
+                    </a>
+                </span>
+                    
+                <span  class="col-xs-12 all-to-none">
+                    驾照测试：你以为你真的记住了？
+                </span>
+            </div>
+            <div class="result_container">
+            </div>
+            <div class="divider">
+            </div>
+            <div class="result_score">
+            </div>
+            <div class="result_page_btn" data-toggle="modal" data-target="#follow_us_modal">
+                关注我们
+            </div>
+            <a href="javascript:void(0)" onclick="$(&#39;#mcover&#39;).css(&#39;display&#39;&#44;&#39;block&#39;)">
+                <div class="result_page_btn">
+                    分享到朋友圈
+                </div>
+            </a>
+            <div class="result_page_btn see_wrong_btn">
+                看看错的题目
+            </div>
+            <a href="javascript:location.reload()">
+                <div class="question_button_container" align="center">
+                    重新开始
+                </div>
+            </a>
+            <a href="http://www.tripalink.com/driver_license">
+                <div class="animated shake share_link">
+                    更多更全的加州驾照笔试题库请猛戳这里哟！
+                </div>
+            </a>
+            <a href="http://www.tripalink.com/">
+                <div class="page_footer">
+                    北美优质个人二手车交易服务平台<br>
+                    www.tripalink.com
+                </div>
+            </a>
+        </div>
+        <div class="question_final"  align="center" id="final_container" style="display:none">
+            <div class="question_main_title" align="center">
+                <span class="col-xs-12 all-to-none">
+                    <a href="http://www.tripalink.com">
+                        <img src="<%= asset_path 'homepage/Tripalink_wechat.png'%>" width='30px' height='30px'> Tripalink.com
+                    </a>
+                </span>
+                    
+                <span  class="col-xs-12 all-to-none">
+                    驾照测试：你以为你真的记住了？
+                </span>
+            </div>
+            <div class="col-xs-12">
+                <div class="final_result_container">
+                </div>
+            </div>
+            <div class="col-xs-12 final_result_wrong_list">
+                <% @questions.each_with_index do |question, index| %>
+                    <div class="question_list question_list_<%= index%>">
+                            <div class="question_content">
+                                <%= (index + 1).to_s + '. ' +question["question"] %><br>
+                            </div>
+                           <div class="question_list_container col-xs-12 all-to-none">
+                               <div class="col-md-1 col-xs-3" style="padding-top:5px;">
+                                   <% if question["image"] %>
+                                       <img src="<%= question['image'] %>"><br>
+                                   <% end %>
+                               </div>
+                               <div class="col-md-11 col-xs-9" style="padding-right:0;">
+                                   <% question["choices"].each_with_index do |choice, number| %>
+                                        <div class="question_list_item question_list_item_<%= index%> option_<%= number%>" value="<%= choice['value'] %>">
+                                            <span>
+                                                <%= ('a'.ord + number).chr %>. <%= choice["text"].html_safe %>
+                                            </span>
+                                        </div>
+                                    <% end %>
+                               </div>
+                            </div>
+                    </div>
+                <% end %>
+            </div>
+            <div class="col-xs-12" align="center">
+                <div class="result_page_btn" data-toggle="modal" data-target="#follow_us_modal">
+                    关注我们
+                </div>
+                <a href="javascript:void(0)" onclick="$(&#39;#mcover&#39;).css(&#39;display&#39;&#44;&#39;block&#39;)">
+                    <div class="result_page_btn">
+                        分享到朋友圈
+                    </div>
+                </a>
+                <a href='http://www.tripalink.com/driver_license'>
+                    <div class="see_more_btn">
+                        查看更多题目
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-xs-12 question_footer" align="center">
+                优质个人二手车交易服务平台
+            </div>
+            <a href="http://www.tripalink.com/">
+                <div class="page_footer" style="margin-bottom:20px;">
+                    北美优质个人二手车交易服务平台<br>
+                    www.tripalink.com
+                </div>
+            </a>
+        </div>
+            
+        <div id="mcover" onclick="document.getElementById(&#39;mcover&#39;).style.display=&#39;&#39;" style="display: none;">    
+            <img src="<%= asset_path 'user_center/guide.png'%>" style="width:154px !important; height:52px !important;" />
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="follow_us_modal" tabindex="-1" role="dialog">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content follow_us_box">
+                <div class="col-xs-12 follow_us_title" align='center'>
+                    长按二维码关注我们
+                </div>
+                <div class="col-xs-12" style="margin-top:80px;" align="center">
+                    <img class="col-xs-6 all-to-none" src="<%= asset_path 'user_center/qr_code.png'%>" style="max-width:174px; max-height:144px;"/>
+                    <img class="col-xs-6 all-to-none" src="<%= asset_path 'user_center/follow_us.png'%>" style="max-width:174px; max-height:146px;">
+                </div>
+            </div>
+          </div>
+        </div>
+
+
+        <script>
+            var total_question_number;
+            var wrong_list     = [];
+            var option_list    = [];
+            var html_correct   = '<span class="corrent_icon judge_icon"><i class="fa fa-check"></i></span>';
+            var html_incorrect = '<span class="wrong_icon judge_icon"><i class="fa fa-times"></i></span>';
+            var str_title = '加州笔试:';
+            $(function(){
+                total_question_number = $('.question_main_content .question').length;
+                //console.log(total_question_number);
+            })
+            var total_score = 0;
+            $('.start_button').click(function(){
+                $('.question_container').css('display', 'none');
+                $('body').css('background-color','white');
+                $('#questions_container').css('display', 'block');
+            })
+            $('.see_wrong_btn').click(function(){
+                $('#result_container').css('display', 'none');
+                $('#final_container').css('display', 'block');
+                $('.question_list_item[value="1"]').css('background-color','rgba(95,199,130,0.2)');
+                $('.question_list_item[value="1"]').append(html_correct);
+                $('.question_list_item[value="0"]').append(html_incorrect);
+                for(var i = 0; i <= 10; i ++){
+                    if(wrong_list[i] != '1'){
+                       $('.question_list_' + i).css('display', 'none');  
+                    }else{
+                       //console.log($('.question_list_' + i + ' .option_' + option_list[i] + ' .wrong_icon'));
+                       $('.question_list_' + i + ' .option_' + option_list[i] + ' .wrong_icon').css('display', 'inline');
+                       $('.question_list_' + i + ' .option_' + option_list[i]).css('background-color', '#E6E7EB');
+                    }
+                }
+            })
+            var total = $("div.js_answer").length;
+            var tScore = 0;
+            
+            function next(t){
+                $("div.js_answer").eq(t).show();
+                $("div.js_answer").eq(t).children("input").attr("checked","");      
+                gotoTop();
+            }
+            function toggle(t){
+                $(t).children("input").attr("checked","checked");
+                
+                var score = $(t).children("input:checked").val();
+                tScore  = parseInt(tScore) + parseInt(score);
+                $("#totalsc").val(tScore);
+                
+                var t = $("div.js_answer").index($(t).parents("div.js_answer")) + 1;
+                if(t == total){
+                    result(tScore);
+                }else{
+                    setTimeout(function(){next(t);},500);
+                }
+            }
+            function gotoTop(){
+                $("body,html").animate({scrollTop: 0}, 200);
+            }
+            function change(item, value, number, t){
+                total_score = parseInt(value) + parseInt(total_score);
+                $(t).parent().css('background-color', '#4a90e2');
+                $(t).parent().css('color', 'white');
+                if(value == 0){
+                    wrong_list[item] = '1';
+                    option_list[item] = number;
+                    //console.log(option_list[item]);
+                }
+                if(item < (total_question_number - 1)){
+                    setTimeout(function(){
+                            $('#question_' + item).css('display','none');
+                            $('#question_' + (item + 1)).css('display','block');
+                        
+                        }, 100
+                    )
+                }else{
+                    $('#questions_container').css('display', 'none');
+                    $('#result_container').css('display', 'block');
+                    
+                    $('.result_score').html('你答对了' + total_score + '/10道题！');
+                    $('.final_result_container').html('你错了' + (10 - total_score) + '道题');
+                    if(total_score == 0 || total_score == 1){
+                        $('.result_container').html('亲，如果可以刷脸蹭车，最好就不要费脑考驾照了吧！');
+                        document.title = str_title + "亲，如果可以刷脸蹭车，最好就不要费脑考驾照了吧！";
+                    }else if(total_score == 2){
+                        $('.result_container').html('别人开车要油，你开车要命啊！');
+                        document.title = str_title + "别人开车要油，你开车要命啊！";
+                    }else if(total_score == 3){
+                        $('.result_container').html('对喷你车技的人说一句：讨厌我的人多了，你算老几！');
+                        document.title = str_title + "对喷你车技的人说一句：讨厌我的人多了，你算老几！";
+                    }else if(total_score == 4){
+                        $('.result_container').html('如果青春是一场冒险，那别人遇见你也忒危险了！');
+                        document.title = str_title + '如果青春是一场冒险，那别人遇见你也忒危险了！';
+                    }else if(total_score == 5){
+                        $('.result_container').html('开车上路的你会带有一种神圣光环，敌人愤怒值增加100%');
+                        document.title = str_title + "开车上路的你会带有一种神圣光环，敌人愤怒值增加100%";
+                    }else if(total_score == 10){
+                        $('.result_container').html('重要的事情说三遍：你全对！你全对！你全对！这个逼你装定了');
+                        document.title = str_title + "重要的事情说三遍：你全对！你全对！你全对！这个逼你装定了";
+                    }else if(total_score == 7 || total_score == 6){
+                        $('.result_container').html('同志，开车前记得带上脑子和眼睛！');
+                        document.title = str_title + '同志，开车前记得带上脑子和眼睛！';
+                    }else if(total_score >= 8){
+                        $('.result_container').html('如果才华是一座监狱，那么你将被判处终身监禁。');
+                        document.title = str_title + "如果才华是一座监狱，那么你将被判处终身监禁。";
+                    }
+                }
+            }
+            function result(t){
+                //console.log(t);
+            }
+            function showIt(){
+                $(this).css('display', 'block');
+            }
+//            $(function(){
+//                var onBridgeReady=function(){
+//                    WeixinJSBridge.on('menu:share:appmessage', function(argv){
+//                        WeixinJSBridge.invoke('sendAppMessage',{
+//                            "appid":        '',
+//                            "img_url":      "<%= asset_path 'homepage/Tripalink_wechat.png'%>",
+//                            "img_width":    "120",
+//                            "img_height":   "120",
+//                            "link":             dataForWeixin.url,
+//                            "desc":             dataForWeixin.desc,
+//                        }, function(res){
+//                            report(dataForWeixin.url, 1);
+//                            //recordscore($("#totalsc").val());
+//                            shareSuccess();
+//                        });
+//                    });
+//                    WeixinJSBridge.on('menu:share:timeline', function(argv){
+//                        report(dataForWeixin.url, 2);
+//                        //recordscore($("#totalsc").val());
+//                        WeixinJSBridge.invoke('shareTimeline',{
+//                        "img_url":dataForWeixin.img,
+//                        "img_width":"120",
+//                        "img_height":"120",
+//                        "link":dataForWeixin.url,
+//                        "desc":dataForWeixin.desc,
+//                        }, function(res){
+//                            shareSuccess();
+//                        });
+//                        
+//                    });
+//                    WeixinJSBridge.on('menu:share:weibo', function(argv){
+//                        WeixinJSBridge.invoke('shareWeibo',{
+//                        "content":'Tripalink优质二手车交易平台：加州新版驾照笔试，你真的准备好了吗？',
+//                        "url":dataForWeixin.url
+//                        }, function(res){
+//                            report(dataForWeixin.url, 3);
+//                            //recordscore($("#totalsc").val());
+//                            shareSuccess();
+//                        });
+//                    });
+//                };
+//                if(document.addEventListener){
+//                    document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+//                        WeixinJSBridge.call('showOptionMenu');
+//                    });
+//                    document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+//                }else if(document.attachEvent){
+//                    document.attachEvent('WeixinJSBridgeReady'   , onBridgeReady);
+//                    document.attachEvent('onWeixinJSBridgeReady' , onBridgeReady);
+//                }
+//            }); 
+        </script>
+        <!--Google Analytics Code start here-->
+        <script>
+          $(document).ready(function(){
+              var current_url = window.location.href;
+              if(current_url.indexOf('localhost') > -1){
+                  //console.log('Localhost');
+                  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+                //  ga('create', 'UA-67004534-1', 'auto');
+                  ga('create', 'UA-67004534-1', 'auto');
+                  ga('send', 'pageview');
+              }else{
+                  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+                //  ga('create', 'UA-67004534-1', 'auto');
+                  ga('create', 'UA-62214121-3', 'auto');
+                  ga('send', 'pageview');
+              }
+          })      
+        </script>
+    </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

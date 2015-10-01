@@ -1,0 +1,25 @@
+<% unless reports.empty? %>
+  <table class="table">
+    <tr>
+      <th>Date</th>
+      <th>Time</th>
+      <th>User</th>
+      <th>Car</th>
+    </tr>
+    <% reports.each do |apt| %>
+      <% car = apt.car %>
+      <% model = car.car_model %>
+      <tr>
+        <td><%= "#{apt.time_window.date}, #{apt.time_window.date.strftime("%A")}" %></td>
+        <td><a href="<%= sell_request_path(apt.sell_request) %>"><%= "#{apt.time_window.hour}:00".to_time.strftime("%l %P") %></a></td>
+        <td><%= link_to apt.user.name, apt.user %></td>
+        <td><%= link_to "#{model.year} #{model.make}, #{model.model}" , car_path(apt.car) %></td>
+        <% if apt.car.status == 1 %>
+          <td><%= link_to "Start report", edit_car_path(apt.car) %></td>
+        <% elsif apt.car.status == 2 %>
+          <td><%= link_to "Change report", edit_car_path(apt.car) %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+<% end %>

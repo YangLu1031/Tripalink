@@ -1,0 +1,861 @@
+<%= provide(:title, 'Appointment') %>
+<style>
+    header{
+        background-color: rgb(74,144,226);
+    }
+    .buy_car_container{
+        height:auto;
+
+    }
+    .signUpBtn > span > a{
+        color:rgb(74,144,226);
+    }
+    .nav_title, .nav_item > a > div{
+        color:white;
+    }
+    .signInBtn{
+        color:white;
+    }
+    .signUpBtn{
+        color:rgb(74,144,226);
+        background-color:white;
+    }
+</style>
+<div class="col-xs-12 all-to-none" style="background-color:rgb(250,250,250)">
+    <div class="col-xs-12 buy_pay_navbar" align='center'>
+        <div class="sell_car_nav_bar" style="width:1280px;">
+            <div class="col-xs-12 sell_car_nav_bar_upper" >
+                <div class="hidden-xs hidden-sm hidden-md col-lg-1">
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10 sell_car_nav_bar_upper_content">
+                    <div class="col-xs-3 sell_car_nav_bar_upper_btn sell_step_1 current_step" id="sell_car_step_1">
+                        Deposit
+                    </div>
+                    <div class="col-xs-3 sell_car_nav_bar_upper_btn sell_step_2 next_step" id="sell_car_step_2">
+                        Choose the way you want to pay
+                    </div>
+                    <div class="col-xs-3 sell_car_nav_bar_upper_btn sell_step_3 next_step" id="sell_car_step_3">
+                        Payment Sample
+                    </div>
+                    <% if not(expert_signed_in? or user_signed_in?) %>
+                        <div class="col-xs-3 sell_car_nav_bar_upper_btn sell_step_4 next_step" id="sell_car_step_4_need_login" data-toggle="modal" data-target="#signInModal">
+                            Confirmation
+                        </div>
+                    <% else %>
+                        <div class="col-xs-3 sell_car_nav_bar_upper_btn sell_step_4 next_step" id="sell_car_step_4">
+                            Confirmation
+                        </div>
+                    <% end %>
+                </div>
+                <div class="hidden-xs hidden-sm hidden-md col-lg-1">
+                </div>
+            </div>
+            <div class="col-xs-12 sell_car_nav_bar_lower">
+                <div class="hidden-xs hidden-sm hidden-md col-lg-1">
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10 sell_car_nav_bar_lower_content">
+                    <div class="step_line_offset">
+                    </div>
+                    <div class="step_line" style="width:75%; float:left;">
+                    </div>
+                    <div class="step_line_offset">
+                    </div>
+                </div>
+                <div class="hidden-xs hidden-sm hidden-md col-lg-1">
+                </div>        
+            </div>
+            <div class="col-xs-12 sell_car_nav_bar_dotted">
+                <div class="hidden-xs hidden-sm hidden-md col-lg-1">
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10 sell_car_nav_bar_lower_content">
+                    <div class="col-xs-3 sell_step_1_circle" align="center">
+                        <div class="last_step_circle" style="display:none">
+                            <i class="fa fa-circle"></i>
+                        </div>
+                        <div class="current_step_circle" >
+                            <div class='current_step_circle_border'>
+                            <i class="fa fa-circle"></i>
+                            </div>
+                        </div>
+                        <div class="next_step_circle" style="display:none">
+                            <i class="fa fa-circle"></i>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-3 sell_step_2_circle" align="center">
+                        <div class="last_step_circle" style="display:none">
+                            <i class="fa fa-circle"></i>
+                        </div>
+                        <div class="current_step_circle" style="display:none">
+                            <div class='current_step_circle_border'>
+                            <i class="fa fa-circle"></i>
+                            </div>
+                        </div>
+                        <div class="next_step_circle">
+                            <i class="fa fa-circle"></i>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-3 sell_step_3_circle" align="center">
+                        <div class="last_step_circle" style="display:none">
+                            <i class="fa fa-circle"></i>
+                        </div>
+                        <div class="current_step_circle" style="display:none">
+                            <div class='current_step_circle_border'>
+                            <i class="fa fa-circle"></i>
+                            </div>
+                        </div>
+                        <div class="next_step_circle">
+                            <i class="fa fa-circle"></i>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-3 sell_step_4_circle" align="center">
+                        <div class="last_step_circle" style="display:none">
+                            <i class="fa fa-circle"></i>
+                        </div>
+                        <div class="current_step_circle" style="display:none">
+                            <div class='current_step_circle_border'>
+                            <i class="fa fa-circle"></i>
+                            </div>
+                        </div>
+                        <div class="next_step_circle">
+                            <i class="fa fa-circle"></i>
+                        </div>   
+                    </div>
+
+                </div>
+                <div class="hidden-xs hidden-sm hidden-md col-lg-1">
+                </div>        
+            </div>
+        </div>
+    </div>
+    <div class="container payment_method_container payment_method_container_0">
+        <div class="buy_container_left buy_container_left_0" align='center'>
+            <div class="col-xs-12 buy_container_title" align='center'>
+                Reserve This Car Today
+            </div>
+            <div class="col-xs-12 buy_container_subtitle" align='center'>
+                Reserve the car with a small deposit, pay the balance later.
+            </div>
+            <div class="col-xs-12 all-to-none" align='center'>
+                <form action='./charges/charge' method="POST" id="payment-form">
+                    
+                    <div class="credit_card_container">
+                        <div class="credit_card_container_left" align='left' style="position:relative; top:-35px;">
+                                
+                                <span class="input_title_credit_card">
+                                    Name on Card
+                                </span>
+                                <input class="input_credit_card" size="20" id="credit_card_name" type='text' required/>
+                                <span class="input_title_credit_card">
+                                    Card Number
+                                </span>
+                                <input class="input_credit_card" id="credit_card_number" type='tel' data-stripe="number"  required/>
+                                <span class="input_title_credit_card">
+                                    Telephone Number
+                                </span>
+                                <input class="input_credit_card" id="credit_card_tel" type='tel' value="<%= current_user.phone %>" required/>
+                                <span class="input_title_credit_card">
+                                    Expiration Date
+                                </span>
+                                <div class="col-xs-12 all-to-none">
+                                    <select class="input_credit_card col-xs-6 all-to-none" placeholder='Month number' id='credit_card_month' style="width:141px; margin-right:20px; background-color:white;" data-stripe="exp-month">
+                                        <option disabled selected>
+                                            Month
+                                        </option>
+                                        <%= (1..12).step(1) do |month|%>
+                                            <option value='<%= month%>'>
+                                                <%= month %>
+                                            </option>
+                                        <% end %>
+                                    </select>
+                                    <select class="input_credit_card col-xs-6 all-to-none" placeholder='Year ' style="width:141px; background-color:white;" data-stripe="exp-year">
+                                        <option disabled selected>
+                                            Year
+                                        </option>
+                                        <%= (2015..2030).step(1) do |year|%>
+                                            <option>
+                                                <%= year %>
+                                            </option>
+                                        <% end %>
+                                    </select>
+                                </div>
+                                <span class="col-xs-12 input_title_credit_card all-to-none" style="margin-top:10px;">
+                                    <span class="all-to-none" style="width:141px; margin-right:20px; float:left;">
+                                        Zip Code
+                                        <input class="input_credit_card" style="margin-top:7px; width:100%" type='tel'maxlength="5"/>
+                                    </span>
+                                    <span class='all-to-none' style="width:141px; float:left;">
+                                        <span class="col-xs-3 all-to-none">
+                                            CVC
+                                        </span>
+                                        <span class="col-xs-9 all-to-none" style="color:#4A90E2" align='right'>
+                                            What's this?
+                                        </span>
+                                        <input class='input_credit_card' style='margin-top:7px; width:100%' type='tel' maxlength="3" data-stripe="cvc"/>
+                                    </span>
+                                </span>
+                        </div>
+                        <div class="horizontal_divider">
+                        </div>
+                        <div class="credit_card_container_right">
+                            <span class="col-xs-12 all-to-none">
+                                Cars sell online fast!
+                                
+                            </span>
+                            <span class="col-xs-12 all-to-none">
+                                To pay by check, we ask that you reserve your car with a $500 deposit.
+                            </span>
+                        </div>
+                    </div>
+                   
+                    <div class="paypage_button" id="pay_step_0_to_1" type="submit">
+                        Pay Deposit
+                    </div>
+                    <span class="payment-errors"></span>
+                    <a href="tel:1 (818) 826-3318">
+                        <div class="paypage_footer">
+                            <i class="fa fa-phone-square"></i> Have Questions? Call us at:(818)826-3318
+                        </div>
+                    </a>
+                </form>
+            </div>
+            
+        </div>
+        <div class="buy_container_left buy_container_left_1" align='center'  style="display: none;">
+            <div class="col-xs-12 buy_container_title" align='center'>
+                Choose the Way You Want to Pay
+            </div>
+            <div class="col-xs-12 buy_container_subtitle" align='center'>
+                Tripalink provides two options to bring your dream car home
+            </div>
+            <div class="col-xs-12 options_container">
+                <div class="col-xs-6 options_box options_box_0 options_box_actived">
+                    <div class="col-xs-12 option_img_container" align="center">
+                        <img src='<%= asset_path "buypage/check_0.png" %>'/>
+                    </div>
+                    <div class="col-xs-12 img_container_main_title" align="center">
+                        Cashier's Check
+                    </div>
+                    <span class="col-xs-12 img_container_sub_title" align="center">
+                        You can get a Cashier Check from a bank
+                    </span>
+                    <span class="col-xs-12 img_container_sub_title" align="center" style="margin:0;">
+                        Our staff will pick up the check
+                    </span>
+                </div>
+                <div class="col-xs-6 options_box options_box_1">
+                    <div class="col-xs-12 option_img_container" align="center">
+                        <img src='<%= asset_path "buypage/transfer_1.png" %>'/>
+                    </div>
+                    <div class="col-xs-12 img_container_main_title" align="center">
+                        Wire Transfer
+                    </div>
+                    <span class="col-xs-12 img_container_sub_title" align="center">
+                        You can use wire transfer to transfer the payment from your bank account to tripalink's account
+                    </span>
+                    <span class="col-xs-12 img_container_sub_title" align="center" style="margin:0;">
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="buy_container_left buy_container_left_2" align='center' style='display:none;'>
+            <div class="col-xs-12 buy_container_title" align='center'>
+                Payment Sample
+            </div>
+            <div class="col-xs-12 buy_container_subtitle" align='center' style="margin-bottom:50px;">
+                Reserve the car with a small deposit, pay the balance with a check.
+            </div>
+            <div class="col-xs-12 buy_container_subtitle" align='center' style="margin-bottom:20px;">
+                You can use wire transfer to transfer
+            </div>
+            
+            <div class="col-xs-12" align='center'>
+                <div class="cash_sample">
+                    <div class="cash_sample_outline" align='center'>
+                        <div class="cash_sample_outline_title">
+                            CASHIER’S CHECK
+                        </div>
+                        <div class="cash_sample_outline_container">
+                            
+                            <div class="cash_sample_outline_container_left">
+                                <div class="col-xs-12 all-to-none cash_sample_outline_container_left_0">
+                                    PAY TO THE ORDER OF
+                                </div>
+                                <div class="col-xs-12 all-to-none cash_sample_outline_container_left_1">
+                                    PAY 
+                                </div>
+                            </div>
+                            <div class="cash_sample_outline_container_right">
+                                <div class="col-xs-12 cash_sample_outline_container_right_title">
+                                    Tripalink, Corp.
+                                </div>
+                                <div class="col-xs-12 cash_sample_outline_container_right_divider">
+                                </div>
+                                <div class="col-xs-12 cash_sample_outline_container_right_title">
+                                    $<%= number_with_delimiter(@car.price)%>
+                                </div>
+                                <div class="col-xs-12 cash_sample_outline_container_right_divider" style="margin-bottom:42px;">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12" align='center' style="margin-top:42px;">
+                            <div class="check_footer">
+                                <div class="col-xs-6 all-to-none" style="text-align:left;">
+                                    908070605040302010
+                                </div>
+                                <div class="col-xs-6 all-to-none" style="text-align:right;">
+                                    908070605040302010
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="paypage_button" id="pay_step_3_to_4" style="margin-top:28px;display:none">
+                    Save and Continue
+                </div>
+                <a href="tel:1 (818) 826-3318">
+                    <div class="paypage_footer">
+                        <i class="fa fa-phone-square"></i> Have Questions? Call us at:(818)826-3318
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="buy_container_left buy_container_left_3" align='center' style='display:none;'>
+            <div class="col-xs-12 buy_container_title" align='center'>
+                Wire Transfer Information
+            </div>
+            <div class="col-xs-12 buy_container_subtitle" align='center' style="margin-bottom:35px;">
+                Please make sure that your wire transfer is sending to the wire.
+            </div>
+            <div class="wire_container">
+                <span class="col-xs-12 wire_container_title all-to-none">
+                    Domestic(U.S)
+                </span>
+                <div class="col-xs-12 wire_container_left">
+                    <span class="col-xs-12 all-to-none">
+                        Bank Name:
+                    </span>
+                    <span class="col-xs-12 all-to-none">
+                        Bank Address:
+                    </span>
+                    <span class="col-xs-12 all-to-none">
+                        Bank Telephone:
+                    </span>
+                    <span class="col-xs-12 all-to-none">
+                        Routing Number:
+                    </span>
+                    <span class="col-xs-12 all-to-none">
+                        Account Name:
+                    </span>
+                    <span class="col-xs-12 all-to-none">
+                        Account Number:
+                    </span>
+                </div>
+                <div class="col-xs-12 wire_container_right">
+                    <span class="col-xs-12 all-to-none">
+                        Bank of America
+                    </span>
+                    <span class="col-xs-12 all-to-none">
+                        160 E Main Street, Alhambra, CA 91801
+                    </span>
+                    <span class="col-xs-12 all-to-none">
+                        626-578-5811
+                    </span>
+                    <span class="col-xs-12 all-to-none">
+                        026009593
+                    </span>
+                    <span class="col-xs-12 all-to-none">
+                        Tripalink Corp
+                    </span>
+                    <span class="col-xs-12 all-to-none">
+                        3250-5252-7892
+                    </span>
+                </div>
+            </div>
+            <div class="paypage_button" id="pay_step_3_to_4_1" style="margin-top:38px;display:none" >
+                Save and Continue
+            </div>
+            <a href="tel:1 (818) 826-3318">
+                <div class="paypage_footer" style="margin-top:85px;">
+                    <i class="fa fa-phone-square"></i> Have Questions? Call us at:(818)826-3318
+                </div>
+            </a>
+        </div>
+        <div class="buy_container_left buy_container_left_4" align='center' style='display:none;' align='center'>
+            <div class="col-xs-12 buy_container_title" align='center'>
+                Congratulations!
+            </div>
+            <div class="buy_container_subtitle" align='center' style="margin-bottom:35px; width:800px;">
+                Thank you! An confirmation Email has been sent to your email. We would send you a confirmation letter once the payment is processed. Our staff will contact you soon.
+            </div>
+            <div class="confirmation_container">
+                <div class="col-xs-6 all-to-none confirmation_container_left">
+                    <span class="confirmation_container_left_title">
+                        CAR INFORMATION
+                    </span>
+                    <div class="col-xs-12 all-to-none" align="left">
+                        <div class="confirmation_container_image">
+                            <div class="buy_car_image" style="background-image:url('<%= @car.car_pictures.first.picture.url%>')" ></div>
+                            <div class="buy_car_image_text">
+                                <span class="col-xs-12 all-to-none">
+                                    <%= "#{ @car.car_model.year } #{@car.car_model.make} #{@car.car_model.model}" %>
+                                </span>
+                                <span class="col-xs-12 all-to-none">
+                                    <%= "#{ @car.car_model.body } | #{@car.ext_color}"%>
+<!--                                    #{@car.exterior_color}-->
+                                </span>
+                                <span class="col-xs-12 all-to-none">
+                                    <%= number_with_delimiter(@car.mileage) %>                                  
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='col-xs-12 all-to-none confirmation_car_detail_title' align='left'>
+                        Car Detail
+                    </div>
+                    <div class='col-xs-12 all-to-none confirmation_car_detail_container' align='left'>
+                        <ul class='confirmation_car_detail_content_title'>
+                            <li>
+                                Mileage
+                            </li>
+                            <li>
+                                Body Style
+                            </li>
+                            <li>
+                                Engine
+                            </li>
+                            <li>
+                                Drivetrain
+                            </li>
+                            <li>
+                                Exterior Color
+                            </li>
+                            <li>
+                                Interior Color
+                            </li>
+                            <li>
+                                Fuel
+                            </li>
+                            <li>
+                                Vin Number
+                            </li>
+                        </ul>
+                        <ul class="confirmation_car_detail_content">
+                            <li>
+                                <%= number_with_delimiter(@car.mileage) %> 
+                            </li>
+                            <li>
+                                <%= "#{ @car.car_model.body }"%> 
+                            </li>
+                            <li>
+                                <% s = @car.car_model.styleName %>
+                                <% if s.index('(') && s.index(')') %>
+                                <% s = s[(s.index("(") + 1)...s.index(")")]%>
+                                <% end %>
+                                <%= s %> 
+                            </li>
+                            <li>
+                                <%= "#{ @car.car_model.driveTrain }"%> 
+                            </li>
+                            <li>
+                                <%= "#{ @car.ext_color }"%> 
+                            </li>
+                            <li>
+                                <%= "#{ @car.int_color }"%> 
+                            </li>
+                            <li>
+                                <%= "#{ @car.car_model.engineType }"%> 
+                            </li>
+                            <li>
+                                <%= "#{ @car.vin }"%> 
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-xs-6 all-to-none confirmation_container_right " style="height:100%;">
+                    <span class="confirmation_container_left_title">
+                        BUYER INFORMATION
+                    </span>
+                    <ul class="col-xs-12 all-to-none confirmation_container_buyer_information">
+                        <li>
+                            <%= current_user.name%>
+                        </li>
+                        <li>
+                            <%= current_user.email%>
+                        </li>
+                        <li>
+                            <%= current_user.phone%>
+                        </li>
+                        <li>
+                            <%= "#{ current_user.address }, #{ current_user.city }, #{ current_user.state}, #{ current_user.zipcode}" %>
+                        </li>
+                    </ul>
+                    <span class="confirmation_container_left_title" style="margin-top:40px;">
+                        PAYMENT
+                    </span>
+                    <div class="col-xs-12 all-to-none divider" style="position: absolute;top: 262px;left:0px; height:1px;">
+                    </div>
+                    <ul class="col-xs-6 all-to-none payment_content_container">
+                        <li>
+                            Total Price
+                        </li>
+                        <li>
+                            Deposit
+                        </li>
+                        
+                        <li class="balance_li">
+                            Balance
+                        </li>
+                                                
+                        <li>
+                            Deposit Paid by
+                        </li>
+                                                
+                        <li>
+                            Balance will pay by
+                        </li>
+                    </ul>
+                    <ul class="col-xs-6 all-to-none payment_content_container payment_content_container_left " style="text-align:right;">
+                        <li>
+                            $<%= number_with_delimiter(@car.price)%>
+                        </li>
+                        <li>
+                            -$500
+                        </li>
+                        
+                        <li class="balance_li">
+                            $<%= (number_with_delimiter(@car.price  - 500)) %>
+                        </li>
+                                                
+                        <li>
+                            Credit Card
+                        </li>
+                                                
+                        <li>
+                            Wire Transfer
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="buy_container_right">
+            <span class="col-xs-12 buy_container_right_title">
+                CAR DETAIL
+            </span>
+            <div class="col-xs-12 all-to-none buy_container_right_subtitle">
+                <div class="buy_car_image" style="background-image:url('<%= @car.car_pictures.first.picture.url%>')">  
+                </div>
+                <div class="buy_container_right_car_detail">
+                    <div class="col-xs-12 buy_container_right_car_detail_title">
+                        <%= "#{ @car.car_model.year } #{@car.car_model.make}" %>
+                    </div>
+                    <span class="col-xs-12 buy_container_right_car_detail_subtitle">
+                        <%= "#{@car.car_model.body} #{@car.car_model.model}" %>
+                    </span>
+                    <span class="col-xs-12 buy_container_right_car_detail_subtitle">
+                        <%= "#{@car.mileage}" %> Miles
+                    </span>
+                </div>
+            </div>
+            <div class="col-xs-12 divider">
+            </div>
+            <span class="col-xs-12 buy_container_right_title">
+                PAYMENT
+            </span>
+            <div class="col-xs-12 all-to-none buy_container_right_subtitle_1">
+                <span class="col-xs-8 payment_detail_0">
+                    Car Price
+                </span>
+                <span class="col-xs-4 payment_detail_1">
+                    $<%= number_with_delimiter(@car.price)%>
+                </span>
+                <span class="col-xs-8 payment_detail_0">
+                    Estimated Tax
+                </span>
+                <span class="col-xs-4 payment_detail_1">
+                    $<%= number_with_delimiter(@car.price * 0.09)%>
+                </span>
+                <span class="col-xs-8 payment_detail_0">
+                    Registration
+                </span>
+                <span class="col-xs-4 payment_detail_1">
+                    $<%= number_with_delimiter(@car.price_registration_fee) %>
+                </span>
+                <span class="col-xs-8 payment_detail_0">
+                    Government Document Fee
+                </span>
+                <span class="col-xs-4 payment_detail_1">
+                    $<%= number_with_delimiter(@car.price_document_fee) %>
+                </span>
+                <span class="col-xs-8 payment_detail_0" style="margin-bottom:12px">
+                    Service Fee
+                </span>
+                <span class="col-xs-4 payment_detail_1" style="margin-bottom:12px">
+                    $<%= number_with_delimiter(@car.price_service_fee) %>
+                </span> 
+                <span class="col-xs-8 payment_detail_0 after_deposit" style="margin-bottom:15px; display: none">
+                    Deposit
+                </span>
+                <span class="col-xs-4 payment_detail_1 after_deposit" style="margin-bottom:15px; display: none">
+                    -$500
+                </span>
+                <div class="col-xs 12 after_deposit after_deposit_line" style="display:none;">
+                </div>
+                <span class="col-xs-8 payment_detail_0_b" >
+                    Total
+                </span>
+                <span class="col-xs-4 payment_detail_1_b">
+                    $<%= number_with_delimiter(@car.price + @car.price * 0.09 + @car.price_registration_fee + @car.price_document_fee + @car.price_service_fee - 500) %>
+                </span>
+            </div>
+            <div class="col-xs-12 divider">
+            </div >
+            <span class="col-xs-12 buy_container_right_title">
+                BUYER INFO
+            </span>
+            <div class="col-xs-12 all-to-none buy_container_right_subtitle">
+                <div class="col-xs-12 all-to-none payment_detail_0">
+                    <%= current_user.name%>
+                </div>
+                <div class="col-xs-12 all-to-none payment_detail_0">
+                    <%= current_user.email%>
+                </div>
+                <div class="col-xs-12 all-to-none payment_detail_0">
+                    <%= "(#{current_user.phone.to_i / 10000000})#{current_user.phone.to_i / 10000 % 1000}-#{current_user.phone.to_i % 10000}" %>
+                </div>
+                <div class="col-xs-12 all-to-none payment_detail_0">
+                    <%= current_user.address %>
+                </div>
+                <div class="col-xs-12 all-to-none payment_detail_0">
+                    <%= current_user.city %>, <%= current_user.state %>, <%= current_user.zipcode %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="callusBox" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel" style="font-size:20px; font-weigth:500; color:black">Call us now!</h4>
+      </div>
+      <div class="modal-body">
+         <span style="font-size:20px; font-weigth:500; color:#4A90E2">
+            (866)686-4246
+         <span>
+
+      </div>
+      <div class="modal-footer">
+         <span class='col-xs-12'style="font-size:14px; color:black">
+             Online payment will be available this Thursday (Sept 3, 2015)!
+         <span>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+          
+<script>
+    var email = '<%= current_user.email%>';
+    var tel = '';
+//      Stripe.setPublishableKey('pk_live_vi7hZGzSCYavQ8oS5yCmQo4F'); //payment key
+      Stripe.setPublishableKey('pk_test_PTEdUo4FnsdPVYZz8DBthrSz'); //test key
+      $(function() {
+          $(window).scroll(function(){
+              var scrollTop = $(window).scrollTop();
+              if(scrollTop != 0) {
+                $('header').css('background','rgba(74,144,226,1)');
+                $('.nav_title, .nav_item > a > div, .signInBtn').css('color','white');  
+                $('.signUpBtn').css('background-color','white');
+                $('.signUpBtn, .signout a').css('color','rgba(74,144,226,1)');
+              }
+              else {
+                $('header').css('background','rgba(74,144,226,1)');
+                $('.nav_title, .nav_item > a > div, .signInBtn').css('color','white');  
+                $('.signUpBtn').css('background-color','white');
+                $('.signUpBtn, .signout a').css('color','rgba(74,144,226,1)'); 
+              }
+          });
+      });
+    jQuery(function($) {
+      $('#pay_step_0_to_1').click(function(){
+      //$('#payment-form').submit(function(event) {
+        tel = $('#credit_card_tel').val();
+        console.log('submitted');
+        var $form = $('#payment-form');
+
+        // Disable the submit button to prevent repeated clicks
+        $form.find('paypage_button').prop('disabled', true);
+
+        Stripe.card.createToken($form, stripeResponseHandler);
+
+        // Prevent the form from submitting with the default action
+        return false;
+      });
+    });
+    function stripeResponseHandler(status, response) {
+         
+      var $form = $('#payment-form');
+
+      if (response.error) {
+        // Show the errors on the form
+        $form.find('.payment-errors').text(response.error.message);
+        $form.find('button').prop('disabled', false);
+      } else {
+        // response contains id and card, which contains additional card details
+        var token = response.id;
+        // Insert the token into the form so it gets submitted to the server
+//        $form.append($('<input type="hidden" name="stripeToken" />').val(token));
+//        // and submit
+//        $form.get(0).submit();
+
+          $.ajax({
+                url: '../charges/charge',
+                type:'post',
+                data:'stripeToken=' + token + '&email=' + email + '&phone=' + tel + '&carid=<%= params[:car_id]%>',
+                dataType: 'json',
+                success:function(json){
+                    console.log(json);
+                    if(json['status']){
+                        $('.buy_container_left_0').fadeOut(function(){
+                            $('.buy_container_left_1').fadeIn();
+                            $('.after_deposit').fadeIn();
+                        });
+                        $('#sell_car_step_2').removeClass('last_step');
+                        $('#sell_car_step_2').removeClass('next_step');        
+                        $('#sell_car_step_2').addClass('current_step');
+                        $('.sell_step_2_circle > .last_step_circle').css('display','none');
+                        $('.sell_step_2_circle > .next_step_circle').css('display','none');
+                        $('.sell_step_2_circle > .current_step_circle').css('display','block');
+
+                        $('#sell_car_step_1').removeClass('current_step');
+                        $('#sell_car_step_1').addClass('last_step');
+                        $('#sell_car_step_1').removeClass('next_step');
+                        $('.sell_step_1_circle > .last_step_circle').css('display','block');
+                        $('.sell_step_1_circle > .next_step_circle').css('display','none');
+                        $('.sell_step_1_circle > .current_step_circle').css('display','none');
+                    }else{
+                        alert('Your payment has been denied, please try again or choose other payment card.')
+                    }
+                }
+          })
+      }
+    };
+    $('.options_box_0').mouseenter(function(){
+    $(this).addClass('options_box_actived');  
+    $('.options_box_1').removeClass('options_box_actived');
+    $('.options_box_0 img').css('content' ,'url(<%= asset_path "buypage/check_0.png" %>)');
+    $('.options_box_1 img').css('content' ,'url(<%= asset_path "buypage/transfer_1.png" %>)'); 
+    }) 
+    $('.options_box_1').mouseenter(function(){
+    $(this).addClass('options_box_actived');
+    $('.options_box_0 img').css('content' ,'url(<%= asset_path "buypage/check_1.png" %>)');
+    $('.options_box_1 img').css('content' ,'url(<%= asset_path "buypage/transfer_0.png" %>)'); 
+    $('.options_box_0').removeClass('options_box_actived'); 
+    }) 
+
+
+    $('.options_box_1').mouseleave(function(){
+    $('.options_box_0').addClass('options_box_actived');
+    $('.options_box_0 img').css('content' ,'url(<%= asset_path "buypage/check_0.png" %>)');
+    $('.options_box_1 img').css('content' ,'url(<%= asset_path "buypage/transfer_1.png" %>)'); 
+    $('.options_box_1').removeClass('options_box_actived'); 
+    }) 
+//    $('#pay_step_0_to_1').click(function(){
+         
+//      $('.buy_container_left_0').fadeOut(function(){
+//          $('.buy_container_left_1').fadeIn();
+//          $('.after_deposit').fadeIn();
+//      });
+//        $('#sell_car_step_2').removeClass('last_step');
+//        $('#sell_car_step_2').removeClass('next_step');        
+//        $('#sell_car_step_2').addClass('current_step');
+//        $('.sell_step_2_circle > .last_step_circle').css('display','none');
+//        $('.sell_step_2_circle > .next_step_circle').css('display','none');
+//        $('.sell_step_2_circle > .current_step_circle').css('display','block');
+//
+//        $('#sell_car_step_1').removeClass('current_step');
+//        $('#sell_car_step_1').addClass('last_step');
+//        $('#sell_car_step_1').removeClass('next_step');
+//        $('.sell_step_1_circle > .last_step_circle').css('display','block');
+//        $('.sell_step_1_circle > .next_step_circle').css('display','none');
+//        $('.sell_step_1_circle > .current_step_circle').css('display','none');
+//    })
+    $('.options_box_0').click(function(){
+        $('.buy_container_left_1').fadeOut(function(){
+            $('.buy_container_left_2').fadeIn();
+        })
+        $('#sell_car_step_3').removeClass('last_step');
+        $('#sell_car_step_3').removeClass('next_step');        
+        $('#sell_car_step_3').addClass('current_step');
+        $('.sell_step_3_circle > .last_step_circle').css('display','none');
+        $('.sell_step_3_circle > .next_step_circle').css('display','none');
+        $('.sell_step_3_circle > .current_step_circle').css('display','block');
+
+        $('#sell_car_step_2').removeClass('current_step');
+        $('#sell_car_step_2').addClass('last_step');
+        $('#sell_car_step_2').removeClass('next_step');
+        $('.sell_step_2_circle > .last_step_circle').css('display','block');
+        $('.sell_step_2_circle > .next_step_circle').css('display','none');
+        $('.sell_step_2_circle > .current_step_circle').css('display','none');
+    })
+    $('.options_box_1').click(function(){
+        $('.buy_container_left_1').fadeOut(function(){
+            $('.buy_container_left_3').fadeIn();
+        })
+        $('#sell_car_step_3').removeClass('last_step');
+        $('#sell_car_step_3').removeClass('next_step');        
+        $('#sell_car_step_3').addClass('current_step');
+        $('.sell_step_3_circle > .last_step_circle').css('display','none');
+        $('.sell_step_3_circle > .next_step_circle').css('display','none');
+        $('.sell_step_3_circle > .current_step_circle').css('display','block');
+
+        $('#sell_car_step_2').removeClass('current_step');
+        $('#sell_car_step_2').addClass('last_step');
+        $('#sell_car_step_2').removeClass('next_step');
+        $('.sell_step_2_circle > .last_step_circle').css('display','block');
+        $('.sell_step_2_circle > .next_step_circle').css('display','none');
+        $('.sell_step_2_circle > .current_step_circle').css('display','none');
+    })
+    $('#pay_step_3_to_4').click(function(){
+          $('.buy_container_left_2, .buy_container_right').fadeOut(function(){
+          $('.buy_container_left_4').fadeIn();     
+      });
+        $('#sell_car_step_4').removeClass('last_step');
+        $('#sell_car_step_4').removeClass('next_step');        
+        $('#sell_car_step_4').addClass('current_step');
+        $('.sell_step_4_circle > .last_step_circle').css('display','none');
+        $('.sell_step_4_circle > .next_step_circle').css('display','none');
+        $('.sell_step_4_circle > .current_step_circle').css('display','block');
+
+        $('#sell_car_step_3').removeClass('current_step');
+        $('#sell_car_step_3').addClass('last_step');
+        $('#sell_car_step_3').removeClass('next_step');
+        $('.sell_step_3_circle > .last_step_circle').css('display','block');
+        $('.sell_step_3_circle > .next_step_circle').css('display','none');
+        $('.sell_step_3_circle > .current_step_circle').css('display','none');
+    })
+    $('#pay_step_3_to_4_1').click(function(){
+          $('.buy_container_left_3, .buy_container_right').fadeOut(function(){
+          $('.buy_container_left_4').fadeIn();
+      });
+        $('#sell_car_step_4').removeClass('last_step');
+        $('#sell_car_step_4').removeClass('next_step');        
+        $('#sell_car_step_4').addClass('current_step');
+        $('.sell_step_4_circle > .last_step_circle').css('display','none');
+        $('.sell_step_4_circle > .next_step_circle').css('display','none');
+        $('.sell_step_4_circle > .current_step_circle').css('display','block');
+
+        $('#sell_car_step_3').removeClass('current_step');
+        $('#sell_car_step_3').addClass('last_step');
+        $('#sell_car_step_3').removeClass('next_step');
+        $('.sell_step_3_circle > .last_step_circle').css('display','block');
+        $('.sell_step_3_circle > .next_step_circle').css('display','none');
+        $('.sell_step_3_circle > .current_step_circle').css('display','none');
+    })
+</script>

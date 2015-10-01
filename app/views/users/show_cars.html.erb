@@ -1,0 +1,25 @@
+<div class="row checkbox-container">
+  <span class="button-checkbox">
+        <button id="inspected" type="button" class="btn" data-color="primary">Inspected</button>
+        <input type="checkbox" class="hidden" />
+  </span>
+  <span class="button-checkbox">
+      <button id="listing" type="button" class="btn" data-color="primary">Selling</button>
+      <input type="checkbox" class="hidden" />
+  </span>
+  <span class="button-checkbox">
+      <button id="sale-pending" type="button" class="btn" data-color="primary">Sale pending</button>
+      <input type="checkbox" class="hidden" />
+  </span>
+  <span class="button-checkbox">
+      <button id="sold" type="button" class="btn" data-color="primary">Sold</button>
+      <input type="checkbox" class="hidden" />
+  </span>
+</div>
+<div class="row car-portfolio-container">
+  <ul class="portfolio-list sort-destination" data-sort-id="portfolio">
+    <% @cars.each do |car| %>
+      <%= render partial: "shared/car", locals: {car: car, status: car_status_str(car.status)} %>
+    <% end %>
+  </ul>
+</div>

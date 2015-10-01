@@ -1,0 +1,170 @@
+<%= provide(:title, 'Schedule Appointments') %>
+
+<div class="container">
+  <hr class="tall">
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="mb-none"><strong>Schedule Appointments</strong></h2>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+
+      <%= form_tag('scheduleAppointments', method: :post) do |f|%>
+
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            Available Time Windows:
+          </h4>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <div class="col-md-12">
+              <%= render 'shared/time_window' %>
+            </div>
+          </div>
+        </div>
+
+        <div id="time_window_ids">
+          <% time_windows = @working_time_windows %>
+          <% if time_windows.size != 0 %>
+              <% time_windows.each do |tw| %>
+                  <%= hidden_field_tag "time_window_ids[]", tw.id %>
+              <% end %>
+          <% else %>
+              <%= hidden_field_tag "time_window_ids[]", :multiple => true %>
+          <% end %>
+        </div>
+
+          <div class="">
+            <% @appointments.each do |apt| %>
+            <div class="row">
+             <div class="col-md-12">
+
+             </div>
+            </div>
+            <% end %>
+
+            <table class="table col-md-12">
+              <thead>
+                <th>Date Time</th>
+                <th>Highlight</th>
+                <th>Action</th>
+                <th>Appointment Type</th>
+                <th>Address</th>
+                <th>Customer</th>
+                <th>Change/Cancel</th>
+              </thead>
+              <% @appointments.each do |apt| %>
+                  <% time_windows = TimeWindow.where(id: apt.time_window_ids) %>
+                  <tr apt_id="<%= apt.id %>">
+                    <td>
+                      <% time_windows.each do |time_window| %>
+                          <div>
+                            <span class="">
+                              <%= "#{time_window.date}, #{time_window.date.strftime("%A")}" %>
+                            </span>
+                            <span class="pull-right">
+                              <%= "#{time_window.hour}:00".to_time.strftime("%l %P") %>
+                            </span>
+                          </div>
+                      <% end %>
+                    </td>
+                    <td>
+                      <div>
+                        <%= link_to 'Hightlight', "#", data: {appointment_id: apt.id}, class: "highlighter" %>
+                      </div>
+                    </td>
+                    <td>
+                      <% time_windows.each do |time_window| %>
+                          <div>
+                            <%= link_to 'Accept', "#",
+                                        data: { appointment_id: apt.id, time_window_id: time_window.id, toggle: "modal", target: "#myModal" },
+                                        class: "accept_link" %>
+                          </div>
+                      <% end %>
+                    </td>
+                    <td><%= apt.apt_type %></td>
+                    <td><%= "#{apt.address}, #{apt.city}, #{apt.state}, #{apt.zipcode}" %></td>
+                    <td><%= link_to apt.user.name, apt.user %></td>
+                    <td>
+                      <a href='#'>contact us</a>
+                    </td>
+                  </tr>
+              <% end %>
+            </table>
+          </div>
+
+
+
+          <div class="row">
+            <div class="form-group">
+              <div class="col-md-12">
+                <%= submit_tag "Submit", class: "btn btn-primary pull-right mb-xl" %>
+              </div>
+            </div>
+          </div>
+      <% end %>
+
+      <!-- Modal -->
+      <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Address</h4>
+            </div>
+            <div class="modal-body">
+              <p>Please input the address of the car at the time of the appointment.</p>
+              <%= form_tag('scheduleAppointments', method: :post) do |f| %>
+                  <div class="row">
+                    <div class="form-group">
+                      <div class="col-md-12">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <%= text_field_tag :car_address, nil, placeholder: 'Address', class: 'form-control' %>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <div class="row">
+                          <div class="col-md-5">
+                            <%= text_field_tag :car_city, nil, placeholder: 'City', class: 'form-control' %>
+                          </div>
+                          <div class="col-md-3">
+                            <%= text_field_tag :car_state, nil, placeholder: 'State', class: 'form-control' %>
+                          </div>
+                          <div class="col-md-4">
+                            <%= text_field_tag :car_zipcode, nil, placeholder: 'Zipcode', class: 'form-control' %>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <%= hidden_field_tag :appointment_id %>
+                  <%= hidden_field_tag :time_window_id %>
+                  <div class="row">
+                    <div class="form-group">
+                      <div class="col-md-12">
+                        <%= submit_tag "Submit", class: "btn btn-primary pull-right mb-xl" %>
+                      </div>
+                    </div>
+                  </div>
+              <% end %>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<%= render 'shared/time_window_script_schedule' %>

@@ -1,0 +1,27 @@
+<div class="timeline-badge danger"><i class="fa fa-paint-brush"></i></div>
+<div class="timeline-panel">
+  <i class="glyphicon glyphicon-chevron-down timeline-panel-btn"></i>
+  <div class="timeline-heading">
+    <h4 class="timeline-title">Car Colors</h4>
+  </div>
+  <div class="timeline-body">
+    <div class="tabbable-panel">
+      <div class="tabbable-line">
+        <ul class="nav nav-tabs ">
+          <li class="active">
+            <a href="#interior_color" data-toggle="tab">Interior</a>
+          </li>
+          <li>
+            <a href="#exterior_color" data-toggle="tab">Exterior</a>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <%= render partial: 'color_picker',
+                     locals: { car_color: @car.interior_color, color_type: "interior_color", form: form }%>
+          <%= render partial: 'color_picker',
+                     locals: { car_color: @car.exterior_color, color_type: "exterior_color", form: form }%>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

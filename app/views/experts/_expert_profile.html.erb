@@ -1,0 +1,49 @@
+ <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 toppad" >
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <%= content_tag "h3", current_expert.name, class: "panel-title" %>
+    </div>
+    <div class="panel-body">
+      <%= form_for(@expert) do |f| %>
+      <div class="row same-height-table">
+        <div class="col-md-4 col-lg-4 picture-container same-height-col" align="center">
+          <% avatar = @expert.avatar? ? @expert.avatar.url : "default_avatar.png" %>
+          <div class="thumbnail">
+            <%= image_tag avatar, class: "img-responsive picture-preview" %>
+            <div class="caption">
+              <p>
+                <a type="button" class="picture-upload-btn btn btn-sm btn-primary">Change Avatar</a>
+              </p>
+            </div>
+          </div>
+          <%= f.file_field :avatar, class: "picture-file-field" %>
+        </div>
+        <div class=" col-md-8 col-lg-8 same-height-col info-form-container">
+          <table class="table table-user-information">
+            <tbody>
+              <tr>
+                <td>Name:</td>
+                <td><%= f.text_field :name, class: "form-control" %></td>
+              </tr>
+              <tr>
+                <td>Email address:</td>
+                <td><%= f.text_field :email, class: "form-control" %></td>
+              </tr>
+              <tr>
+                <td>Phone Number</td>
+                <td><%= f.text_field :phone, class: "form-control" %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="panel-footer">
+        <%= f.submit "Update", class: "btn btn-sm btn-success" %>
+        <span class="pull-right">
+          <a type="button" class="btn btn-sm btn-danger">Cancel</a>
+        </span>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+<% existing_features_set = {} %>
+<% @car.features.each do |existing_feature| %>
+  <% existing_features_set[existing_feature.name] = 1 %>
+<% end %>
+<% CarFeature.all.each do |feature| %>
+  <div class="col-md-4">
+    <div class="well well-sm">
+      <div class="checkbox">
+        <%= fields_for :feature do |feature_form| %>
+          <label>
+            <%= feature_form.check_box feature.name, checked: existing_features_set.include?(feature.name) %>
+            <%= feature.name %>
+          </label>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>
+

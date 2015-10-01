@@ -1,0 +1,439 @@
+<!--<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
+
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <%= content_tag "h3", current_user.name, class: "panel-title" %>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-3 col-lg-3 " align="center">
+              <img alt="User Pic" src="http://babyinfoforyou.com/wp-content/uploads/2014/10/avatar-300x300.png"
+                   class="img-circle img-responsive">
+            </div>
+            <div class=" col-md-9 col-lg-9 ">
+              <table class="table table-user-information">
+                <tbody>
+                <tr>
+                  <td>User Name:</td>
+                  <%= content_tag "td", current_user.name %>
+                </tr>
+                <tr>
+                  <td>Email address:</td>
+                  <%= content_tag "td", current_user.email %>
+                </tr>
+                <tr>
+                  <td>Phone Number</td>
+                  <%= content_tag "td", current_user.phone %>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="panel-footer">
+          <%= link_to edit_user_path(current_user), data: { "original-title" => "Edit", "toggle" => "tooltip"},
+                      type: "button", class: "btn btn-sm btn-warning" do %>
+            <i class="glyphicon glyphicon-edit"></i>
+          <% end %>
+          <span class="pull-right">
+            <a data-original-title="Remove this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-danger">
+              <i class="glyphicon glyphicon-remove"></i>
+            </a>
+          </span>
+        </div>
+      </div>
+    </div>
+    <table class="table">
+      <tr>
+        <td>Name</td>
+        <td><%= @user.name %></td>
+      </tr>
+
+      <tr>
+        <td>Email</td>
+        <td><%= @user.email %></td>
+      </tr>
+
+      <tr>
+        <td>Phone</td>
+        <td><%= @user.phone %></td>
+      </tr>
+    </table>
+
+    <% apts = @user.appointments.joins(:time_window).order("time_windows.date DESC, time_windows.hour DESC") %>
+    <% unless apts.empty? %>
+      <div class="col-md-12"> <h4>Appointments</h4> </div>
+      <table class="table">
+        <tr>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Appointment Type</th>
+          <th>Address</th>
+          <th>Genius</th>
+          <th>Change/Cancel</th>
+        </tr>
+        <% apts.each do |apt| %>
+          <% time_window = apt.time_window ? apt.time_window :
+                  apt.time_window_ids && apt.time_window_ids.size > 0 ? TimeWindow.find(apt.time_window_ids[0]) : nil %>
+          <tr>
+            <% if time_window %>
+            <td><%= "#{time_window.date}, #{time_window.date.strftime("%A")}" %></td>
+            <% if apt.appointment_type == 0 %>
+            <td><a href="<%= sell_request_path(apt.sell_request) %>"><%= "#{time_window.hour}:00".to_time.strftime("%l %P") %></a></td>
+            <% else %>
+            <td><a href="<%= appointment_path(apt) %>"><%= "#{time_window.hour}:00".to_time.strftime("%l %P") %></a></td>
+            <% end %>
+            <% else %>
+            <td>N/A</td>
+            <td>N/A</td>
+            <% end %>
+            <td><%= apt.apt_type %></td>
+            <td><%= "#{apt.address}, #{apt.city}, #{apt.state}, #{apt.zipcode}" %></td>
+            <td><%= link_to apt.expert.name, apt.expert %></td>
+            <td>
+              <%= link_to "Change", edit_appointment_path(apt) %> / 
+              <%#= link_to "Cancel", appointment_path(apt), method: :delete %>
+              <a data-toggle="modal" data-target="#myModal" href="#">Cancel</a>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+    <% end %>
+
+    <%= render 'shared/appointment_cancel_alert' %>
+
+  </div>
+</div>
+<!-- -->
+<style>
+    body{
+        overflow:auto;
+        background-color:#F9F9FB;
+    }
+    .home_page_footer{
+        background-color:transparent;
+    }
+    header{
+        background-color: rgb(74,144,226);
+        min-width:1280px;
+    }
+    ul{
+        list-style-type: none;
+    }
+    .nav_title, .nav_item > a > div{
+        color:white;
+    }
+    .signInBtn{
+        color:white;
+    }
+    .signUpBtn{
+        color:rgb(74,144,226);
+        background-color:white;
+    }
+    .signUpBtn > span > a {
+        color: rgb(74,144,226);
+    }
+    .form_user_photo:hover img{
+        content:url("<%= asset_path 'user_center/uploader_0.png' %>");
+    }
+</style>
+<div class="col-xs-12" align="center">
+    <div class="user_center_container">
+        <div class="user_center_left_container">
+            <div class='user_center_nav'>
+                <a href="/">
+                    <span>Home</span>
+                </a>
+                &nbsp;>&nbsp;
+                <span>
+                    User Center
+                </span>
+            </div>
+            <div class="user_center_left_bar">
+                <div class="user_center_left_bar_title">
+                    User Center
+                </div>
+                <div class="divider-line" style="margin-left:-20px;">
+                </div>
+                <ul class="user_center_left_bar_list">
+                    
+                        <a href="<%= buy_transactions_user_path current_user %>">
+                            <li>
+                                <div class="list_square">
+                                </div>
+                                <span>
+                                    My Purchasing
+                                </span>
+                            </li>
+                        </a>
+                    
+                    <li>
+                        <a href="<%= sell_transactions_user_path current_user %>">
+                            <div class="list_square">
+                            </div>
+                            <span>
+                                My Selling
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<%= appointments_user_path current_user %>">
+                            <div class="list_square">
+                            </div>
+                            <span>
+                                My Appointment
+                            </span>
+                        </a>
+                    </li>
+                    <li class="user_center_active">
+                        <a href="<%= user_path current_user %>">
+                            <div class="list_square">
+                            </div>
+                            <span>
+                                My Profile
+                            </span>
+                        </a>
+                    </li>
+                    <li style="cursor:not-allowed">
+                        <div class="list_square">
+                        </div>
+                        <span>
+                            My Wish List (Future)
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="user_center_right_container">
+            <div class="user_center_left_bar_title">
+                MY PROFILE
+            </div>
+            <div class="divider-line" style="margin-left:-20px;">
+            </div>
+            
+            <%= form_for(@user) do |f| %>
+                <div class="user_center_form_up">
+                    <div class="form_left_column">
+                        Full Name
+                    </div>
+                    <% s = current_user.name; pos = s.rindex(' '); pos = s.size if pos == nil%>
+<!--                    <input class="" value="<%= s[ 0...pos ]%>"/>-->
+                    <%= f.text_field :name, class: "form_right_column" %>
+<!--
+                    <div class="form_left_column">
+                        Last Name
+                    </div>
+                    <input class="form_right_column" value="<%= s[ pos + 1 ... s.size ]%>"/>
+-->
+                    <div class="form_left_column">
+                        Email
+                    </div>
+                    <%= f.text_field :email, class: "form_right_column" %>
+<!--                    <input class="form_right_column" value="<%= current_user.email%>"/>-->
+                    <div class="form_left_column">
+                        Phone Number
+                    </div>
+                    <%= f.text_field :phone, class: "form_right_column" %>
+<!--                    <input class="form_right_column" value="<%= current_user.phone%>"/>-->
+                </div>
+                <div class="form_user_photo" align="center">
+                    <img src="<%= asset_path 'user_center/uploader.png' %>" width="50px" height="50px"/>
+                    <div class="user_photo_text_0">
+                        Drag photo here or
+                    </div>
+                    <div class="user_photo_text_1">
+                        Choose photo
+                    </div>
+                </div>
+                <div class="user_center_form_below">
+                    <div class="col-xs-12 all-to-none">
+                        <div class="form_left_column">
+                            Address Line1
+                        </div>
+                        <%= f.text_field :address, class: "form_right_column", style: "width:440px;"%>
+<!--                        <input class="form_right_column" value="<%= current_user.address %>" style="width:440px;"/>-->
+                    </div>
+                    <div class="col-xs-12 all-to-none">
+                        <div class="form_left_column">
+                            Address Line2(optional)
+                        </div>
+                        <input class="form_right_column" value="" style="width:440px;"/>
+                    </div>
+                    <div class="col-xs-12 all-to-none">
+                        <div class="form_left_column">
+                            City
+                        </div>
+                        <%= f.text_field :city, class: "form_right_column"%>
+                    </div>
+                    <div class="col-xs-12 all-to-none">
+                        <div class="form_left_column">
+                            State
+                        </div>
+                        <%= f.text_field :state, class: "form_right_column"%>
+                    </div>
+                    <div class="col-xs-12 all-to-none">
+                        <div class="form_left_column">
+                            Zip Code
+                        </div>
+                        <%= f.text_field :zipcode, class: "form_right_column"%>
+                    </div>
+                    <div class="col-xs-12 all-to-none">
+                        <div class="form_left_column">
+                        </div>
+                        <div class="form_right_column_btn">
+                            <%= f.submit "Save", class: "user_save_btn" %>
+<!--
+                            <div class="user_save_btn">
+                                Save
+                            </div>
+-->
+                            <div class="user_cancel_btn">
+                                Cancel
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <% end %>
+            
+            <div class="divider-line" style="margin-left:-20px; position:relative; top:440px;">
+            </div>
+            <div class="user_center_form_up" style="margin-top:15px;">
+                <div class="form_left_column">
+                    Password
+                </div>
+                <input class="form_right_column" type="password" />
+                <div class="form_left_column">
+                    New Password
+                </div>
+                <input class="form_right_column" type="password"/>
+                <div class="form_left_column">
+                    Confirm Password
+                </div>
+                <input class="form_right_column" type="password"/>
+                <div class="form_left_column">
+                    
+                </div>
+                <div class="form_right_column_btn">
+                    <input type="submit" name="commit" value="Save" class="user_save_btn">
+                    <div class="user_cancel_btn">
+                        Cancel
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 home_page_footer all-to-none">
+          <div class="col-xs-12 all-to-none footer_upper">
+              <div class="footer_upper_left all-to-none">
+                 
+              </div>
+              <div class="footer_upper_middle all-to-none">
+                  <a href="/faq">
+                      <div class="col-xs-3 all-to-none" style="text-align:center;">
+                          FAQ
+                      </div>
+                  </a>
+                  <div class="col-xs-3 all-to-none" style="text-align:center;">
+                      About Us
+                  </div>
+                  <a href="/terms_policy">
+                      <div class="col-xs-3 all-to-none" style="text-align:center;">
+                          Terms & Policy
+                      </div>
+                  </a>
+                  <a href="mailto:tripalink.helpcenter@gmail.com">
+                      <div class="col-xs-3 all-to-none" style="text-align:center;">
+                          Contact Us
+                      </div>
+                  </a>
+              </div>
+              <div class="footer_upper_right all-to-none">
+                  <div style="max-width: 190px;">
+                     <a href="https://www.facebook.com/pages/Tripalink/1045740125437551">      
+                         <div class="col-xs-3 foot_img_0">
+                             <img src="<%= asset_path 'homepage/facebook.png' %>" width="40px" height="40px" />
+                         </div>
+                     </a>
+                     <a href="https://twitter.com/tripalink">
+                         <div class="col-xs-3 foot_img_1">
+                             <img src="<%= asset_path 'homepage/twitter.png' %>" width="40px" height="40px" />
+                         </div>
+                     </a>
+                     <div class="col-xs-3 foot_img_2" style="cursor:not-allowed">
+                         <img src="<%= asset_path 'homepage/weibo.png' %>" width="40px" height="40px" />
+                     </div>
+                     <div class="col-xs-3 foot_img_3" style="cursor:not-allowed">
+                         <img src="<%= asset_path 'homepage/wechat.png' %>" width="40px" height="40px" />
+                     </div>
+                  </div>
+              </div>
+              <div class="col-xs-12" align="center">
+                  <div class='footer_lower'>
+                      2015 Tripalink Corp. All Rights Reserved.
+                  </div>
+              </div>
+           </div>
+       </div>
+</div>
+<script>
+  $(function() {
+      $('.form_right_column')
+      $(window).scroll(function(){
+          var scrollTop = $(window).scrollTop();
+          if(scrollTop != 0) {
+            $('header').css('background','rgba(74,144,226,0.8)');
+            $('.nav_title, .nav_item > a > div, .signInBtn').css('color','white');  
+            $('.signUpBtn').css('background-color','white');
+            $('.signUpBtn, .signout a').css('color','rgba(74,144,226,1)');
+          }
+          else {
+            $('header').css('background','rgba(74,144,226,0.8)');
+            $('.nav_title, .nav_item > a > div, .signInBtn').css('color','white');  
+            $('.signUpBtn').css('background-color','white');
+            $('.signUpBtn, .signout a').css('color','rgba(74,144,226,1)');
+          }
+      });
+  });
+</script> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

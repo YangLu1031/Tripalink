@@ -1,0 +1,27 @@
+<h1>Appointment Cancel Confirmation</h1>
+
+<% apt = @appointment %>
+
+<table class="table">
+  <tr>
+    <th>Date</th>
+    <th>Time</th>
+    <th>Appointment Type</th>
+    <th>Address</th>
+    <th>Genius</th>
+    <th>Car</th>
+  </tr>
+  <tr>
+    <td><%= "#{apt.time_window.date}, #{apt.time_window.date.strftime("%A")}" %></td>
+    <% if apt.appointment_type == 0 %>
+      <td><a href="<%= sell_request_path(apt.sell_request) %>"><%= "#{apt.time_window.hour}:00".to_time.strftime("%l %P") %></a></td>
+    <% else %>
+      <td><a href="<%= appointment_path(apt) %>"><%= "#{apt.time_window.hour}:00".to_time.strftime("%l %P") %></a></td>
+    <% end %>
+    <td><%= apt.apt_type %></td>
+    <td><%= "#{apt.address}, #{apt.city}, #{apt.state}, #{apt.zipcode}" %></td>
+    <td><%= link_to apt.expert.name, apt.expert %></td>
+    <td><%= link_to "Car detail", apt.car %></td>
+  </tr>
+</table>
+
